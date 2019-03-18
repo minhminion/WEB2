@@ -1,0 +1,13 @@
+
+    @media only screen and (max-width: 768px)
+    {
+        #logo
+        {
+            margin : auto;
+            width:100px;
+        }
+    }
+    .slider-range
+    {
+        margin-right:50px;
+    }
