@@ -27,10 +27,11 @@
 
 <body>
     <?php
-        include("header.php");
-        include("sidebar.php");
-        include("brand.php");
-        include("footer.php");
+        include("./models/header.php");
+        include("./models/sidebar.php");
+        include("./models/brand.php");
+        include("./models/footer.php");
+        include("./models/shopbag.php");
     ?>
     <ul id="pagination-demo" class="pagination-sm"></ul>
     <!-- jQuery (Necessary for All JavaScript Plugins) -->
@@ -51,49 +52,9 @@
     <!-- Active js -->
     <script src="js/script.js"></script>
     <!--------------->
-    <script src="./js/jquery.twbsPagination.min.js"></script>
+    <script src="./MyJs/all.js"></script>
 
-    <script>
-        $(document).ready(function(){
-            load_data();
-            function load_data(page)
-            {
-                $.ajax({
-                    url:"phantrang.php",
-                    method:"POST",
-                    data:{page:page,brand:GetURLParameter('brand')},
-                    success:function(data)
-                    {
-                        $("#itemShow").html(data);
-                    }
-                })
-            }
 
-            $(document).on("click",".page-item",function()
-            {
-                var page = $(this).attr("id");
-                load_data(page);
-            });
-/*
-            $(document).on("click",".a",function()
-            {
-                var brand = $(this).attr("href");
-                load_data(brand);
-            });*/
-        })
-    function GetURLParameter(sParam) {
-        var sPageURL = window.location.search.substring(1);
-        var sURLVariables = sPageURL.split('&');
-        for (var i = 0; i < sURLVariables.length; i++){
-            var sParameterName = sURLVariables[i].split('=');
-            if (sParameterName[0] == sParam)
-            {
-                return sParameterName[1];
-            }
-        }
-    }
-    </script>       
-    
 
 </body>
 </html>

@@ -24,11 +24,12 @@
 
 <body>
     <?php
-        include("header.php");
-        include("topItem.php");
-        include("newproduct.php");
-        include("brand.php");
-        include("footer.php");
+        include("./models/header.php");
+        include("./models/topItem.php");
+        include("./models/newproduct.php");
+        include("./models/brand.php");
+        include("./models/footer.php");
+        include("./models/shopbag.php");
     ?>
     <!-- jQuery (Necessary for All JavaScript Plugins) -->
     <script src="js/jquery/jquery-2.2.4.min.js"></script>
@@ -48,7 +49,6 @@
     <!-- Active js -->
     <script src="js/script.js"></script>
     <!--------------->
-    <script src="./js/jquery.twbsPagination.min.js"></script>
-
+    <script src="./MyJs/all.js"></script>
 </body>
 </html>
