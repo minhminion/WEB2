@@ -1,5 +1,5 @@
 
-    $(document).ready(function(){
+$(document).ready(function(){
         load_data();
         load_cart_item();
         function load_data(page)
@@ -48,35 +48,34 @@
         }
 
         /* Xóa Item khỏi giỏ hàng */
-        /* MAi Sửa
         {
-        $(document).on("click",".delete_item",function()
+        $(document).on("click",".product-remove",function()
         {
             $.ajax({
                 url:"./XuLy/upToSession_delete.php",
                 method:"POST",
-                data:{id : $(this).attr("id")},
+                data:{id : $(this).attr("data")},
                 success:function(data)
                 {
+                //   console.log(data);
                     
-                    $("#cart-list").html(data.split("?")[1]);
-                    $(".sizeBag").html(data.split("?")[0]);
+                   $("#cart-list").html(data.split("?")[1]);
+                   $(".sizeBag").html(data.split("?")[0]);
                 }
             })
         });
         }
-    })
-****/
-function GetURLParameter(sParam) {
-    var sPageURL = window.location.search.substring(1);
-    var sURLVariables = sPageURL.split('&');
-    for (var i = 0; i < sURLVariables.length; i++){
-        var sParameterName = sURLVariables[i].split('=');
-        if (sParameterName[0] == sParam)
-        {
-            return sParameterName[1];
+    });
+    function GetURLParameter(sParam) {
+        var sPageURL = window.location.search.substring(1);
+        var sURLVariables = sPageURL.split('&');
+        for (var i = 0; i < sURLVariables.length; i++){
+            var sParameterName = sURLVariables[i].split('=');
+            if (sParameterName[0] == sParam)
+            {
+                return sParameterName[1];
+            }
         }
     }
-}
 
     

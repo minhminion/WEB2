@@ -7,11 +7,11 @@
         foreach($_SESSION['id'] as $item)
         {    
             $output .= '<div class="single-cart-item">
-                            <a href="#" class="product-image">
+                            <a class="product-image">
                                 <img src="./img/sanpham/'.$item->img.'" class="cart-thumb" alt="">
                                 <!-- Cart Item Desc -->
                                 <div class="cart-item-desc">
-                                <span class="product-remove"><i class="fa fa-close delete_item" id="'.$item->id.'" aria-hidden="true"></i></span>
+                                <span class="product-remove" data="'.$item->id.'" ><i class="fa fa-close delete_item" aria-hidden="true"></i></span>
                                     <span class="badge">'.$item->brand.'</span>
                                     <h6>'.$item->name.'</h6>
                                     <p class="size">Số lượng: '.$item->quality.'</p>
