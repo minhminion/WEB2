@@ -32,7 +32,7 @@
             <!-- Cart Summary -->
             <div class="cart-amount-summary">
 
-                <h2>Summary</h2>
+                <h2>Hóa đơn</h2>
                 <ul class="summary-table">
                     <li><span>subtotal:</span> <span>$274.00</span></li>
                     <li><span>delivery:</span> <span>Free</span></li>

@@ -104,8 +104,35 @@
                     </div>
                 </div>
 
-                <div class="col-12 col-md-8 col-lg-9" id="itemShow">
+                <div class="col-12 col-md-8 col-lg-9">
                     <!-- Pagination -->
+                    <div class="shop_grid_product_area">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="product-topbar d-flex align-items-center justify-content-between">
+                                <!-- Total Products -->
+                                <div class="total-products">
+                                    <p>Tìm thấy : <span id="total-item"></span></p>
+                                </div>
+                                <!-- Sorting -->
+                                <div class="product-sorting d-flex">
+                                    <p>Sắp xếp:</p>
+                                    <form action="#" method="get">
+                                        <select name="select" id="sortByselect">
+                                            <option value="DESC">Giá cao - thấp</option>
+                                            <option value="ASC">Giá thấp - cao</option>
+                                            <option value="value">Mới nhất</option>
+                                        </select>
+                                        <input type="submit" class="d-none" value="">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" id="itemShow">
+                    </div>
+                    <nav aria-label="navigation" id="pagination-box">
+                    </nav>
                 </div>
             </div>
         </div>

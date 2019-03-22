@@ -29,7 +29,7 @@
                     <!-- Cart Summary -->
                     <div class="cart-amount-summary">
 
-                        <h2>Summary</h2>
+                        <h2>Hóa Đơn</h2>
                         <ul class="summary-table">
                             <li><span>Tổng:</span> <span>'.number_format($total,0,".",".").' đ</span></li>
                             <li><span>Phí vận chuyển :</span> <span>Free</span></li>

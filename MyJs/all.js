@@ -10,12 +10,16 @@ $(document).ready(function(){
             $.ajax({
                 url:"./XuLy/phantrang.php",
                 method:"POST",
-                data:{page:page,brand:GetURLParameter('brand'),search:GetURLParameter('search'),order:$order},
+                data:{  page:page,brand:GetURLParameter('brand'),
+                        search:GetURLParameter('search'),
+                        order:$order},
                 success:function(data)
                 {
                     $("#title-shop").html(data.split("?")[0]);
+                    $("#total-item").html(data.split("?")[1]);
                     // console.log(data.split("?")[1]);
-                    $("#itemShow").html(data.split("?")[1]);
+                    $("#itemShow").html(data.split("?")[2]);
+                    $("#pagination-box").html(data.split("?")[3]);
                 }
             })
         }
@@ -117,7 +121,7 @@ $(document).ready(function(){
     }
     function URLpush(search,brand)
     {
-        $oldUrl = window.location.href.split("?");
+        $oldUrl = "shop.php";
 
         $search = search === undefined ?"":"?search="+search;
         $brand = brand === undefined ?"":"?brand="+brand;
@@ -125,7 +129,7 @@ $(document).ready(function(){
         console.log($search);
         console.log($brand);
 
-        $newURL  = $oldUrl[0] + $search + $brand;
+        $newURL  = $oldUrl + $search + $brand;
         
         window.history.pushState("String","",$newURL);
 

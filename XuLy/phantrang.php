@@ -58,8 +58,14 @@
     else{
         $page = 1;
     }
-
-    $order = $_POST['order'];
+    if(isset($_POST['order']))
+    {
+        $sort = $_POST['order'];
+    }
+    else{
+        $sort = "DESC";
+    }
+    
 
     $page_query = "SELECT * FROM sanpham WHERE $where";
     // echo $page_query."?";
@@ -67,32 +73,11 @@
     $total_record = mysqli_num_rows($page_result); 
     $total_page = ceil($total_record/$record_page);
 
-    $output = '<div class="shop_grid_product_area">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="product-topbar d-flex align-items-center justify-content-between">
-                                <!-- Total Products -->
-                                <div class="total-products">
-                                    <p>Tìm thấy : <span>'.$total_record.'</span></p>
-                                </div>
-                                <!-- Sorting -->
-                                <div class="product-sorting d-flex">
-                                    <p>Sắp xếp:</p>
-                                    <form action="#" method="get">
-                                        <select name="select" id="sortByselect">
-                                            <option value="DECS">Giá cao - thấp</option>
-                                            <option value="ASC">Giá thấp - cao</option>
-                                            <option value="value">Mới nhất</option>
-                                        </select>
-                                        <input type="submit" class="d-none" value="">
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row" >';
+    echo $total_record."?";
+
+    $output = '';
     $start_form = ($page - 1)*$record_page;
-    $query = "SELECT * FROM sanpham WHERE $where ORDER BY priceSP LIMIT $start_form,$record_page";
+    $query = "SELECT * FROM sanpham WHERE $where ORDER BY priceSP $sort LIMIT $start_form,$record_page";
     $result = mysqli_query($connect, $query);
 
     while($row = mysqli_fetch_array($result))
@@ -127,7 +112,7 @@
                         </div>
                     </div>';
     }
-    $output .="</div></div>";
+    $output .="</div>";
 if($page == 1)
 {
     $prev = 1;
@@ -143,18 +128,18 @@ else
     $prev = $page - 1;
     $next = $page + 1;
 }
-
-    $output .='<nav aria-label="navigation">
-                <ul class="pagination mt-50 mb-70">
+    $paging = "";
+    $paging .=' <ul class="pagination mt-50 mb-70">
                 <li class="page-item" id="'.$prev.'"><a class="page-link"><i class="fa fa-angle-left"></i></a></li>';
 
 
 
     for($i = 1 ; $i <= $total_page ; $i++)
     {
-        $output .= '<li class="page-item" id="'.$i.'"><a class="page-link">'.$i.'</a></li>';
+        $paging .= '<li class="page-item" id="'.$i.'"><a class="page-link">'.$i.'</a></li>';
     }
-    $output .='<li class="page-item" id="'.$next.'"><a class="page-link"><i class="fa fa-angle-right"></i></a></li></ul></nav>';
+    $paging .='<li class="page-item" id="'.$next.'"><a class="page-link"><i class="fa fa-angle-right"></i></a></li></ul>';
 
-    echo $output
+    echo $output."?";
+    echo $paging;
 ?>
