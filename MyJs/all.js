@@ -2,25 +2,30 @@
 $(document).ready(function(){
         load_data();
         load_cart_item();
+///////////////
         function load_data(page)
         {
+            $order = $("#sortByselect").val();
+            console.log($order);
             $.ajax({
                 url:"./XuLy/phantrang.php",
                 method:"POST",
-                data:{page:page,brand:GetURLParameter('brand')},
+                data:{page:page,brand:GetURLParameter('brand'),search:GetURLParameter('search'),order:$order},
                 success:function(data)
                 {
-                    $("#itemShow").html(data);
+                    $("#title-shop").html(data.split("?")[0]);
+                    // console.log(data.split("?")[1]);
+                    $("#itemShow").html(data.split("?")[1]);
                 }
             })
         }
-
+/////////////
         $(document).on("click",".page-item",function()
         {
             var page = $(this).attr("id");
             load_data(page);
         });
-
+    //////////////
         $(document).on("click",".add-to-cart-btn",function()
         {
             var id = $(this).attr("id");
@@ -44,11 +49,11 @@ $(document).ready(function(){
                     $("#cart-list").html(data.split("?")[1]);
                     $(".sizeBag").html(data.split("?")[0]);
                 }
-            })
+            });
         }
-
-        /* Xóa Item khỏi giỏ hàng */
         {
+        /* Xóa Item khỏi giỏ hàng */
+
         $(document).on("click",".product-remove",function()
         {
             $.ajax({
@@ -62,13 +67,46 @@ $(document).ready(function(){
                    $("#cart-list").html(data.split("?")[1]);
                    $(".sizeBag").html(data.split("?")[0]);
                 }
-            })
+            });
         });
         }
+        /***** *********************/
+        $('#search-box').on("submit",function(event)
+        {
+            $url = window.location.href.split("?")[0];
+            $search = $('#search-box').serialize();
+            event.preventDefault();
+            URLpush($search.split("=")[1],GetURLParameter("brand"));
+            load_data();
+        });
+
+        $(document).on("click",".sub-item",function()
+        {   
+            
+            // $url = window.location.href.split("?");
+            // $url = window.location.href.split("?")[$url.length - 1];
+            // console.log($url);
+            $brand = $(this).attr("brand");
+            if($brand != undefined)
+            {
+               URLpush(GetURLParameter('search'),$brand);
+            }
+            else{
+                URLpush();
+            }
+            load_data();
+            
+        })
+
+        $(document).on("change","#sortByselect",function()
+        {
+            load_data();
+        })
     });
+
     function GetURLParameter(sParam) {
         var sPageURL = window.location.search.substring(1);
-        var sURLVariables = sPageURL.split('&');
+        var sURLVariables = sPageURL.split('?');
         for (var i = 0; i < sURLVariables.length; i++){
             var sParameterName = sURLVariables[i].split('=');
             if (sParameterName[0] == sParam)
@@ -77,6 +115,22 @@ $(document).ready(function(){
             }
         }
     }
+    function URLpush(search,brand)
+    {
+        $oldUrl = window.location.href.split("?");
+
+        $search = search === undefined ?"":"?search="+search;
+        $brand = brand === undefined ?"":"?brand="+brand;
+
+        console.log($search);
+        console.log($brand);
+
+        $newURL  = $oldUrl[0] + $search + $brand;
+        
+        window.history.pushState("String","",$newURL);
+
+    }
+
 
 
     

@@ -4,7 +4,7 @@
         <div class="row h-100 align-items-center">
             <div class="col-12">
                 <div class="page-title text-center">
-                    <h2>Bàn Phím</h2>
+                    <h2 id="title-shop"></h2>
                 </div>
             </div>
         </div>
@@ -29,15 +29,15 @@
                                     <!-- Single Item -->
                                     <li data-toggle="collapse" data-target="#keyboard">
                                         <a href="#">Bàn Phím</a>
-                                        <ul class="sub-menu collapse show" id="keyboard">
-                                            <li><a href="shop.php">All</a></li>
-                                            <li><a href="shop.php?brand=Razer">Razer</a></li>
-                                            <li><a href="shop.php?brand=logitech">Logitech</a></li>
-                                            <li><a href="shop.php?brand=asus">Asus</a></li>
-                                            <li><a href="shop.php?brand=corsair">Corsair</a></li>
-                                            <li><a href="shop.php?brand=steelseries">Steelseries</a></li>
-                                        </ul>
                                     </li>
+                                        <ul class="sub-menu collapse show" id="keyboard">
+                                            <li><a href="#" class="sub-item">All</a></li>
+                                            <li><a href="#" class="sub-item" brand="Razer">Razer</a></li>
+                                            <li><a href="#" class="sub-item" brand="Logitech">Logitech</a></li>
+                                            <li><a href="#" class="sub-item" brand="Asus">Asus</a></li>
+                                            <li><a href="#" class="sub-item" brand="Corsair">Corsair</a></li>
+                                            <li><a href="#" class="sub-item" brand="Steelseries">Steelseries</a></li>
+                                        </ul>
                                     <!-- Single Item -->
                                     <li data-toggle="collapse" data-target="#mouse" class="collapsed">
                                         <a href="#">Chuột</a>

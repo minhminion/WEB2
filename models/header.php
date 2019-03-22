@@ -69,7 +69,7 @@
         <div class="header-meta d-flex clearfix justify-content-end">
             <!-- Search Area -->
             <div class="search-area">
-                <form action="#" method="post">
+                <form id="search-box" action="#" method="post">
                     <input type="search" name="search" id="headerSearch" placeholder="Tìm kiếm ......">
                     <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                 </form>

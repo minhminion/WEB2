@@ -5,6 +5,52 @@
     $record_page = 6;
     $page =" ";
 
+    $where = "";
+    /**** Search */
+    $data = array();
+    if(isset($_POST['search']))
+    {
+        // echo $_POST["search"]."?";
+        $search = ' nameSP LIKE "%'.$_POST["search"].'%"';
+        array_push($data,$search);
+    }
+    // else
+    // {
+    //     $search = "";
+    // }
+    /********** */
+    
+
+    /**** Lấy Nhăn Hiệu */
+    if(isset($_POST["brand"]))
+    {
+        echo "Bàn Phím : ".$_POST["brand"]."?";
+        $brand = 'HANG="'.$_POST["brand"].'"';
+        array_push($data,$brand);
+    }
+    else
+    {
+        echo "Bàn Phím?";
+    }
+    ////////////////////
+    // $where = $brand.$search;
+    //echo $where."?";
+    for($i = 0 ; $i < count($data); $i++)
+    {
+        if($i+1 == count($data))
+        {
+            $where .= $data[$i] ;
+        }
+        else
+        {
+            $where .= $data[$i]." AND ";
+        }
+    }
+    if($where == "")
+    {
+        $where = 1;
+    }
+
     if(isset($_POST["page"]))
     {
         $page = $_POST["page"];
@@ -12,20 +58,11 @@
     else{
         $page = 1;
     }
-    /**** Lấy Nhăn Hiệu */
-    if(isset($_POST["brand"]))
-    {
 
-        $where = 'WHERE HANG="'.$_POST["brand"].'"';
-  //      echo "<h1>".$where."</h1>";
-    }
-    else
-    {
-        $where = "";
-    }
-    ////////////////////
-    
-    $page_query = "SELECT * FROM sanpham $where";
+    $order = $_POST['order'];
+
+    $page_query = "SELECT * FROM sanpham WHERE $where";
+    // echo $page_query."?";
     $page_result = mysqli_query($connect, $page_query);
     $total_record = mysqli_num_rows($page_result); 
     $total_page = ceil($total_record/$record_page);
@@ -43,7 +80,8 @@
                                     <p>Sắp xếp:</p>
                                     <form action="#" method="get">
                                         <select name="select" id="sortByselect">
-                                            <option value="value">Giá cao - thấp</option>
+                                            <option value="DECS">Giá cao - thấp</option>
+                                            <option value="ASC">Giá thấp - cao</option>
                                             <option value="value">Mới nhất</option>
                                         </select>
                                         <input type="submit" class="d-none" value="">
@@ -54,7 +92,7 @@
                     </div>
                     <div class="row" >';
     $start_form = ($page - 1)*$record_page;
-    $query = "SELECT * FROM sanpham $where LIMIT $start_form,$record_page";
+    $query = "SELECT * FROM sanpham WHERE $where ORDER BY priceSP LIMIT $start_form,$record_page";
     $result = mysqli_query($connect, $query);
 
     while($row = mysqli_fetch_array($result))
