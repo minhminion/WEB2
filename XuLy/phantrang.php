@@ -14,10 +14,6 @@
         $search = ' nameSP LIKE "%'.$_POST["search"].'%"';
         array_push($data,$search);
     }
-    // else
-    // {
-    //     $search = "";
-    // }
     /********** */
     
 
@@ -32,9 +28,9 @@
     {
         echo "Bàn Phím?";
     }
-    ////////////////////
-    // $where = $brand.$search;
-    //echo $where."?";
+    /************ */
+
+    /******* Tao SQL WHERE*/
     for($i = 0 ; $i < count($data); $i++)
     {
         if($i+1 == count($data))
@@ -50,7 +46,9 @@
     {
         $where = 1;
     }
+    /******** */
 
+    /***** Pagging */
     if(isset($_POST["page"]))
     {
         $page = $_POST["page"];
@@ -58,6 +56,9 @@
     else{
         $page = 1;
     }
+    /**** */
+    
+    /**** SORT */
     if(isset($_POST['order']))
     {
         $sort = $_POST['order'];
@@ -65,9 +66,15 @@
     else{
         $sort = "DESC";
     }
+    /************* */
     
+    /*** Tim theo gia */
 
-    $page_query = "SELECT * FROM sanpham WHERE $where";
+    $min = isset($_POST['min'])?$min = $_POST['min']*1000000:$min = 0;
+    $max = isset($_POST['max'])?$max = $_POST['max']*1000000:$max = 10000000;
+    /****** */
+
+    $page_query = "SELECT * FROM sanpham WHERE $where AND priceSP BETWEEN $min AND $max";
     // echo $page_query."?";
     $page_result = mysqli_query($connect, $page_query);
     $total_record = mysqli_num_rows($page_result); 
@@ -77,7 +84,7 @@
 
     $output = '';
     $start_form = ($page - 1)*$record_page;
-    $query = "SELECT * FROM sanpham WHERE $where ORDER BY priceSP $sort LIMIT $start_form,$record_page";
+    $query = "SELECT * FROM sanpham WHERE $where AND priceSP BETWEEN $min AND $max ORDER BY priceSP $sort LIMIT $start_form,$record_page";
     $result = mysqli_query($connect, $query);
 
     while($row = mysqli_fetch_array($result))
@@ -116,12 +123,11 @@
 if($page == 1)
 {
     $prev = 1;
-    $next = $page + 1;
-}
-elseif($page == $total_page)
-{
-    $prev = $page - 1;
-    $next = $total_page;
+    $next = $page +1 ;
+    if($page == $total_page)
+    {
+        $next = $total_page;
+    }
 }
 else
 {    
@@ -141,5 +147,6 @@ else
     $paging .='<li class="page-item" id="'.$next.'"><a class="page-link"><i class="fa fa-angle-right"></i></a></li></ul>';
 
     echo $output."?";
+    echo $query."?";
     echo $paging;
 ?>

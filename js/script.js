@@ -107,17 +107,48 @@
             max: max,
             values: [value_min, value_max],
             slide: function (_event, ui) {
+                jQuery(this).attr("min",ui.values[0]);
+                jQuery(this).attr("max",ui.values[1]);
                 if(ui.values[0] != 0)
                 {
                     ui.values[0] = ui.values[0]+price;
                 }
+                
                 var result = label_result + " " + ui.values[0] + unit + ' - ' + ui.values[1] + price + unit;
-                console.log(t);
+                // console.log(t);
+                console.log(jQuery(this).attr('min'));
+                console.log(jQuery(this).attr('max'));
+                load_data();
+
                 t.closest('.slider-range').find('.range-price').html(result);
             }
         });
     });
-
+    function load_data(page)
+        {
+            $order = $("#sortByselect").val();
+            $min = $("#sortPrice").attr('min');
+            $max = $("#sortPrice").attr('max');
+            console.log($order);
+            $.ajax({
+                url:"./XuLy/phantrang.php",
+                method:"POST",
+                data:{  page:page,
+                        brand:GetURLParameter('brand'),
+                        search:GetURLParameter('search'),
+                        order:$order,
+                        min:$min,
+                        max:$max},
+                success:function(data)
+                {
+                    $("#title-shop").html(data.split("?")[0]);
+                    $("#total-item").html(data.split("?")[1]);
+                    console.log(data.split("?")[3]);
+                    $("#itemShow").html(data.split("?")[2]);
+                    $("#pagination-box").html(data.split("?")[4]);
+                }
+            })
+        }
     // :: Favorite Button Active Code
     var favme = $(".favme");
 
