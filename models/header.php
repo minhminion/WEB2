@@ -21,11 +21,12 @@
                             <div class="megamenu">
                                 <ul class="single-mega cn-col-4">
                                     <li class="title">Bàn Phím</li>
-                                    <li><a href="shop.php">Razer</a></li>
-                                    <li><a href="shop.php">Logitech</a></li>
-                                    <li><a href="shop.php">Asus</a></li>
-                                    <li><a href="shop.php">Corsair</a></li>
-                                    <li><a href="shop.php">Steelseries</a></li>
+                                    <li><a href="shop.php">All</a></li>
+                                    <li><a href="shop.php?brand=razer">Razer</a></li>
+                                    <li><a href="shop.php?brand=logitech">Logitech</a></li>
+                                    <li><a href="shop.php?brand=asus">Asus</a></li>
+                                    <li><a href="shop.php?brand=corsair">Corsair</a></li>
+                                    <li><a href="shop.php?brand=steelseries">Steelseries</a></li>
                                 </ul>
                                 <ul class="single-mega cn-col-4">
                                     <li class="title">Chuột</li>
