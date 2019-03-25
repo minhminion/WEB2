@@ -82,8 +82,8 @@ $(document).ready(function(){
         /***** *********************/
         $('#search-box').on("submit",function(event)
         {
-            $url = window.location.href.split("?")[0];
             $search = $('#search-box').serialize();
+
             event.preventDefault();
             URLpush($search.split("=")[1],GetURLParameter("brand"));
             load_data();
