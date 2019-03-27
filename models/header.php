@@ -1,51 +1,83 @@
-<div class="modal fade" id="myModal" role="dialog" >
-                <div class="modal-dialog">
-                <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Đăng ký</h4>
-                        </div>
-                        <div class="modal-body">
-                        <form action="#" method="post">
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="first_name">First Name <span>*</span></label>
-                                    <input type="text" class="form-control" id="first_name" value="" required="">
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="last_name">Last Name <span>*</span></label>
-                                    <input type="text" class="form-control" id="last_name" value="" required="">
-                                </div>
-                                <div class="col-md-12 mb-3">
-                                    <label for="last_name">Tên tài khoản <span>*</span></label>
-                                    <input type="text" class="form-control" id="last_name" value="" required="">
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="last_name">Mật khẩu <span>*</span></label>
-                                    <input type="text" class="form-control" id="last_name" value="" required="">
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="last_name">Nhập lại mật khẩu <span>*</span></label>
-                                    <input type="text" class="form-control" id="last_name" value="" required="">
-                                </div>
-                                <div class="col-12 mb-3">
-                                    <label for="phone_number">Số điện thoại <span>*</span></label>
-                                    <input type="number" class="form-control" id="phone_number" min="0" value="">
-                                </div>
-                                <div class="col-12 mb-4">
-                                    <label for="email_address">Email<span>*</span></label>
-                                    <input type="email" class="form-control" id="email_address" value="">
-                                </div>
-                            </div>
-                        </form>
-                        </div>
-                        <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Đăng Nhập</button>
-                        </div>
+<!-- Form Đăng nhập -->
+<div class="modal fade" id="login" role="dialog" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+    <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+            <h4 class="modal-title">Đăng nhập</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+            <form action="#" method="post">
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <label for="last_name">Tên đăng nhập<span>*</span></label>
+                        <input type="text" class="form-control" id="user" value="" required="" placeholder="Tên đăng nhập">
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <label for="last_name">Mật khẩu<span>*</span></label>
+                        <input type="text" class="form-control" id="password" value="" required="" placeholder="Mật khẩu">
+                    </div>
+                    <div class="col-md-12 mb-3 mt-3">
+                        <input type="submit" class="form-control" value="Đăng nhập">
                     </div>
                 </div>
+            </form>
             </div>
+            <div class="modal-footer justify-content-center">
+                <p>Tạo tài khoản ? <span style="cursor:pointer;" class="changeUpIn">Đăng ký</span></p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Form Đăng ký -->
+<div class="modal fade" id="signUp" role="dialog" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+    <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+            <h4 class="modal-title">Đăng ký</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+            <form action="#" method="post">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="last_name">Họ<span>*</span></label>
+                        <input type="text" class="form-control" id="firstName" value="" required="" placeholder="Nguyễn Văn">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="last_name">Tên<span>*</span></label>
+                        <input type="text" class="form-control" id="lastName" value="" required="" placeholder="A">
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <label for="last_name">Tên đăng nhập<span>*</span></label>
+                        <input type="text" class="form-control" id="user" value="" required="" placeholder="Tên đăng nhập">
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <label for="last_name">Email<span>*</span></label>
+                        <input type="text" class="form-control" id="email" value="" required="" placeholder="admin1234@gmail.com">
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <label for="last_name">Mật khẩu<span>*</span></label>
+                        <input type="password" class="form-control" id="password" value="" required="" placeholder="Mật khẩu">
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <label for="last_name">Nhập lại mật khẩu<span>*</span></label>
+                        <input type="password" class="form-control" id="confirm_password" value="" required="" placeholder="Mật khẩu">
+                    </div>
+                    <div class="col-md-12 mb-3 mt-3">
+                        <input type="submit" class="form-control" value="Đăng ký">
+                    </div>
+                </div>
+            </form>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <p>Đă có tài khoản ? <span style="cursor:pointer;" class="changeUpIn">Đăng nhập</span></p>
+            </div>
+        </div>
+    </div>
+</div>
 <header class="header_area">
     <div class="classy-nav-container breakpoint-off d-flex align-items-center justify-content-between">
         <!-- Classy Menu -->
@@ -128,7 +160,7 @@
                 <a href="#"><img src="img/core-img/heart.svg" alt=""></a>
             </div>
             <!-- User Login Info -->
-            <div class="user-login-info" data-toggle="modal" data-target="#myModal">
+            <div class="user-login-info" data-toggle="modal" data-target="#login">
                 <a href="#"><img src="img/core-img/user.svg" alt=""></a>
             </div>
             
@@ -141,4 +173,11 @@
     </div>
     
 </header>
-
+<script>
+    $(document).on('click','.dangky',function()
+    {
+        alert("click");
+        $("#login").model("toggle");
+        $("#signUp").model("toggle");
+    });
+</script>

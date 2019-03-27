@@ -123,6 +123,13 @@ $(document).ready(function(){
         {
             load_data();
         })
+
+        $(document).on("click",".changeUpIn",function()
+        {
+            // alert("click");
+            $("#login").modal("toggle");
+            $("#signUp").modal("toggle");
+        });
     });
 
     function GetURLParameter(sParam) {
