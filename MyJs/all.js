@@ -90,6 +90,7 @@ $(document).ready(function(){
             $url = $(location).attr("pathname").split("/")[2];
             console.log($url);
             $search = $('#search-box').serialize();
+
             event.preventDefault();
             URLpush($search.split("=")[1],GetURLParameter("brand"));
             
