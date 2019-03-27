@@ -118,11 +118,14 @@
                 // console.log(t);
                 console.log(jQuery(this).attr('min'));
                 console.log(jQuery(this).attr('max'));
-                load_data();
-
+                // load_data();
+                
                 t.closest('.slider-range').find('.range-price').html(result);
+                load_data();
             }
         });
+        
+        
     });
     function load_data(page)
         {

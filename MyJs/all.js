@@ -32,6 +32,11 @@ $(document).ready(function(){
         $(document).on("click",".page-item",function()
         {
             var page = $(this).attr("id");
+            window.scrollBy({
+                top: -1500,
+                left:0,
+                behavior:'smooth'
+            });
             load_data(page);
         });
     //////////////
@@ -82,10 +87,16 @@ $(document).ready(function(){
         /***** *********************/
         $('#search-box').on("submit",function(event)
         {
-            $url = window.location.href.split("?")[0];
+            $url = $(location).attr("pathname").split("/")[2];
+            console.log($url);
             $search = $('#search-box').serialize();
             event.preventDefault();
             URLpush($search.split("=")[1],GetURLParameter("brand"));
+            
+            if($url != "shop.php")
+            {
+                window.location.reload();
+            }
             load_data();
         });
 

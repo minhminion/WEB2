@@ -6,4 +6,5 @@
     
     // Create connection
     $connect = mysqli_connect($servername, $username, $password,$data);
+    mysqli_set_charset($connect,"UTF8");
 ?>

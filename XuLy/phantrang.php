@@ -4,10 +4,12 @@
 
     $record_page = 6;
     $page =" ";
-
+    
     $where = "";
     /**** Search */
     $data = array();
+    $enable = "enable ='1'";
+    array_push($data,$enable);
     if(isset($_POST['search']))
     {
         // echo $_POST["search"]."?";
@@ -89,7 +91,7 @@
 
     while($row = mysqli_fetch_array($result))
     {
-        $output .='<div class="col-12 col-sm-6 col-lg-4">
+        $output .='<div class="col-12 col-sm-6 col-lg-4" data-aos="zoom-in" data-aos-duration="850" data-aos-delay="50" data-aos-once="true">
                         <div class="single-product-wrapper">
                             <!-- Product Image -->
                             <div class="product-img">
