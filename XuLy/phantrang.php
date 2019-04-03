@@ -1,7 +1,7 @@
 <?php
     require("conSQL.php");
-
-
+    
+    
     $record_page = 6;
     $page =" ";
     
@@ -10,10 +10,10 @@
     $data = array();
     $enable = "enable ='1'";
     array_push($data,$enable);
-    if(isset($_POST['search']))
+    if(isset($_POST['search']) && $_POST['search'] != "undefined" )
     {
         // echo $_POST["search"]."?";
-        $search = ' nameSP LIKE "%'.$_POST["search"].'%"';
+        $search = ' nameSP LIKE "%'.$_POST['search'].'%"';
         array_push($data,$search);
     }
     /********** */
@@ -78,7 +78,7 @@
 
     $page_query = "SELECT * FROM sanpham WHERE $where AND priceSP BETWEEN $min AND $max";
     // echo $page_query."?";
-    $page_result = mysqli_query($connect, $page_query);
+    $page_result = conSQL::executeQuery($page_query);
     $total_record = mysqli_num_rows($page_result); 
     $total_page = ceil($total_record/$record_page);
 
@@ -87,7 +87,7 @@
     $output = '';
     $start_form = ($page - 1)*$record_page;
     $query = "SELECT * FROM sanpham WHERE $where AND priceSP BETWEEN $min AND $max ORDER BY priceSP $sort LIMIT $start_form,$record_page";
-    $result = mysqli_query($connect, $query);
+    $result = conSQL::executeQuery($query);
 
     while($row = mysqli_fetch_array($result))
     {
@@ -151,4 +151,5 @@ else
     echo $output."?";
     echo $query."?";
     echo $paging;
+    
 ?>

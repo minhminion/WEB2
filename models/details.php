@@ -1,0 +1,57 @@
+
+<!-- ##### Single Product Details Area Start ##### -->
+<section class="single_product_details_area d-flex align-items-center">
+
+<!-- Single Product Thumb -->
+<?php
+    require('./XuLy/conSQL.php');
+    $query = "";
+    if(isset($_GET['id']))
+    {
+        $query = 'SELECT * FROM sanpham WHERE idSP="'.$_GET['id'].'" ';
+        $result = conSQL::executeQuery($query);
+        while($row = mysqli_fetch_array($result))
+        {
+            $out =
+            '<div class="single_product_thumb clearfix" >
+                <div class="product_thumbnail_slides owl-carousel">
+                    <img src="./img/sanpham/'.$row["IMG"].'" alt="" >
+                    <img src="./img/sanpham/'.$row["IMG"].'" alt="" >
+                </div>
+            </div>
+
+            <div class="single_product_desc clearfix">
+                <span>'.$row["HANG"].'</span>
+                <a href="cart.html">
+                    <h2>'.$row["nameSP"].'</h2>
+                </a>
+                <p class="product-price"><span class="old-price">$65.00</span>'.number_format($row["priceSP"],0,".",".").'đ</p>
+                <p class="product-desc">Mauris viverra cursus ante laoreet eleifend. Donec vel fringilla ante. Aenean finibus velit id urna vehicula, nec maximus est sollicitudin.</p>
+                <p class="product-desc">Mauris viverra cursus ante laoreet eleifend. Donec vel fringilla ante. Aenean finibus velit id urna vehicula, nec maximus est sollicitudin.</p>
+                <p class="product-desc">Mauris viverra cursus ante laoreet eleifend. Donec vel fringilla ante. Aenean finibus velit id urna vehicula, nec maximus est sollicitudin.</p>
+                <div class="input-group col-12 col-md-3"> 
+                <span class="input-group-btn"> 
+                    <button type="button" class="btn btn-success btn-number minus" data-type="minus" data-field="quant"> 
+                        <i class="fas fa-minus"></i>
+                    </button>
+                </span> 
+                <input style="height:38px;text-align:center;"name="quant" class="form-control input-number quality" value="1" min="1" max="'.$row['SL'].'" type="text"> 
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-success btn-number plus" data-type="plus" data-field="quant"> 
+                        <i class="fas fa-plus" ></i>
+                    </button>
+                </span> 
+            </div> 
+                <div class="cart-fav-box d-flex align-items-center mt-5">
+                    <button type="submit" name="addtocart" value="5" class="btn essence-btn">Add to cart</button>
+                    <div class="product-favourite ml-4">
+                        <a href="#" class="favme fa fa-heart"></a>
+                    </div>
+                </div>
+            </div>';
+        }
+    }
+    echo $out;
+?>
+</section>
+<!-- ##### Single Product Details Area End ##### -->

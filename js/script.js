@@ -115,13 +115,13 @@
                 }
                 
                 var result = label_result + " " + ui.values[0] + unit + ' - ' + ui.values[1] + price + unit;
-                // console.log(t);
-                console.log(jQuery(this).attr('min'));
-                console.log(jQuery(this).attr('max'));
+
+                // console.log(jQuery(this).attr('min'));
+                // console.log(jQuery(this).attr('max'));
                 // load_data();
                 
                 t.closest('.slider-range').find('.range-price').html(result);
-                load_data();
+                
             }
         });
         

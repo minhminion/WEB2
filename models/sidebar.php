@@ -77,7 +77,7 @@
 
                             <div class="widget-desc">
                                 <div class="slider-range" style ="margin-right:50px">
-                                    <div data-min="0" data-max="10" data-unit="đ" class="slider-range-price ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-value-min="0" data-value-max="10" data-label-result="Giá : " data-price=".000.000">
+                                    <div id="sortPrice" data-min="0" data-max="10" data-unit="đ" class="slider-range-price ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-value-min="0" data-value-max="10" data-label-result="Giá : " data-price=".000.000">
                                         <div class="ui-slider-range ui-widget-header ui-corner-all"></div>
                                         <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
                                         <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>

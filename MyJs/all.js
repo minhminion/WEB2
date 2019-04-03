@@ -8,13 +8,13 @@ $(document).ready(function(){
             $order = $("#sortByselect").val();
             $min = $("#sortPrice").attr('min');
             $max = $("#sortPrice").attr('max');
-            console.log($order);
+            console.log(decodeURI(GetURLParameter('search')));
             $.ajax({
                 url:"./XuLy/phantrang.php",
                 method:"POST",
                 data:{  page:page,
                         brand:GetURLParameter('brand'),
-                        search:GetURLParameter('search'),
+                        search:decodeURI(GetURLParameter('search')),
                         order:$order,
                         min:$min,
                         max:$max},
@@ -28,7 +28,7 @@ $(document).ready(function(){
                 }
             })
         }
-/////////////
+        // Phân Trang
         $(document).on("click",".page-item",function()
         {
             var page = $(this).attr("id");
@@ -39,7 +39,11 @@ $(document).ready(function(){
             });
             load_data(page);
         });
-    //////////////
+        $(document).on("click","#sortPrice",function()
+        {
+            load_data();
+        })
+        // Thêm vào giỏ hàng 
         $(document).on("click",".add-to-cart-btn",function()
         {
             var id = $(this).attr("id");
@@ -158,6 +162,24 @@ $(document).ready(function(){
         window.history.pushState("String","",$newURL);
 
     }
+
+    $(document).ready(function(){
+        $(document).on('click','.plus',function()
+        {
+            // alert("click");
+            $('.quality').val(parseInt($('.quality').val()) + 1 );
+        });
+        $(document).on('click','.minus',function()
+        {
+            $('.quality').val(parseInt($('.quality').val()) - 1 );
+            // alert("click");
+                if ($('.quality').val() == 0) 
+                {
+                    $('.quality').val(1);
+                }
+        });
+    });
+    
 
 
 
