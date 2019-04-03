@@ -1,3 +1,86 @@
+<?php
+	include("./models/validation.php");
+?>
+<!-- Form Đăng nhập -->
+<div class="modal fade" id="login" role="dialog" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+    <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+            <h4 class="modal-title">Đăng nhập</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+            <form action="#" method="post">
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <label for="last_name">Tên đăng nhập<span>*</span></label>
+                        <input type="text" class="form-control" id="user" value="" required="" placeholder="Tên đăng nhập">
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <label for="last_name">Mật khẩu<span>*</span></label>
+                        <input type="text" class="form-control" id="password" value="" required="" placeholder="Mật khẩu">
+                    </div>
+                    <div class="col-md-12 mb-3 mt-3">
+                        <input type="submit" class="form-control" value="Đăng nhập">
+                    </div>
+                </div>
+            </form>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <p>Tạo tài khoản ? <span style="cursor:pointer;" class="changeUpIn">Đăng ký</span></p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Form Đăng ký -->
+<div class="modal fade" id="signUp" role="dialog" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+    <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+            <h4 class="modal-title">Đăng ký</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+            <form action="validation.php" method="post" novalidate="novalidate">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="last_name">Họ*<span class="error"><?php echo $firstNameError;?></span></label>
+                        <input type="text" class="form-control" name="firstName" value="" required="" placeholder="Nguyễn Văn">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="last_name">Tên*<span class="error"><?php echo $lastNameError;?></span></label>
+                        <input type="text" class="form-control" name="lastName" value="" required="" placeholder="A">
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <label for="last_name">Tên đăng nhập*<span class="error"><?php echo $userError;?></span></label>
+                        <input type="text" class="form-control" name="user" value="" required="" placeholder="Tên đăng nhập">
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <label for="last_name">Email*<span class="error"><?php echo $emailError;?></span></label>
+                        <input type="text" class="form-control" name="email" value="" required="" placeholder="admin1234@gmail.com">
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <label for="last_name">Mật khẩu*<span class="error"><?php echo $pswdError;?></span></label>
+                        <input type="password" class="form-control" name="password" value="" required="" placeholder="Mật khẩu">
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <label for="last_name">Nhập lại mật khẩu*<span class="error"><?php echo $confirmpswdError;?></span></label>
+                        <input type="password" class="form-control" name="confirm_password" value="" required="" placeholder="Mật khẩu">
+                    </div>
+                    <div class="col-md-12 mb-3 mt-3">
+                        <input type="submit" class="form-control" value="Đăng ký" name="submit">
+                    </div>
+                </div>
+            </form>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <p>Đă có tài khoản ? <span style="cursor:pointer;" class="changeUpIn">Đăng nhập</span></p>
+            </div>
+        </div>
+    </div>
+</div>
 <header class="header_area">
     <div class="classy-nav-container breakpoint-off d-flex align-items-center justify-content-between">
         <!-- Classy Menu -->
@@ -21,11 +104,12 @@
                             <div class="megamenu">
                                 <ul class="single-mega cn-col-4">
                                     <li class="title">Bàn Phím</li>
-                                    <li><a href="shop.php">Razer</a></li>
-                                    <li><a href="shop.php">Logitech</a></li>
-                                    <li><a href="shop.php">Asus</a></li>
-                                    <li><a href="shop.php">Corsair</a></li>
-                                    <li><a href="shop.php">Steelseries</a></li>
+                                    <li><a href="shop.php">All</a></li>
+                                    <li><a href="shop.php?brand=razer">Razer</a></li>
+                                    <li><a href="shop.php?brand=logitech">Logitech</a></li>
+                                    <li><a href="shop.php?brand=asus">Asus</a></li>
+                                    <li><a href="shop.php?brand=corsair">Corsair</a></li>
+                                    <li><a href="shop.php?brand=steelseries">Steelseries</a></li>
                                 </ul>
                                 <ul class="single-mega cn-col-4">
                                     <li class="title">Chuột</li>
@@ -69,7 +153,7 @@
         <div class="header-meta d-flex clearfix justify-content-end">
             <!-- Search Area -->
             <div class="search-area">
-                <form action="#" method="post">
+                <form id="search-box" action="#" method="post">
                     <input type="search" name="search" id="headerSearch" placeholder="Tìm kiếm ......">
                     <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                 </form>
@@ -79,14 +163,24 @@
                 <a href="#"><img src="img/core-img/heart.svg" alt=""></a>
             </div>
             <!-- User Login Info -->
-            <div class="user-login-info">
+            <div class="user-login-info" data-toggle="modal" data-target="#login">
                 <a href="#"><img src="img/core-img/user.svg" alt=""></a>
             </div>
+            
             <!-- Cart Area -->
             <div class="cart-area">
-                <a href="#" id="essenceCartBtn"><img src="img/core-img/bag.svg" alt=""> <span>3</span></a>
+                <a href="#" id="essenceCartBtn"><img src="img/core-img/bag.svg" alt=""> <span class="sizeBag"></span></a>
             </div>
         </div>
 
     </div>
+ 
 </header>
+<script>
+    $(document).on('click','.dangky',function()
+    {
+        alert("click");
+        $("#login").model("toggle");
+        $("#signUp").model("toggle");
+    });
+</script>
