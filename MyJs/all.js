@@ -105,6 +105,27 @@ $(document).ready(function(){
             load_data();
         });
 
+        $("#DK").on("submit",function(e)
+        {
+            e.preventDefault();
+            $.ajax({
+                url:"./XuLy/validation.php",
+                method:"POST",
+                data:{info : $(this).serialize()},
+                success:function(data)
+                {
+                    console.log($(".error").toArray());
+                    var error = $(".error").toArray();
+                    for(var i = 0 ; i<= error.length ;i++)
+                    {
+                        error[i].innerHTML = data.split("?")[i];
+                    }
+                    console.log(data.split("?")[7]);
+                    
+                }
+            })
+        });
+
         $(document).on("click",".sub-item",function()
         {   
             

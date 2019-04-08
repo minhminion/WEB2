@@ -14,7 +14,7 @@
         {
             $out =
             '<div class="single_product_thumb clearfix" >
-                <div class="product_thumbnail_slides owl-carousel">
+                <div class="product_thumbnail_slides owl-carousel" style="width:300px heigth:300px" >
                     <img src="./img/sanpham/'.$row["IMG"].'" alt="" >
                     <img src="./img/sanpham/'.$row["IMG"].'" alt="" >
                 </div>
@@ -26,10 +26,16 @@
                     <h2>'.$row["nameSP"].'</h2>
                 </a>
                 <p class="product-price"><span class="old-price">$65.00</span>'.number_format($row["priceSP"],0,".",".").'đ</p>
-                <p class="product-desc">Mauris viverra cursus ante laoreet eleifend. Donec vel fringilla ante. Aenean finibus velit id urna vehicula, nec maximus est sollicitudin.</p>
-                <p class="product-desc">Mauris viverra cursus ante laoreet eleifend. Donec vel fringilla ante. Aenean finibus velit id urna vehicula, nec maximus est sollicitudin.</p>
-                <p class="product-desc">Mauris viverra cursus ante laoreet eleifend. Donec vel fringilla ante. Aenean finibus velit id urna vehicula, nec maximus est sollicitudin.</p>
-                <div class="input-group col-12 col-md-3"> 
+                '.
+                //     $a="";
+                //     foreach($s:$row["INTRO"].str_split("?"))
+                //     {
+                //         $a .= '<p class="product-desc">adasd</p>'  
+                //     }
+                // '.
+                '
+                <p class="product-desc"></p>
+                <div class="input-group col-12 col-md-4"> 
                 <span class="input-group-btn"> 
                     <button type="button" class="btn btn-success btn-number minus" data-type="minus" data-field="quant"> 
                         <i class="fas fa-minus"></i>

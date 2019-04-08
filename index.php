@@ -24,7 +24,7 @@
 
 <body>
     <?php
-        include("./models/header.php");
+        include("./models/header1.php");
         include("./models/topItem.php");
         include("./models/newproduct.php");
         include("./models/brand.php");
