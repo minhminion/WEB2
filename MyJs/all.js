@@ -20,11 +20,11 @@ $(document).ready(function(){
                         max:$max},
                 success:function(data)
                 {
-                    $("#title-shop").html(data.split("?")[0]);
-                    $("#total-item").html(data.split("?")[1]);
-                    console.log(data.split("?")[3]);
-                    $("#itemShow").html(data.split("?")[2]);
-                    $("#pagination-box").html(data.split("?")[4]);
+                    $("#title-shop").html(data.split("%")[0]);
+                    $("#total-item").html(data.split("%")[1]);
+                    console.log(data.split("%")[3]);
+                    $("#itemShow").html(data.split("%")[2]);
+                    $("#pagination-box").html(data.split("%")[4]);
                 }
             })
         }
@@ -103,6 +103,27 @@ $(document).ready(function(){
                 window.location.reload();
             }
             load_data();
+        });
+
+        $("#DK").on("submit",function(e)
+        {
+            e.preventDefault();
+            $.ajax({
+                url:"./XuLy/validation.php",
+                method:"POST",
+                data:{info : $(this).serialize()},
+                success:function(data)
+                {
+                    console.log($(".error").toArray());
+                    var error = $(".error").toArray();
+                    for(var i = 0 ; i<= error.length ;i++)
+                    {
+                        error[i].innerHTML = data.split("?")[i];
+                    }
+                    console.log(data.split("?")[7]);
+                    
+                }
+            })
         });
 
         $(document).on("click",".sub-item",function()
