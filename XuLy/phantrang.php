@@ -22,13 +22,13 @@
     /**** Lấy Nhăn Hiệu */
     if(isset($_POST["brand"]))
     {
-        echo "Bàn Phím : ".$_POST["brand"]."?";
+        echo "Bàn Phím : ".$_POST["brand"]."%";
         $brand = 'HANG="'.$_POST["brand"].'"';
         array_push($data,$brand);
     }
     else
     {
-        echo "Bàn Phím?";
+        echo "Bàn Phím%";
     }
     /************ */
 
@@ -82,7 +82,7 @@
     $total_record = mysqli_num_rows($page_result); 
     $total_page = ceil($total_record/$record_page);
 
-    echo $total_record."?";
+    echo $total_record."%";
 
     $output = '';
     $start_form = ($page - 1)*$record_page;
@@ -105,7 +105,7 @@
                             <!-- Product Description -->
                             <div class="product-description">
                                 <span>'.$row["HANG"].'</span>
-                                <a href="single-product-details.html">
+                                <a href="product-details.php?id='.$row["idSP"].'">
                                     <h6>'.$row["nameSP"].'</h6>
                                 </a>
                                 <p class="product-price">'.number_format($row["priceSP"],0,".",".").' Đ</p>
@@ -148,8 +148,8 @@ else
     }
     $paging .='<li class="page-item" id="'.$next.'"><a class="page-link"><i class="fa fa-angle-right"></i></a></li></ul>';
 
-    echo $output."?";
-    echo $query."?";
+    echo $output."%";
+    echo $query."%";
     echo $paging;
     
 ?>

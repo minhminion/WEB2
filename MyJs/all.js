@@ -20,11 +20,11 @@ $(document).ready(function(){
                         max:$max},
                 success:function(data)
                 {
-                    $("#title-shop").html(data.split("?")[0]);
-                    $("#total-item").html(data.split("?")[1]);
-                    console.log(data.split("?")[3]);
-                    $("#itemShow").html(data.split("?")[2]);
-                    $("#pagination-box").html(data.split("?")[4]);
+                    $("#title-shop").html(data.split("%")[0]);
+                    $("#total-item").html(data.split("%")[1]);
+                    console.log(data.split("%")[3]);
+                    $("#itemShow").html(data.split("%")[2]);
+                    $("#pagination-box").html(data.split("%")[4]);
                 }
             })
         }

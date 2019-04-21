@@ -13,7 +13,11 @@
         while($row = mysqli_fetch_array($result))
         {
             $out =
-            '<div class="single_product_thumb clearfix" >
+            '<div class="single_product_thumb clearfix">
+                <div class="product_thumbnail_slides owl-carousel" >
+                    <img src="./img/sanpham/'.$row["IMG"].'" >
+                    <img src="./img/sanpham/'.$row["IMG"].'" >
+            <div class="single_product_thumb clearfix" >
                 <div class="product_thumbnail_slides owl-carousel" style="width:300px heigth:300px" >
                     <img src="./img/sanpham/'.$row["IMG"].'" alt="" >
                     <img src="./img/sanpham/'.$row["IMG"].'" alt="" >
