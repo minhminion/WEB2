@@ -120,7 +120,7 @@ $(document).ready(function(){
                     for(var i = 0 ; i<= error.length ;i++)
                     {
                         var s = infoE[i];
-                        error[i].innerText = String(s);
+                        error[i].innerText = s;
                     }
                     console.log(infoE[7]);
                     console.log(infoE[8]);

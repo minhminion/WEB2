@@ -12,12 +12,15 @@
         $result = conSQL::executeQuery($query);
         while($row = mysqli_fetch_array($result))
         {
+            $a="";
+            $description = explode("%",$row["DESCRIPTION"]);
+            foreach($description as $s)
+            {
+                $a .= '<p class="product-desc">'.$s.'</p>' ;
+            }
             $out =
-            '<div class="single_product_thumb clearfix">
-                <div class="product_thumbnail_slides owl-carousel" >
-                    <img src="./img/sanpham/'.$row["IMG"].'" >
-                    <img src="./img/sanpham/'.$row["IMG"].'" >
-            <div class="single_product_thumb clearfix" >
+            '       
+            <div class="single_product_thumb clearfix" style="width:300px">
                 <div class="product_thumbnail_slides owl-carousel" style="width:300px heigth:300px" >
                     <img src="./img/sanpham/'.$row["IMG"].'" alt="" >
                     <img src="./img/sanpham/'.$row["IMG"].'" alt="" >
@@ -30,13 +33,8 @@
                     <h2>'.$row["nameSP"].'</h2>
                 </a>
                 <p class="product-price"><span class="old-price">$65.00</span>'.number_format($row["priceSP"],0,".",".").'đ</p>
-                '.
-                //     $a="";
-                //     foreach($s:$row["INTRO"].str_split("?"))
-                //     {
-                //         $a .= '<p class="product-desc">adasd</p>'  
-                //     }
-                // '.
+                '. $a
+                .
                 '
                 <p class="product-desc"></p>
                 <div class="input-group col-12 col-md-4"> 
