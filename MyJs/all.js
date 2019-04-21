@@ -115,12 +115,16 @@ $(document).ready(function(){
                 success:function(data)
                 {
                     console.log($(".error").toArray());
-                    var error = $(".error").toArray();
+                    var error = $(".error");
+                    var infoE = data.split("?");
                     for(var i = 0 ; i<= error.length ;i++)
                     {
-                        error[i].innerHTML = data.split("?")[i];
+                        var s = infoE[i];
+                        error[i].innerText = String(s);
                     }
-                    console.log(data.split("?")[7]);
+                    console.log(infoE[7]);
+                    console.log(infoE[8]);
+
                     
                 }
             })
