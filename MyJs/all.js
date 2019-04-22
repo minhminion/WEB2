@@ -52,15 +52,27 @@ $(document).ready(function(){
             var img = $(this).attr("img");
             var price = $(this).attr("price");
             console.log(id+name+brand+img+price);
-            load_cart_item(id,name,brand,img,price);
+            load_cart_item(id,name,brand,img,price,1);
+        });
+        // Thêm giỏ hàng bên chi tiết SP
+        $(document).on("click",".essence-btn",function()
+        {
+            var id = $(this).attr("id");
+            var name = $(this).attr("name");
+            var brand = $(this).attr("brand");
+            var img = $(this).attr("img");
+            var price = $(this).attr("price");
+            var quality = $(".quality-item").val();
+            console.log(id+name+brand+img+price);
+            load_cart_item(id,name,brand,img,price,quality);
         });
         /*** Sự kiện tạo giỏ hàng */ 
-        function load_cart_item(id,name,brand,img,price)
+        function load_cart_item(id,name,brand,img,price,quality)
         {
             $.ajax({
                 url:"./XuLy/upToSession.php",
                 method:"POST",
-                data:{id : id,name: name,brand: brand,img: img,price: price},
+                data:{id : id,name: name,brand: brand,img: img,price: price,quality :quality},
                 success:function(data)
                 {
                     
@@ -117,13 +129,13 @@ $(document).ready(function(){
                     console.log($(".error").toArray());
                     var error = $(".error");
                     var infoE = data.split("?");
+                    console.log(infoE[7]);
+                    console.log(infoE[8]);
                     for(var i = 0 ; i<= error.length ;i++)
                     {
                         var s = infoE[i];
                         error[i].innerText = s;
                     }
-                    console.log(infoE[7]);
-                    console.log(infoE[8]);
 
                     
                 }
@@ -192,6 +204,11 @@ $(document).ready(function(){
         $(document).on('click','.plus',function()
         {
             // alert("click");
+            if($('.quality').val() == $('.quality').attr("max"))
+            {
+                alert("Không đủ hàng !!");
+                return;
+            }
             $('.quality').val(parseInt($('.quality').val()) + 1 );
         });
         $(document).on('click','.minus',function()
@@ -202,6 +219,15 @@ $(document).ready(function(){
                 {
                     $('.quality').val(1);
                 }
+        });
+        $("input[name='quant']").change(function()
+        {
+            if($('.quality').val() >= $('.quality').attr("max"))
+            {
+                alert("Không đủ hàng !!");
+                $('.quality').val($('.quality').attr("max"));
+                return;
+            }
         });
     });
     

@@ -10,6 +10,7 @@ $firstName  = GetParameter($_POST['info'],"firstName");
 $lastName  = GetParameter($_POST['info'],"lastName");
 $user = GetParameter($_POST['info'],"user");
 $email  = GetParameter($_POST['info'],"email");
+$email = urldecode($email);
 $password  = GetParameter($_POST['info'],"password");
 $confirmpassword  = GetParameter($_POST['info'],"confirmpassword");
 
@@ -40,7 +41,7 @@ $confirmpassword  = GetParameter($_POST['info'],"confirmpassword");
 	if(empty($email)){
 		$emailError = "Vui lòng nhập email";
 	} else{
-		if(!preg_match("/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{3})$/",$email)){
+		if(!preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/",$email)){
 			$emailError = "Vui lòng nhập email hợp lệ";
 		}
 	}
@@ -56,7 +57,7 @@ $confirmpassword  = GetParameter($_POST['info'],"confirmpassword");
 	if(empty($confirmpassword)){
 		$confirmpswdError = "Vui lòng nhập mật khẩu nhập lại";
 	} else{
-		if(!preg_match($password,$confirmpassword)){
+		if(!($password === $confirmpassword)){
 			$confirmpswdError = "Mật khẩu nhập lại phải trùng với mật khẩu";
 		}
 	}

@@ -1,16 +1,28 @@
-
-    @media only screen and (max-width: 768px)
+.product-desc li
+{
+    margin-left: 20px;
+    list-style-type: circle;
+}
+.input-group
+{
+    margin-top: 20px;
+}
+@media only screen and (max-width: 768px)
+{
+    #logo
     {
-        #logo
-        {
-            margin : auto;
-            width:100px;
-        }
+        margin : auto;
+        width:100px;
     }
-    .slider-range
+    .cart-fav-box
     {
-        margin-right:50px;
+        justify-content: center;
     }
-    .error{
-        color: red;
-    }
+}
+.slider-range
+{
+    margin-right:50px;
+}
+.error{
+    color: red;
+}
