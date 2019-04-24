@@ -19,6 +19,7 @@
                 $a .= '<li>'.$s.'</li>' ;
             }
             $a .="</ul>";
+            // echo $a;
             $out =
             '    
             <div class="single_product_thumb clearfix" style="width:300px">

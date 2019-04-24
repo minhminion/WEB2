@@ -9,15 +9,15 @@
             <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-            <form action="#" method="post">
+            <form action="./XuLy/validateuser.php" method="post">
                 <div class="row">
                     <div class="col-md-12 mb-3">
-                        <label for="last_name">Tên đăng nhập<span>*</span></label>
-                        <input type="text" class="form-control" id="user" value="" required="" placeholder="Tên đăng nhập">
+                        <label for="user">Tên đăng nhập<span>*</span></label>
+                        <input type="text" name="username" class="form-control" id="user" value="" required="" placeholder="Tên đăng nhập">
                     </div>
                     <div class="col-md-12 mb-3">
-                        <label for="last_name">Mật khẩu<span>*</span></label>
-                        <input type="text" class="form-control" id="password" value="" required="" placeholder="Mật khẩu">
+                        <label for="password">Mật khẩu<span>*</span></label>
+                        <input type="password" name="password" class="form-control" id="password" value="" required="" placeholder="Mật khẩu">
                     </div>
                     <div class="col-md-12 mb-3 mt-3">
                         <input type="submit" class="form-control" value="Đăng nhập">
@@ -133,14 +133,18 @@
                                 <li><a href="index.php?id=shop">Shop</a></li>
                                 <li><a href="single-product-details.html">Product Details</a></li>
                                 <li><a href="checkout.html">Checkout</a></li>
-                                <li><a href="blog.html">Blog</a></li>
                                 <li><a href="single-blog.html">Single Blog</a></li>
                                 <li><a href="regular-page.html">Regular Page</a></li>
                                 <li><a href="contact.html">Contact</a></li>
                             </ul>
                         </li>
-                        <li><a href="blog.html">Blog</a></li>
                         <li><a href="contact.html">Contact</a></li>
+                        <?php
+                            if(isset($_SESSION['isLOGIN']) && $_SESSION["isLOGIN"] == 1 && $_SESSION["AUTHENTICATION"] == 0)
+                            {
+                                echo '<li><a href="admin.php">Admin</a><li>';
+                            }
+                        ?>
                     </ul>
                 </div>
                 <!-- Nav End -->
@@ -162,7 +166,16 @@
             </div>
             <!-- User Login Info -->
             <div class="user-login-info" data-toggle="modal" data-target="#login">
-                <a href="#"><img src="img/core-img/user.svg" alt=""></a>
+                <?php
+                    if(isset($_SESSION["isLOGIN"]) && $_SESSION["isLOGIN"] == "1")
+                    {
+                        echo '<a>'.$_SESSION['userName'].'</a>';
+                    }
+                    else
+                    {
+                        echo '<a href="#"><img src="img/core-img/user.svg" alt=""></a>';
+                    }
+                ?>
             </div>
             
             <!-- Cart Area -->
