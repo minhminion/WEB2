@@ -1,6 +1,6 @@
 <?php
 	$hostName = "localhost";
-   	$databaseName = "web2";
+   	$databaseName = "web2_1";
    	$username = "root";
    	$password = "";
 ?>

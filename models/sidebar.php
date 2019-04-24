@@ -31,42 +31,45 @@
                                         <a href="#">Bàn Phím</a>
                                     </li>
                                         <ul class="sub-menu collapse show" id="keyboard">
-                                            <li><a href="#" class="sub-item">All</a></li>
-                                            <li><a href="#" class="sub-item" brand="Razer">Razer</a></li>
-                                            <li><a href="#" class="sub-item" brand="Logitech">Logitech</a></li>
-                                            <li><a href="#" class="sub-item" brand="Asus">Asus</a></li>
-                                            <li><a href="#" class="sub-item" brand="Corsair">Corsair</a></li>
-                                            <li><a href="#" class="sub-item" brand="Steelseries">Steelseries</a></li>
+                                            <li><a href="#" class="sub-item" cetorgry="001">All</a></li>
+                                            <li><a href="#" class="sub-item" brand="001" cetorgry="001">Razer</a></li>
+                                            <li><a href="#" class="sub-item" brand="003" cetorgry="001">Logitech</a></li>
+                                            <li><a href="#" class="sub-item" brand="002" cetorgry="001">Asus</a></li>
+                                            <li><a href="#" class="sub-item" brand="004" cetorgry="001">Corsair</a></li>
+                                            <li><a href="#" class="sub-item" brand="005" cetorgry="001">Steelseries</a></li>
                                         </ul>
                                     <!-- Single Item -->
                                     <li data-toggle="collapse" data-target="#mouse" class="collapsed">
                                         <a href="#">Chuột</a>
-                                        <ul class="sub-menu collapse" id="mouse">
-                                        <li><a href="index.php?id=shop">All</a></li>
-                                            <li><a href="index.php?id=shop">Razer</a></li>
-                                            <li><a href="index.php?id=shop">Logitech</a></li>
-                                            <li><a href="index.php?id=shop">Asus</a></li>
-                                        </ul>
                                     </li>
+                                        <ul class="sub-menu collapse" id="mouse">
+                                            <li><a href="#" class="sub-item" cetorgry="002">All</a></li>
+                                            <li><a href="#" class="sub-item" brand="001" cetorgry="002">Razer</a></li>
+                                            <li><a href="#" class="sub-item" brand="003" cetorgry="002">Logitech</a></li>
+                                            <li><a href="#" class="sub-item" brand="002" cetorgry="002">Asus</a></li>
+                                            <li><a href="#" class="sub-item" brand="004" cetorgry="002">Corsair</a></li>
+                                            <li><a href="#" class="sub-item" brand="005" cetorgry="002">Steelseries</a></li>
+                                        </ul>
+                                    
                                     <!-- Single Item -->
                                     <li data-toggle="collapse" data-target="#headphone" class="collapsed">
                                         <a href="#">Tai Nghe</a>
-                                        <ul class="sub-menu collapse" id="headphone">
-                                        <li><a href="index.php?id=shop">All</a></li>
-                                            <li><a href="index.php?id=shop">Razer</a></li>
-                                            <li><a href="index.php?id=shop">Logitech</a></li>
-                                            <li><a href="index.php?id=shop">Asus</a></li>
-                                        </ul>
                                     </li>
+                                        <ul class="sub-menu collapse" id="headphone">
+                                            <li><a href="#" class="sub-item" cetorgry="003">All</a></li>
+                                            <li><a href="#" class="sub-item" brand="001" cetorgry="003">Razer</a></li>
+                                            <li><a href="#" class="sub-item" brand="003" cetorgry="003">Logitech</a></li>
+                                            <li><a href="#" class="sub-item" brand="002" cetorgry="003">Asus</a></li>
+                                        </ul>
                                     <!-- Single Item -->
                                     <li data-toggle="collapse" data-target="#accessories" class="collapsed">
                                         <a href="#">Phụ Kiện</a>
-                                        <ul class="sub-menu collapse" id="accessories">
-                                            <li><a href="#">All</a></li>
                                     </li>
-                                </ul>
+                                        <ul class="sub-menu collapse" id="accessories">
+                                            <li><a href="#" class="sub-item" cetorgry="004" >All</a></li>
+                                        </ul>
+                                </div>
                             </div>
-                        </div>
 
                         <!-- ##### Single Widget ##### -->
                         <div class="widget price mb-50">

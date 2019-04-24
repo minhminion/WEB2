@@ -102,28 +102,30 @@
                             <div class="megamenu">
                                 <ul class="single-mega cn-col-4">
                                     <li class="title">Bàn Phím</li>
-                                    <li><a href="shop.php">All</a></li>
-                                    <li><a href="shop.php?brand=razer">Razer</a></li>
-                                    <li><a href="shop.php?brand=logitech">Logitech</a></li>
-                                    <li><a href="shop.php?brand=asus">Asus</a></li>
-                                    <li><a href="shop.php?brand=corsair">Corsair</a></li>
-                                    <li><a href="shop.php?brand=steelseries">Steelseries</a></li>
+                                    <li><a href="shop.php?cetorgry=001">All</a></li>
+                                    <li><a href="shop.php?brand=001?cetorgry=001">Razer</a></li>
+                                    <li><a href="shop.php?brand=003?cetorgry=001">Logitech</a></li>
+                                    <li><a href="shop.php?brand=002?cetorgry=001">Asus</a></li>
+                                    <li><a href="shop.php?brand=004?cetorgry=001">Corsair</a></li>
+                                    <li><a href="shop.php?brand=005?cetorgry=001">Steelseries</a></li>
                                 </ul>
                                 <ul class="single-mega cn-col-4">
                                     <li class="title">Chuột</li>
-                                    <li><a href="shop.php">Asus</a></li>
-                                    <li><a href="shop.php">Corsair</a></li>
-                                    <li><a href="shop.php">Steelseries</a></li>
+                                    <li><a href="shop.php?cetorgry=002">All</a></li>
+                                    <li><a href="shop.php?brand=002?cetorgry=002">Asus</a></li>
+                                    <li><a href="shop.php?brand=004?cetorgry=002">Corsair</a></li>
+                                    <li><a href="shop.php?brand=005?cetorgry=002">Steelseries</a></li>
                                 </ul>
                                 <ul class="single-mega cn-col-4">
                                     <li class="title">Tai Nghe</li>
-                                    <li><a href="shop.php">Razer</a></li>
-                                    <li><a href="shop.php">Logitech</a></li>
-                                    <li><a href="shop.php">Asus</a></li>
+                                    <li><a href="shop.php?cetorgry=003">All</a></li>
+                                    <li><a href="shop.php?brand=001?cetorgry=003">Razer</a></li>
+                                    <li><a href="shop.php?brand=003?cetorgry=003">Logitech</a></li>
+                                    <li><a href="shop.php?brand=002?cetorgry=003">Asus</a></li>
                                 </ul>
                                 <ul class="single-mega cn-col-4">
                                     <li class="title">Phụ kiện</li>
-                                    <li><a href="shop.php">All</a></li>
+                                    <li><a href="shop.php?cetorgry=004">All</a></li>
                                 </ul>
                             </div>
                         </li>

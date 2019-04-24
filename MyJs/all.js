@@ -14,6 +14,7 @@ $(document).ready(function(){
                 method:"POST",
                 data:{  page:page,
                         brand:GetURLParameter('brand'),
+                        cetorgry:GetURLParameter('cetorgry'),
                         search:decodeURI(GetURLParameter('search')),
                         order:$order,
                         min:$min,
@@ -144,14 +145,11 @@ $(document).ready(function(){
 
         $(document).on("click",".sub-item",function()
         {   
-            
-            // $url = window.location.href.split("?");
-            // $url = window.location.href.split("?")[$url.length - 1];
-            // console.log($url);
             $brand = $(this).attr("brand");
-            if($brand != undefined)
+            $cetorgry = $(this).attr("cetorgry");
+            if($brand != undefined || $cetorgry != undefined)
             {
-               URLpush(GetURLParameter('search'),$brand);
+               URLpush(GetURLParameter('search'),$brand,$cetorgry);
             }
             else{
                 URLpush();
@@ -184,17 +182,19 @@ $(document).ready(function(){
             }
         }
     }
-    function URLpush(search,brand)
+    function URLpush(search,brand,cetorgry)
     {
         $oldUrl = "shop.php";
 
         $search = search === undefined ?"":"?search="+search;
         $brand = brand === undefined ?"":"?brand="+brand;
+        $cetorgry = cetorgry === undefined ?"":"?cetorgry="+cetorgry;
 
         console.log($search);
         console.log($brand);
+        console.log($cetorgry);
 
-        $newURL  = $oldUrl + $search + $brand;
+        $newURL  = $oldUrl + $search + $brand + $cetorgry;
         
         window.history.pushState("String","",$newURL);
 

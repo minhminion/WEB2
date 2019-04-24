@@ -8,12 +8,12 @@
     $query = "";
     if(isset($_GET['id']))
     {
-        $query = 'SELECT * FROM sanpham WHERE idSP="'.$_GET['id'].'" ';
+        $query = 'SELECT product.*,brand.brandName FROM product,brand WHERE productID="'.$_GET['id'].'" AND productBrand = brandID ';
         $result = conSQL::executeQuery($query);
         while($row = mysqli_fetch_array($result))
         {
             $a="<ul class='product-desc'>";
-            $description = explode("%",$row["DESCRIPTION"]);
+            $description = explode("%",$row["productDescription"]);
             foreach($description as $s)
             {
                 $a .= '<li>'.$s.'</li>' ;
@@ -30,11 +30,11 @@
             </div>
 
             <div class="single_product_desc clearfix">
-                <span>'.$row["HANG"].'</span>
+                <span>'.$row["brandName"].'</span>
                 <a href="cart.html">
-                    <h2>'.$row["nameSP"].'</h2>
+                    <h2>'.$row["productName"].'</h2>
                 </a>
-                <p class="product-price"><span class="old-price">$65.00</span>'.number_format($row["priceSP"],0,".",".").'đ</p>
+                <p class="product-price"><span class="old-price">$65.00</span>'.number_format($row["productPrice"],0,".",".").'đ</p>
                 '. $a.'
                 <div class="input-group col-12 col-md-4"> 
                 <span class="input-group-btn"> 
@@ -42,7 +42,7 @@
                         <i class="fas fa-minus"></i>
                     </button>
                 </span> 
-                <input style="height:38px;text-align:center;" name="quant" class="quality-item form-control input-number quality" value="1" min="1" max="'.$row['SL'].'" type="text"> 
+                <input style="height:38px;text-align:center;" name="quant" class="quality-item form-control input-number quality" value="1" min="1" max="'.$row['productAmount'].'" type="text"> 
                 <span class="input-group-btn">
                     <button type="button" class="btn btn-success btn-number plus" data-type="plus" data-field="quant"> 
                         <i class="fas fa-plus" ></i>
@@ -51,11 +51,11 @@
             </div> 
                 <div class="cart-fav-box d-flex align-items-center mt-5">
                     <button name="addtocart" value="5" class="btn essence-btn" 
-                    id="'.$row["idSP"].'" 
-                    name="'.$row["nameSP"].'" 
-                    brand="'.$row["HANG"].'" 
+                    id="'.$row["productID"].'" 
+                    name="'.$row["productName"].'" 
+                    brand="'.$row["brandName"].'" 
                     img="'.$row["IMG"].'" 
-                    price="'.$row["priceSP"].'"
+                    price="'.$row["productPrice"].'"
                     >Add to cart</button>
                     <div class="product-favourite ml-4">
                         <a href="#" class="favme fa fa-heart"></a>

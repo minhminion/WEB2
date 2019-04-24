@@ -6,29 +6,58 @@
     $page =" ";
     
     $where = "";
+
+    $brand="";
+    $brandName="";
+
+    $cetorgry = "";
+    $cetorgryName ="";
+
     /**** Search */
     $data = array();
-    $enable = "enable ='1'";
+    array_push($data,"productBrand = brandID");
+    $enable = "state ='1'";
     array_push($data,$enable);
     if(isset($_POST['search']) && $_POST['search'] != "undefined" )
     {
         // echo $_POST["search"]."?";
-        $search = ' nameSP LIKE "%'.$_POST['search'].'%"';
+        $search = ' productName LIKE "%'.$_POST['search'].'%"';
         array_push($data,$search);
     }
     /********** */
     
 
+    /**** Lấy Loại */
+    if(isset($_POST["cetorgry"]))
+    {
+        $rs = conSQL :: executeQuery('SELECT * FROM cetorgry WHERE cetorgryID = "'.$_POST["cetorgry"].'" ');
+        while($row = mysqli_fetch_array($rs))
+        {
+            $cetorgryName = $row['cetorgryName'];
+        }
+        $cetorgry = 'productCetorgry="'.$_POST["cetorgry"].'"';
+        array_push($data,$cetorgry);
+    }
+    else{
+        $cetorgryName = "Tất cả";
+    }
+    /************* */
+
     /**** Lấy Nhăn Hiệu */
     if(isset($_POST["brand"]))
     {
-        echo "Bàn Phím : ".$_POST["brand"]."%";
-        $brand = 'HANG="'.$_POST["brand"].'"';
+        $rs = conSQL :: executeQuery('SELECT * FROM brand WHERE brandID = "'.$_POST["brand"].'" ');
+        while($row = mysqli_fetch_array($rs))
+        {
+            $brandName = $row['brandName'];
+        }
+        echo $cetorgryName." : ".$brandName."%";
+        $brand = 'productBrand="'.$_POST["brand"].'"';
         array_push($data,$brand);
     }
     else
     {
-        echo "Bàn Phím%";
+        echo  $cetorgryName."%";
     }
     /************ */
 
@@ -46,7 +75,7 @@
     }
     if($where == "")
     {
-        $where = 1;
+        $where = "productBrand = brandID";
     }
     /******** */
 
@@ -76,7 +105,7 @@
     $max = isset($_POST['max'])?$max = $_POST['max']*1000000:$max = 10000000;
     /****** */
 
-    $page_query = "SELECT * FROM sanpham WHERE $where AND priceSP BETWEEN $min AND $max";
+    $page_query = "SELECT product.*,brand.brandName FROM `product`,brand WHERE $where AND productPrice BETWEEN $min AND $max";
     // echo $page_query."?";
     $page_result = conSQL::executeQuery($page_query);
     $total_record = mysqli_num_rows($page_result); 
@@ -86,7 +115,7 @@
 
     $output = '';
     $start_form = ($page - 1)*$record_page;
-    $query = "SELECT * FROM sanpham WHERE $where AND priceSP BETWEEN $min AND $max ORDER BY priceSP $sort LIMIT $start_form,$record_page";
+    $query = "SELECT product.*,brand.brandName FROM `product`,brand WHERE $where AND productPrice BETWEEN $min AND $max ORDER BY productPrice $sort LIMIT $start_form,$record_page";
     $result = conSQL::executeQuery($query);
 
     while($row = mysqli_fetch_array($result))
@@ -104,16 +133,16 @@
                             </div>
                             <!-- Product Description -->
                             <div class="product-description">
-                                <span>'.$row["HANG"].'</span>
-                                <a href="product-details.php?id='.$row["idSP"].'">
-                                    <h6>'.$row["nameSP"].'</h6>
+                                <span>'.$row["brandName"].'</span>
+                                <a href="product-details.php?id='.$row["productID"].'">
+                                    <h6>'.$row["productName"].'</h6>
                                 </a>
-                                <p class="product-price">'.number_format($row["priceSP"],0,".",".").' Đ</p>
+                                <p class="product-price">'.number_format($row["productPrice"],0,".",".").' Đ</p>
 
                                 <!-- Hover Content -->
                                 <div class="hover-content">
                                     <!-- Add to Cart -->
-                                    <div id="'.$row["idSP"].'" name="'.$row["nameSP"].'" brand="'.$row["HANG"].'"  img="'.$row["IMG"].'" price="'.$row["priceSP"].'" class="add-to-cart-btn">
+                                    <div id="'.$row["productID"].'" name="'.$row["productName"].'" brand="'.$row["brandName"].'"  img="'.$row["IMG"].'" price="'.$row["productPrice"].'" class="add-to-cart-btn">
                                         <a class="btn essence-btn" style="color:white;">Mua Ngay</a>
                                     </div>
                                 </div>
