@@ -79,6 +79,31 @@
         </div>
     </div>
 </div>
+<!-- Form đăng xuất -->
+<div class="modal fade" id="logout" role="dialog" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+    <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+            <h4 class="modal-title">Đăng nhập</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+            <form action="./XuLy/validateuser.php" method="post">
+                <div class="row">
+                    <div class="col-md-12 mb-3 mt-3">
+                        <input type="submit" class="form-control" value="Đăng xuất">
+                    </div>
+                </div>
+            </form>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <p>Tạo tài khoản ? <span style="cursor:pointer;" class="changeUpIn">Đăng ký</span></p>
+            </div>
+        </div>
+    </div>
+</div>
+
 <header class="header_area">
     <div class="classy-nav-container breakpoint-off d-flex align-items-center justify-content-between">
         <!-- Classy Menu -->
@@ -167,18 +192,21 @@
                 <a href="#"><img src="img/core-img/heart.svg" alt=""></a>
             </div>
             <!-- User Login Info -->
-            <div class="user-login-info" data-toggle="modal" data-target="#login">
                 <?php
                     if(isset($_SESSION["isLOGIN"]) && $_SESSION["isLOGIN"] == "1")
                     {
-                        echo '<a>'.$_SESSION['userName'].'</a>';
+                        echo '<div class="user-login-info" data-toggle="modal" data-target="#logout">
+                                <a style="width:12em;"> Chào,'.$_SESSION['userName'].' </a>
+                                </div>';
                     }
                     else
                     {
-                        echo '<a href="#"><img src="img/core-img/user.svg" alt=""></a>';
+                        
+                        echo '<div class="user-login-info" data-toggle="modal" data-target="#login">
+                                <a href="#"><img src="img/core-img/user.svg" alt=""></a>
+                                </div>';
                     }
                 ?>
-            </div>
             
             <!-- Cart Area -->
             <div class="cart-area">

@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,7 +30,7 @@
 
 <body>
     <?php
-        include("./models/header.php");
+        include("./models/header1.php");
         include("./models/sidebar.php");
         include("./models/brand.php");
         include("./models/footer.php");
