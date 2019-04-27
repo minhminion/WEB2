@@ -2,7 +2,7 @@
 $(document).ready(function(){
         load_data();
         load_cart_item();
-///////////////
+        
         function load_data(page)
         {
             $order = $("#sortByselect").val();
@@ -19,13 +19,15 @@ $(document).ready(function(){
                         order:$order,
                         min:$min,
                         max:$max},
+                datatype:"json",
                 success:function(data)
                 {
-                    $("#title-shop").html(data.split("%")[0]);
-                    $("#total-item").html(data.split("%")[1]);
-                    console.log(data.split("%")[3]);
-                    $("#itemShow").html(data.split("%")[2]);
-                    $("#pagination-box").html(data.split("%")[4]);
+                    data = JSON.parse(data)
+                    console.log(data);
+                    $("#title-shop").html(data.cetorgry);
+                    $("#total-item").html(data.totalRecord);
+                    $("#itemShow").html(data.output);
+                    $("#pagination-box").html(data.paging);
                 }
             })
         }
@@ -53,11 +55,13 @@ $(document).ready(function(){
             var img = $(this).attr("img");
             var price = $(this).attr("price");
             console.log(id+name+brand+img+price);
+            addsuccess();
             load_cart_item(id,name,brand,img,price,1);
         });
         // Thêm giỏ hàng bên chi tiết SP
         $(document).on("click",".essence-btn",function()
         {
+            addsuccess();
             var id = $(this).attr("id");
             var name = $(this).attr("name");
             var brand = $(this).attr("brand");
@@ -74,11 +78,12 @@ $(document).ready(function(){
                 url:"./XuLy/upToSession.php",
                 method:"POST",
                 data:{id : id,name: name,brand: brand,img: img,price: price,quality :quality},
+                datatype:"json",
                 success:function(data)
                 {
-                    
-                    $("#cart-list").html(data.split("?")[1]);
-                    $(".sizeBag").html(data.split("?")[0]);
+                    data = JSON.parse(data);
+                    $("#cart-list").html(data.output);
+                    $(".sizeBag").html(data.quality);
                 }
             });
         }
@@ -91,12 +96,12 @@ $(document).ready(function(){
                 url:"./XuLy/upToSession_delete.php",
                 method:"POST",
                 data:{id : $(this).attr("data")},
+                datatype:"json",
                 success:function(data)
                 {
-                //   console.log(data);
-                    
-                   $("#cart-list").html(data.split("?")[1]);
-                   $(".sizeBag").html(data.split("?")[0]);
+                    data = JSON.parse(data);
+                   $("#cart-list").html(data.output);
+                   $(".sizeBag").html(data.quality);
                 }
             });
         });
@@ -157,7 +162,7 @@ $(document).ready(function(){
             load_data();
             
         })
-
+        
         $(document).on("change","#sortByselect",function()
         {
             load_data();
@@ -171,35 +176,7 @@ $(document).ready(function(){
         });
     });
 
-    function GetURLParameter(sParam) {
-        var sPageURL = window.location.search.substring(1);
-        var sURLVariables = sPageURL.split('?');
-        for (var i = 0; i < sURLVariables.length; i++){
-            var sParameterName = sURLVariables[i].split('=');
-            if (sParameterName[0] == sParam)
-            {
-                return sParameterName[1];
-            }
-        }
-    }
-    function URLpush(search,brand,cetorgry)
-    {
-        $oldUrl = "shop.php";
-
-        $search = search === undefined ?"":"?search="+search;
-        $brand = brand === undefined ?"":"?brand="+brand;
-        $cetorgry = cetorgry === undefined ?"":"?cetorgry="+cetorgry;
-
-        console.log($search);
-        console.log($brand);
-        console.log($cetorgry);
-
-        $newURL  = $oldUrl + $search + $brand + $cetorgry;
-        
-        window.history.pushState("String","",$newURL);
-
-    }
-
+    
     $(document).ready(function(){
         $(document).on('click','.plus',function()
         {
@@ -215,11 +192,11 @@ $(document).ready(function(){
         {
             $('.quality').val(parseInt($('.quality').val()) - 1 );
             // alert("click");
-                if ($('.quality').val() == 0) 
-                {
-                    $('.quality').val(1);
+            if ($('.quality').val() == 0) 
+            {
+                $('.quality').val(1);
                 }
-        });
+            });
         $("input[name='quant']").change(function()
         {
             if($('.quality').val() >= $('.quality').attr("max"))
@@ -230,6 +207,44 @@ $(document).ready(function(){
             }
         });
     });
+
+// FUNCTION   
+    function addsuccess()
+    {
+        $.notify({
+            message: 'Thêm thành công',
+            type: 'danger'
+        });
+    }
+
+    function GetURLParameter(sParam) {
+        var sPageURL = window.location.search.substring(1);
+        var sURLVariables = sPageURL.split('?');
+        for (var i = 0; i < sURLVariables.length; i++){
+            var sParameterName = sURLVariables[i].split('=');
+            if (sParameterName[0] == sParam)
+            {
+                return sParameterName[1];
+            }
+        }
+    }
+    function URLpush(search,brand,cetorgry)
+    {
+        $oldUrl = "shop.php";
+    
+        $search = search === undefined ?"":"?search="+search;
+        $brand = brand === undefined ?"":"?brand="+brand;
+        $cetorgry = cetorgry === undefined ?"":"?cetorgry="+cetorgry;
+    
+        console.log($search);
+        console.log($brand);
+        console.log($cetorgry);
+    
+        $newURL  = $oldUrl + $search + $brand + $cetorgry;
+        
+        window.history.pushState("String","",$newURL);
+    
+    }
     
 
 

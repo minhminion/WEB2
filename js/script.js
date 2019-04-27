@@ -127,31 +127,6 @@
         
         
     });
-    function load_data(page)
-        {
-            $order = $("#sortByselect").val();
-            $min = $("#sortPrice").attr('min');
-            $max = $("#sortPrice").attr('max');
-            console.log($order);
-            $.ajax({
-                url:"./XuLy/phantrang.php",
-                method:"POST",
-                data:{  page:page,
-                        brand:GetURLParameter('brand'),
-                        search:GetURLParameter('search'),
-                        order:$order,
-                        min:$min,
-                        max:$max},
-                success:function(data)
-                {
-                    $("#title-shop").html(data.split("?")[0]);
-                    $("#total-item").html(data.split("?")[1]);
-                    console.log(data.split("?")[3]);
-                    $("#itemShow").html(data.split("?")[2]);
-                    $("#pagination-box").html(data.split("?")[4]);
-                }
-            })
-        }
     // :: Favorite Button Active Code
     var favme = $(".favme");
 
@@ -187,4 +162,4 @@
         $.preventDefault();
     });
 
-})(jQuery);
+});

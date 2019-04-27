@@ -1,3 +1,4 @@
+
 <!-- ##### Breadcumb Area Start ##### -->
 <div class="breadcumb_area bg-img" style="background-image: url(img/bg-img/breadcumb.jpg);">
     <div class="container h-100">
@@ -96,11 +97,11 @@
                             <p class="widget-title2 mb-30">Nhăn hiệu</p>
                                 <div class="widget-desc">
                                     <ul>
-                                        <li><a href="#">Asus</a></li>
-                                        <li><a href="#">Razer</a></li>
-                                        <li><a href="#">Steelseries</a></li>
-                                        <li><a href="#">Corsair</a></li>
-                                        <li><a href="#">Logitech</a></li>
+                                        <li><a href="#" class="sub-item" brand="002">Asus</a></li>
+                                        <li><a href="#" class="sub-item" brand="001">Razer</a></li>
+                                        <li><a href="#" class="sub-item" brand="005">Steelseries</a></li>
+                                        <li><a href="#" class="sub-item" brand="004">Corsair</a></li>
+                                        <li><a href="#" class="sub-item" brand="003">Logitech</a></li>
                                     </ul>
                                 </div>
                         </div>
@@ -140,6 +141,6 @@
             </div>
         </div>
     </section>
-    
+ 
 
 

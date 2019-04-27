@@ -11,9 +11,13 @@
         $pass = $_POST['password'];
         // echo $_POST['password'];
         echo password_hash($pass , PASSWORD_DEFAULT)."<br>";
-        $sql = "SELECT * FROM user WHERE userNAME='$username'";
+        $sql = "SELECT * FROM user WHERE userNAME='$username' AND state ='1' " ;
         echo $sql.'<br>';
         $result = conSQL::executeQuery($sql);
+        if(!$result)
+        {
+            echo "Sai tên đăng nhập"; 
+        }
         while($row = mysqli_fetch_array($result))
         {
             echo "ABC<br>";
@@ -21,12 +25,12 @@
             // echo password_verify($pass,$row["userPass"])."</br>"; 
             if(password_verify($pass,$row["userPass"])) 
             {
-                echo "Đăng nhập";  
                 $_SESSION["isLOGIN"] = 1;
                 $_SESSION["userName"] = $row["userName"];
                 $_SESSION["AUTHENTICATION"] = $row["userAuthentication"];
+                echo "Đăng nhập thành công";  
             }else{
-                echo "sai";
+                echo "Sai mật khẩu";
             }
         }
     }
