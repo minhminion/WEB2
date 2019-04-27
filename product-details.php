@@ -17,6 +17,7 @@
 
 
     <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <script src="js/bootstrap-notify.min.js"></script>
     
     <link rel="stylesheet" href="./css/aos.css">
     <!-- Core Style CSS -->

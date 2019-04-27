@@ -3,7 +3,6 @@
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="">
@@ -15,31 +14,26 @@
     <title>M2M - Gaming Gear Shop </title>
 
     <!-- Favicon  -->
-    <link rel="icon" href="img/core-img/favicon.icon">
+    <link rel="icon" href="img/core-img/favicon.ico">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
-
-
-    <script src="js/jquery/jquery-2.2.4.min.js"></script>
-    <script src="js/bootstrap-notify.min.js"></script>
     
     <link rel="stylesheet" href="./css/aos.css">
     <!-- Core Style CSS -->
     <link rel="stylesheet" href="css/style1.css">
     <link rel="stylesheet" href="style.css">
-
+    <!-- jQuery (Necessary for All JavaScript Plugins) -->
+    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <script src="js/bootstrap-notify.min.js"></script>
 </head>
 
 <body>
     <?php
         include("./models/header1.php");
-        include("./models/sidebar.php");
+        include("./models/checkout-content.php");
         include("./models/brand.php");
         include("./models/footer.php");
         include("./models/shopbag.php");
     ?>
-    <ul id="pagination-demo" class="pagination-sm"></ul>
-    <!-- jQuery (Necessary for All JavaScript Plugins) -->
-    
     <!-- Popper js -->
     <script src="js/popper.min.js"></script>
     <!-- Bootstrap js -->
@@ -57,8 +51,5 @@
     <script src="js/script.js"></script>
     <!--------------->
     <script src="./MyJs/all.js"></script>
-
-
-
 </body>
 </html>

@@ -37,10 +37,15 @@
                             <li><span>Tổng tiển:</span> <span>'.number_format($total/100*(100-15),0,".",".").' đ</span></li>
                         </ul>
                         <div class="checkout-btn mt-100">
-                            <a href="checkout.html" class="btn essence-btn">Kiểm tra</a>
+                            <a href="checkout.php" class="btn essence-btn">Kiểm tra</a>
                         </div>
                     </div>
                 </div>';
-    echo $num.="?";
-    echo $output;
+   
+    $myObj = new stdClass();
+    $myObj->num = $num;
+    $myObj->output = $output;
+
+    echo json_encode($myObj);
+                
 ?>

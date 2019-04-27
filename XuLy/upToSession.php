@@ -51,7 +51,8 @@ class Item
             if($flag)
             {
                 $item = new Item;
-                $item->__contruct($_POST['id'],$_POST['name'],$_POST['brand'],$_POST['img'],$_POST['price'],$_POST['quality']);
+                $quality = isset($_POST['quality']) ? $_POST['quality'] : 1;
+                $item->__contruct($_POST['id'],$_POST['name'],$_POST['brand'],$_POST['img'],$_POST['price'],$quality);
                 array_push($_SESSION['id'],$item);
             }
         }
