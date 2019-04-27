@@ -51,11 +51,14 @@
         {
             $brandName = $row['brandName'];
         }
-        $cetorgryName = $cetorgryName." : ".$brandName."";
+        echo $cetorgryName." : ".$brandName."%";
         $brand = 'productBrand="'.$_POST["brand"].'"';
         array_push($data,$brand);
     }
-
+    else
+    {
+        echo  $cetorgryName."%";
+    }
     /************ */
 
     /******* Tao SQL WHERE*/
@@ -108,6 +111,7 @@
     $total_record = mysqli_num_rows($page_result); 
     $total_page = ceil($total_record/$record_page);
 
+    echo $total_record."%";
 
     $output = '';
     $start_form = ($page - 1)*$record_page;
@@ -138,12 +142,7 @@
                                 <!-- Hover Content -->
                                 <div class="hover-content">
                                     <!-- Add to Cart -->
-                                    <div id="'.$row["productID"].'" 
-                                            name="'.$row["productName"].'" 
-                                            brand="'.$row["brandName"].'"  
-                                            img="'.$row["IMG"].'" 
-                                            price="'.$row["productPrice"].'" 
-                                            class="add-to-cart-btn">
+                                    <div id="'.$row["productID"].'" name="'.$row["productName"].'" brand="'.$row["brandName"].'"  img="'.$row["IMG"].'" price="'.$row["productPrice"].'" class="add-to-cart-btn">
                                         <a class="btn essence-btn" style="color:white;">Mua Ngay</a>
                                     </div>
                                 </div>
@@ -178,16 +177,8 @@ else
     }
     $paging .='<li class="page-item" id="'.$next.'"><a class="page-link"><i class="fa fa-angle-right"></i></a></li></ul>';
 
-    $myobj = new \stdClass();
-    $myobj->cetorgry = $cetorgryName;
-    $myobj->totalRecord = $total_record;
-    $myobj->output = $output;
-    $myobj->paging = $paging;
-
-    echo json_encode($myobj);
-
-    // echo $output."%";
-    // echo $query."%";
-    // echo $paging;
+    echo $output."%";
+    echo $query."%";
+    echo $paging;
     
 ?>

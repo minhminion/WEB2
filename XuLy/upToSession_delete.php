@@ -39,6 +39,8 @@ class Item
             unset($_SESSION['id'][$i]);
             $_SESSION['id'] = array_values($_SESSION['id']);
         }
+
+        // echo $item->id;
     }
 
     include("cartBag.php");
