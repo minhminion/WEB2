@@ -1,37 +1,6 @@
 <?php
 //
-class Item
-{
-    var $id= "";
-    var $name = "";
-    var $brand = "";
-    var $img = "";
-    var $price = "";
-    var $quality = 1;
-    function __contruct($id,$name,$brand,$img,$price,$quality)
-    {
-        $this->id .= $id; 
-        $this->name .= $name; 
-        $this->brand .= $brand; 
-        $this->img .= $img;
-        $this->price .= $price; 
-        $this->quality = $quality;
-    }
-    function toString()
-    {
-        return  $this->id . 
-        $this->name .
-        $this->brand .
-        $this->img.
-        $this->price;
-    }
-    function upQuality($quality)
-    {
-        $this->quality = $this->quality + $quality;
-    }
-
-}
-
+    include("./myClass.php");
     session_start();
 //    echo sizeof($_SESSION['id']);
    

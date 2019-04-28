@@ -1,8 +1,9 @@
 <div class="checkout_area section-padding-80">
         <div class="container-fluid">
             <div class="row">
-            <div class="col-12 col-md-7 ml-5">
-            <table class="table"> 
+            <div class="col-12 col-md-7 ml-5 checkout-bag">
+            </div>
+            <!-- <table class="table"> 
                 <caption>by Minhminion</caption>
                     <thead>
                         <tr>
@@ -37,7 +38,7 @@
                     </tr>
                 </tbody>
             </table>
-            </div>
+            </div> -->
                 <!-- <div class="col-12 col-md-6">
                     <div class="checkout_details_area mt-50 clearfix">
 

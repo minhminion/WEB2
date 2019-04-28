@@ -46,6 +46,7 @@
     <script src="js/aos.js"></script>
     <script>
         AOS.init();
+        
     </script>
     <!-- Active js -->
     <script src="js/script.js"></script>

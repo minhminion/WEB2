@@ -2,7 +2,8 @@
 $(document).ready(function(){
         load_data();
         load_cart_item();
-        
+        checkout();
+
         function load_data(page)
         {
             $order = $("#sortByselect").val();
@@ -32,6 +33,20 @@ $(document).ready(function(){
             })
         }
 
+        //CHECK OUT
+        function checkout()
+        {
+            $.ajax({
+                url :"./XuLy/checkout-bag.php",
+                method:"POST",
+                success:function(data)
+                {
+                    $(".checkout-bag").html(data);
+                }
+            })
+        }
+
+        // LOGIN 
         $('#login-form').on("submit",function(event){
             alert("ABC");
             event.preventDefault();
