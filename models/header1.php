@@ -8,6 +8,7 @@
             <h4 class="modal-title">Đăng nhập</h4>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
+            <div class="login-error"></div>
             <div class="modal-body">
             <form id="login-form" action="../XuLy/validateuser.php" method="post">
                 <div class="row">
@@ -37,7 +38,7 @@
     </div>
 </div>
 <!-- Form Đăng ký -->
-<div class="modal fade" id="signUp" role="dialog" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="register" role="dialog" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
     <!-- Modal content-->
         <div class="modal-content">
@@ -90,20 +91,17 @@
     <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
-            <h4 class="modal-title">Đăng nhập</h4>
+            <h4 class="modal-title">Thông tin</h4>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-            <form action="./XuLy/validateuser.php" method="post">
+            <form id="logout-form" action="./XuLy/validateuser.php" method="post">
                 <div class="row">
                     <div class="col-md-12 mb-3 mt-3">
                         <input type="submit" class="form-control" value="Đăng xuất">
                     </div>
                 </div>
             </form>
-            </div>
-            <div class="modal-footer justify-content-center">
-                <p>Tạo tài khoản ? <span style="cursor:pointer;" class="changeUpIn">Đăng ký</span></p>
             </div>
         </div>
     </div>
@@ -188,7 +186,18 @@
             <!-- Search Area -->
             <div class="search-area">
                 <form id="search-box" action="#" method="post">
-                    <input type="search" name="search" id="headerSearch" placeholder="Tìm kiếm ......">
+                    <?php
+                        function searchvalue()
+                        {
+                            $search = "";
+                            if(isset($_GET['search']))
+                            {
+                                $search = $_GET['search'];
+                            }
+                            echo 'value="'.$search.'"';
+                        }
+                    ?>
+                    <input type="search" name="search" id="headerSearch" placeholder="Tìm kiếm ......" <?php searchvalue(); ?> >
                     <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                 </form>
             </div>
@@ -199,7 +208,7 @@
             <div id="user-info">
             <!-- User Login Info -->
                 <?php
-                   include ($_SERVER["DOCUMENT_ROOT"] . "/WEB2/XuLy/header.php")
+                   echo include ($_SERVER["DOCUMENT_ROOT"] . "/WEB2/XuLy/header.php");
                 ?>
             </div>
             <!-- Cart Area -->
@@ -212,12 +221,6 @@
  
 </header>
 <script>
-    $(document).on('click','.dangky',function()
-    {
-        alert("click");
-        $("#login").model("toggle");
-        $("#signUp").model("toggle");
-    });
 
     // SHOW PASSWORD
     $(document).ready(function() {

@@ -28,6 +28,7 @@
                                     <td>'.$item->name.'</td>
                                     <td>'.number_format($item->price,0,".",".").'</td>
                                     <td><input type="number" class="form-control qty col-12 col-md-6 col-lg-5 m-auto" min="0" value="'.$item->quality.'"></td>
+                                    <td><input type="button" value="Xóa" class="product-remove" data="'.$item->id.'"></td>
                                 </tr>
                             <tr>';
                 $total += $item->price*$item->quality;

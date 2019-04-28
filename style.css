@@ -34,3 +34,7 @@ td {
 .error{
     color: red;
 }
+.modal-open
+{
+    overflow: hidden;
+}

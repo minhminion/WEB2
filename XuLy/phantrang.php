@@ -20,7 +20,6 @@
     array_push($data,$enable);
     if(isset($_POST['search']) && $_POST['search'] != "undefined" )
     {
-        // echo $_POST["search"]."?";
         $search = ' productName LIKE "%'.$_POST['search'].'%"';
         array_push($data,$search);
     }

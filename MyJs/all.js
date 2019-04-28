@@ -9,14 +9,16 @@ $(document).ready(function(){
             $order = $("#sortByselect").val();
             $min = $("#sortPrice").attr('min');
             $max = $("#sortPrice").attr('max');
-            console.log(decodeURI(GetURLParameter('search')));
+            $search = decodeURI(GetURLParameter('search'));
+            $search = $search.replace("+"," ");
+            console.log($search);
             $.ajax({
                 url:"./XuLy/phantrang.php",
                 method:"POST",
                 data:{  page:page,
                         brand:GetURLParameter('brand'),
                         cetorgry:GetURLParameter('cetorgry'),
-                        search:decodeURI(GetURLParameter('search')),
+                        search:$search,
                         order:$order,
                         min:$min,
                         max:$max},
@@ -49,7 +51,36 @@ $(document).ready(function(){
             })
         }
 
-
+        function login_logout(post_url,request_method,form_data)
+        {
+            $.ajax({
+                url: post_url,
+                method: request_method,
+                datatype: "json",
+                data: form_data,
+                datatype: "json",
+                success:function(data)
+                {
+                    data = JSON.parse(data);
+                    console.log(data);
+                    if(data.islogin == false)
+                    {
+                        $("#logout").modal("hide");
+                        $("#user-info").html(data.output);
+                    }
+                    else if(data.login == true)
+                    {
+                        $("#login").modal("hide");
+                        loginSuccess();
+                        $("#user-info").html(data.output);
+                    }
+                    else
+                    {
+                        $(".login-error").html(data.output);
+                    }
+                }
+            })
+        }
 
         // LOGIN 
         $('#login-form').on("submit",function(event){
@@ -58,16 +89,17 @@ $(document).ready(function(){
             var request_method = $(this).attr("method"); //get form GET/POST method
             var form_data = $(this).serialize(); //Encode form elements for submission
             console.log(form_data);
-            $.ajax({
-                url: post_url,
-                method: request_method,
-                datatype: "json",
-                data: form_data,
-                success:function(data)
-                {
-                    $("#user-info").html(data);
-                }
-            })
+            login_logout(post_url,request_method,form_data);
+        });
+
+        // LOGOUT
+        $('#logout-form').on("submit",function(event){
+            event.preventDefault();
+            var post_url = "./XuLy/validateuser.php";
+            var request_method = $(this).attr("method"); //get form GET/POST method
+            var form_data = $(this).serialize(); //Encode form elements for submission
+            console.log(form_data);
+            login_logout(post_url,request_method,form_data);
         });
 
         // Phân Trang
@@ -81,10 +113,8 @@ $(document).ready(function(){
             });
             load_data(page);
         });
-        $(document).on("click","#sortPrice",function()
-        {
-            load_data();
-        })
+
+
 
         // Thêm giỏ hàng SP
         $(document).on("click",".add-to-cart-btn",function()
@@ -205,7 +235,7 @@ $(document).ready(function(){
         {
             // alert("click");
             $("#login").modal("toggle");
-            $("#signUp").modal("toggle");
+            $("#register").modal("toggle");
         });
     });
 
@@ -287,6 +317,28 @@ $(document).ready(function(){
                 '<a href="{3}" target="{4}" data-notify="url"></a>' +
             '</div>' 
         });
+    }
+
+    function loginSuccess()
+    {
+        Swal.fire(
+            {
+            type : "success",
+            title :'Đăng nhập thành công!',
+            html:'Cửa sổ sẽ đóng trong <strong></strong> seconds.<br/><br/>',
+            timer: 5000,
+            onBeforeOpen: () => {
+                timerInterval = setInterval(() => {
+                    Swal.getContent().querySelector('strong')
+                      .textContent = (Swal.getTimerLeft() / 1000)
+                        .toFixed(0)
+                  }, 100)
+                },
+            onClose: () => {
+                clearInterval(timerInterval)
+                }
+            }
+        )
     }
 
     function GetURLParameter(sParam) {

@@ -120,8 +120,11 @@
                 // console.log(jQuery(this).attr('max'));
                 // load_data();
                 
-                t.closest('.slider-range').find('.range-price').html(result);
-                
+                t.closest('.slider-range').find('.range-price').html(result); 
+            },
+            change: function()
+            {
+                load_data();
             }
         });
         
@@ -132,23 +135,26 @@
             $order = $("#sortByselect").val();
             $min = $("#sortPrice").attr('min');
             $max = $("#sortPrice").attr('max');
-            console.log($order);
+            console.log(decodeURI(GetURLParameter('search')));
             $.ajax({
                 url:"./XuLy/phantrang.php",
                 method:"POST",
                 data:{  page:page,
                         brand:GetURLParameter('brand'),
-                        search:GetURLParameter('search'),
+                        cetorgry:GetURLParameter('cetorgry'),
+                        search:decodeURI(GetURLParameter('search')),
                         order:$order,
                         min:$min,
                         max:$max},
+                datatype:"json",
                 success:function(data)
                 {
-                    $("#title-shop").html(data.split("?")[0]);
-                    $("#total-item").html(data.split("?")[1]);
-                    console.log(data.split("?")[3]);
-                    $("#itemShow").html(data.split("?")[2]);
-                    $("#pagination-box").html(data.split("?")[4]);
+                    data = JSON.parse(data);
+                    console.log(data);
+                    $("#title-shop").html(data.cetorgry);
+                    $("#total-item").html(data.totalRecord);
+                    $("#itemShow").html(data.output);
+                    $("#pagination-box").html(data.paging);
                 }
             })
         }
