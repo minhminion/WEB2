@@ -138,8 +138,8 @@
                                 <!-- Hover Content -->
                                 <div class="hover-content">
                                     <!-- Add to Cart -->
-                                    <div class="add-to-cart-btn">
-                                        <a class="btn essence-btn" style="color:white;"
+                                    <div>
+                                        <a class="btn essence-btn add-to-cart-btn" style="color:white;"
                                         id="'.$row["productID"].'" 
                                             name="'.$row["productName"].'" 
                                             brand="'.$row["brandName"].'"  

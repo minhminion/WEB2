@@ -5,7 +5,7 @@
                 <div class="hero-content">
                     <h6>Top Gaming Keyboard</h6>
                     <h2>Razer Huntsman Elite</h2>
-                    <a href="#" class="btn essence-btn">Mua Ngay</a>
+                    <a href="#" class="btn essence-btn">Xem ngay</a>
                 </div>
             </div>
         </div>
@@ -18,7 +18,7 @@
                 <div class="mx-auto features-icons-item mb-5 mb-lg-0 mb-lg-3">
                     <div class="d-flex features-icons-icon mb-3 mt-4"><i class="fas fa-truck-moving m-auto text-primary" style="font-size:90px;"></i></div>
                     <h3>Vận chuyển nhanh,an toàn</h3>
-                    <p class="lead mb-0">Chúng tôi cam kết vận chuyển hàng trong vòng 3 ngày </p>
+                    <p class="lead mb-0">Chúng tôi cam kết vận chuyển hàng trong vòng 3 ngày</p>
                 </div>
             </div>
             <div class="col-lg-4">

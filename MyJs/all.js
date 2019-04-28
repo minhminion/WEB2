@@ -23,7 +23,7 @@ $(document).ready(function(){
                 datatype:"json",
                 success:function(data)
                 {
-                    data = JSON.parse(data)
+                    data = JSON.parse(data);
                     console.log(data);
                     $("#title-shop").html(data.cetorgry);
                     $("#total-item").html(data.totalRecord);
@@ -39,21 +39,25 @@ $(document).ready(function(){
             $.ajax({
                 url :"./XuLy/checkout-bag.php",
                 method:"POST",
+                datatype:"json",
                 success:function(data)
                 {
-                    $(".checkout-bag").html(data);
+                    data = JSON.parse(data);
+                    $(".checkout-bag").html(data.checkOutBag);
+                    $(".order-details-form").html(data.checkOutDetails);
                 }
             })
         }
 
+
+
         // LOGIN 
         $('#login-form').on("submit",function(event){
-            alert("ABC");
             event.preventDefault();
-            var post_url = $(this).attr("action"); //get form action url
+            var post_url = "./XuLy/validateuser.php";
             var request_method = $(this).attr("method"); //get form GET/POST method
             var form_data = $(this).serialize(); //Encode form elements for submission
-
+            console.log(form_data);
             $.ajax({
                 url: post_url,
                 method: request_method,
@@ -65,6 +69,7 @@ $(document).ready(function(){
                 }
             })
         });
+
         // Phân Trang
         $(document).on("click",".page-item",function()
         {
@@ -82,7 +87,7 @@ $(document).ready(function(){
         })
 
         // Thêm giỏ hàng SP
-        $(document).on("click",".essence-btn",function()
+        $(document).on("click",".add-to-cart-btn",function()
         {
             var id = $(this).attr("id");
             var name = $(this).attr("name");
@@ -92,8 +97,11 @@ $(document).ready(function(){
             var quality = $(".quality-item").val();
             console.log(id+name+brand+img+price);
             load_cart_item(id,name,brand,img,price,quality);
-            addsuccess();
+            addsuccess(name);
         });
+
+
+
         /*** Sự kiện tạo giỏ hàng */ 
         function load_cart_item(id,name,brand,img,price,quality)
         {
@@ -125,6 +133,7 @@ $(document).ready(function(){
                     data = JSON.parse(data);
                     $("#cart-list").html(data.output);
                     $(".sizeBag").html(data.num);
+                    checkout();
                 }
             });
         });
@@ -233,13 +242,13 @@ $(document).ready(function(){
     });
 
 // FUNCTION   
-    function addsuccess()
+    function addsuccess(name)
     {
         $.notify({
             // options
             icon: 'glyphicon glyphicon-warning-sign',
-            title: 'Thêm thành công ',
-            // message: 'Turning standard Bootstrap alerts into "notify" like notifications',
+            title: 'Thêm vào giỏ ',
+            message: name,
         },{
             // settings
             element: 'body',
@@ -267,10 +276,10 @@ $(document).ready(function(){
             onClose: null,
             onClosed: null,
             icon_type: 'class',
-            template: '<div data-notify="container" class="col-xs-11 col-sm-3 alert alert-{0}" role="alert">' +
+            template: '<div data-notify="container" class="col-xs-12 col-sm-3 alert alert-{0}" role="alert">' +
                 '<button type="button" aria-hidden="true" class="close" data-notify="dismiss">×</button>' +
                 '<span data-notify="icon"></span> ' +
-                '<span data-notify="title">{1}</span> ' +
+                '<span style="font-weight:bold" data-notify="title">{1}</span> ' +
                 '<span data-notify="message">{2}</span>' +
                 '<div class="progress" data-notify="progressbar">' +
                     '<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +

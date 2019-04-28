@@ -50,7 +50,7 @@
                 </span> 
             </div> 
                 <div class="cart-fav-box d-flex align-items-center mt-5">
-                    <button value="5" class="btn essence-btn" 
+                    <button value="5" class="btn essence-btn add-to-cart-btn" 
                     id="'.$row["productID"].'" 
                     name="'.$row["productName"].'" 
                     brand="'.$row["brandName"].'" 

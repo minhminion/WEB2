@@ -198,9 +198,9 @@
             </div>
             <div id="user-info">
             <!-- User Login Info -->
-                <div class="user-login-info" data-toggle="modal" data-target="#login">
-                    <a href="#"><img src="img/core-img/user.svg" alt=""></a>
-                </div>
+                <?php
+                   include ($_SERVER["DOCUMENT_ROOT"] . "/WEB2/XuLy/header.php")
+                ?>
             </div>
             <!-- Cart Area -->
             <div class="cart-area">
