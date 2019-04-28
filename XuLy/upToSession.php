@@ -44,7 +44,8 @@ class Item
             {
                 if($_POST['id'] == $item->id)
                 {
-                    $item->upQuality($_POST['quality']);
+                    $quality = isset($_POST['quality']) ? $_POST['quality'] : 1;
+                    $item->upQuality($quality);
                     $flag = false;
                 }
             }
@@ -62,40 +63,5 @@ class Item
     {
         $_SESSION['id'] = array();
     }     
-    
-/*
-    foreach($_SESSION['id'] as $item)
-    {
-        print_r($item->toString());
-    }
-*/
     include("cartBag.php");
-   // echo $_SESSION["id"];
-/*
-    $query = 'SELECT * FROM sanpham WHERE idSP="'.$_SESSION['id'].'"';
-    $result = mysqli_query($connect,$query);
-    if(!$result)
-    {
-    echo "Fail";
-    exit;
-    }
-    $output = "";
-    while($row = mysqli_fetch_array($result))
-    {    
-        $output .= '<div class="single-cart-item">
-                        <a href="#" class="product-image">
-                            <img src="./img/sanpham/'.$row['idSP'].'.jpg" class="cart-thumb" alt="">
-                            <!-- Cart Item Desc -->
-                            <div class="cart-item-desc">
-                            <span class="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>
-                                <span class="badge">'.$row['HANG'].'</span>
-                                <h6>'.$row['nameSP'].'</h6>
-                                <p class="size">Số lượng: 1</p>
-                                <p class="price">'.number_format($row["priceSP"],0,".",".").'</p>
-                            </div>
-                        </a>
-                    </div>';
-    }
-    echo $output;
-*/
 ?>

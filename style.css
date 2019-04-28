@@ -3,9 +3,17 @@
     margin-left: 20px;
     list-style-type: circle;
 }
-.input-group
+table,
+thead,
+tr,
+tbody,
+th,
+td {
+    text-align: center;
+}
+.table td ,.table th
 {
-    margin-top: 20px;
+    vertical-align:middle;
 }
 @media only screen and (max-width: 768px)
 {

@@ -1,4 +1,6 @@
 <?php
+require("./conSQL.php");
+
 $firstNameError = "";
 $lastNameError = "";
 $userError = "";
@@ -35,6 +37,10 @@ $confirmpassword  = GetParameter($_POST['info'],"confirmpassword");
 	} else{
 		if(!preg_match("/^[A-Za-z0-9]{5,32}$/",$user)){
 			$userError = "Tên đăng nhập gồm 5 kí tự trở lên, không bao gồm kí tự đặc biệt";
+		}
+		else if(conSQL :: executeQuery("SELECT * FROM user WHERE userName='$user' "))
+		{
+			$userError = "Tên đăng nhập đã tồn tại";
 		}
 	}
 	

@@ -31,6 +31,25 @@ $(document).ready(function(){
                 }
             })
         }
+
+        $('#login-form').on("submit",function(event){
+            alert("ABC");
+            event.preventDefault();
+            var post_url = $(this).attr("action"); //get form action url
+            var request_method = $(this).attr("method"); //get form GET/POST method
+            var form_data = $(this).serialize(); //Encode form elements for submission
+
+            $.ajax({
+                url: post_url,
+                method: request_method,
+                datatype: "json",
+                data: form_data,
+                success:function(data)
+                {
+                    $("#user-info").html(data);
+                }
+            })
+        });
         // Phân Trang
         $(document).on("click",".page-item",function()
         {
@@ -77,8 +96,8 @@ $(document).ready(function(){
             });
         }
         {
-        /* Xóa Item khỏi giỏ hàng */
 
+        /* Xóa Item khỏi giỏ hàng */
         $(document).on("click",".product-remove",function()
         {
             $.ajax({
@@ -89,12 +108,13 @@ $(document).ready(function(){
                 success:function(data)
                 {
                     data = JSON.parse(data);
-                   $("#cart-list").html(data.output);
-                   $(".sizeBag").html(data.quality);
+                    $("#cart-list").html(data.output);
+                    $(".sizeBag").html(data.num);
                 }
             });
         });
         }
+        
         /***** *********************/
         $('#search-box').on("submit",function(event)
         {
@@ -201,8 +221,47 @@ $(document).ready(function(){
     function addsuccess()
     {
         $.notify({
-            message: 'Thêm thành công',
-            type: 'danger'
+            // options
+            icon: 'glyphicon glyphicon-warning-sign',
+            title: 'Thêm thành công ',
+            // message: 'Turning standard Bootstrap alerts into "notify" like notifications',
+        },{
+            // settings
+            element: 'body',
+            position: null,
+            type: "success",
+            allow_dismiss: false,
+            newest_on_top: true,
+            showProgressbar: false,
+            placement: {
+                from: "bottom",
+                align: "right"
+            },
+            offset: 20,
+            spacing: 10,
+            z_index: 1031,
+            delay: 60,
+            timer: 1000,
+            mouse_over: null,
+            animate: {
+                enter: 'animated fadeInRight',
+                exit: 'animated fadeOutLeft',
+            },
+            onShow: null,
+            onShown: null,
+            onClose: null,
+            onClosed: null,
+            icon_type: 'class',
+            template: '<div data-notify="container" class="col-xs-11 col-sm-3 alert alert-{0}" role="alert">' +
+                '<button type="button" aria-hidden="true" class="close" data-notify="dismiss">×</button>' +
+                '<span data-notify="icon"></span> ' +
+                '<span data-notify="title">{1}</span> ' +
+                '<span data-notify="message">{2}</span>' +
+                '<div class="progress" data-notify="progressbar">' +
+                    '<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
+                '</div>' +
+                '<a href="{3}" target="{4}" data-notify="url"></a>' +
+            '</div>' 
         });
     }
 

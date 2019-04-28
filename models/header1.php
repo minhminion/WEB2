@@ -9,15 +9,20 @@
             <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-            <form action="./XuLy/validateuser.php" method="post">
+            <form id="login-form" action="../XuLy/validateuser.php" method="post">
                 <div class="row">
                     <div class="col-md-12 mb-3">
                         <label for="user">Tên đăng nhập<span>*</span></label>
                         <input type="text" name="username" class="form-control" id="user" value="" required="" placeholder="Tên đăng nhập">
                     </div>
-                    <div class="col-md-12 mb-3">
+                    <div class="form-group col-md-12 mb-3">
                         <label for="password">Mật khẩu<span>*</span></label>
-                        <input type="password" name="password" class="form-control" id="password" value="" required="" placeholder="Mật khẩu">
+                        <div class="input-group" id="show_hide_password">
+                            <input type="password" name="password" class="form-control" id="password" value="" required="" placeholder="Mật khẩu">
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fa fa-eye-slash" aria-hidden="true"></i></span>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-md-12 mb-3 mt-3">
                         <input type="submit" class="form-control" value="Đăng nhập">
@@ -191,23 +196,12 @@
             <div class="favourite-area">
                 <a href="#"><img src="img/core-img/heart.svg" alt=""></a>
             </div>
+            <div id="user-info">
             <!-- User Login Info -->
-                <?php
-                    if(isset($_SESSION["isLOGIN"]) && $_SESSION["isLOGIN"] == "1")
-                    {
-                        echo '<div class="user-login-info" data-toggle="modal" data-target="#logout">
-                                <a style="width:12em;"> Chào,'.$_SESSION['userName'].' </a>
-                                </div>';
-                    }
-                    else
-                    {
-                        
-                        echo '<div class="user-login-info" data-toggle="modal" data-target="#login">
-                                <a href="#"><img src="img/core-img/user.svg" alt=""></a>
-                                </div>';
-                    }
-                ?>
-            
+                <div class="user-login-info" data-toggle="modal" data-target="#login">
+                    <a href="#"><img src="img/core-img/user.svg" alt=""></a>
+                </div>
+            </div>
             <!-- Cart Area -->
             <div class="cart-area">
                 <a href="#" id="essenceCartBtn"><img src="img/core-img/bag.svg" alt=""> <span class="sizeBag"></span></a>
@@ -223,5 +217,21 @@
         alert("click");
         $("#login").model("toggle");
         $("#signUp").model("toggle");
+    });
+
+    // SHOW PASSWORD
+    $(document).ready(function() {
+    $("#show_hide_password span").on('click', function(event) {
+        event.preventDefault();
+        if($('#show_hide_password input').attr("type") == "text"){
+            $('#show_hide_password input').attr('type', 'password');
+            $('#show_hide_password i').addClass( "fa-eye-slash" );
+            $('#show_hide_password i').removeClass( "fa-eye" );
+        }else if($('#show_hide_password input').attr("type") == "password"){
+            $('#show_hide_password input').attr('type', 'text');
+            $('#show_hide_password i').removeClass( "fa-eye-slash" );
+            $('#show_hide_password i').addClass( "fa-eye" );
+        }
+    });
     });
 </script>
