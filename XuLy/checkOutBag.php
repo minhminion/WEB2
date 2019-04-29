@@ -2,13 +2,13 @@
     include("./myClass.php");
     session_start();
     $checkOutBag = "";
-    $checkOutDetails ='<li style="font-weight:bold;"><span>Sản phẩm</span> <span>Tổng tiền</span></li>';                   
     $total = 0;
     if(isset($_SESSION['id']))
     {
         if(!empty($_SESSION['id']))
         {
-            $checkOutBag .='<table class="table"> 
+            $checkOutBag .='   <div class="table-reponsive">
+                        <table class="table"> 
                         <caption>by Minhminion</caption>
                             <thead>
                                 <tr>
@@ -27,17 +27,22 @@
                                     <td><img src="./img/sanpham/'.$item->img.'" alt="" width="120"></td>
                                     <td>'.$item->name.'</td>
                                     <td>'.number_format($item->price,0,".",".").'</td>
-                                    <td><input type="number" class="form-control qty col-12 col-md-6 col-lg-5 m-auto" min="0" value="'.$item->quality.'"></td>
+                                    <td>
+                                    <div class="input-group m-auto" style="width:13em">
+                                        <div class="input-group-prepend">
+                                            <button style="min-width: 2.5rem" class="btn btn-decinc btn-decrement btn-outline-secondary" id="'.$item->id.'" quality="-1" type="button"><strong>-</strong></button>
+                                        </div>
+                                            <input type="number" class="form-control qty m-auto text-center" id="'.$item->id.'-quality" min="1" value="'.$item->quality.'">
+                                        <div class="input-group-append">
+                                            <button style="min-width: 2.5rem" class="btn btn-decinc btn-increment btn-outline-secondary" id="'.$item->id.'" quality="1" type="button"><strong>+</strong></button>
+                                        </div>
+                                    </div>
+                                    </td>
                                     <td><input type="button" value="Xóa" class="product-remove" data="'.$item->id.'"></td>
                                 </tr>
                             <tr>';
-                $total += $item->price*$item->quality;
-                $checkOutDetails .='<li><span>'.$item->name.'</span> <span>'.number_format($item->price*$item->quality,0,".",".").'đ</span></li>';
             }
-            $checkOutBag .= '   </tbody></table>';
-            $checkOutDetails .='<li style="font-weight:bold;" ><span>Giảm giá</span> <span>15%</span></li>
-                                 <li style="font-weight:bold;" ><span>Shipping</span> <span>Free</span></li>
-                                 <li style="font-weight:bold;" ><span>Tổng tiền</span> <span>'.number_format($total/100*(100-15),0,".",".").'đ</span></li>';
+            $checkOutBag .= '   </tbody></table></div>';
         }
         else{
             $checkOutBag .= '<div class="alert alert-danger" role="alert">
@@ -48,7 +53,6 @@
 
     $myObj = new stdClass();
     $myObj->checkOutBag = $checkOutBag;
-    $myObj->checkOutDetails = $checkOutDetails;
 
     echo json_encode($myObj);
 ?>

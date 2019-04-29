@@ -85,6 +85,7 @@
         </div>
     </div>
 </div>
+ 
 <!-- Form đăng xuất -->
 <div class="modal fade" id="logout" role="dialog" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
@@ -94,7 +95,18 @@
             <h4 class="modal-title">Thông tin</h4>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body user-info">
+            <?php
+                $output = "";
+                if(isset($_SESSION['isLOGIN']) && $_SESSION["isLOGIN"] == 1)
+                {
+                    $customer = $_SESSION['user'];
+                    $output =   '<div class="mb-1"><strong> Họ và tên :</strong> '.$customer->firstName.' '.$customer->lastName.'</div><br>'.
+                                '<div class="mb-1"><strong> Email :</strong> '.$customer->email.'</div><br>'.
+                                '<button type="button" class="btn btn-primary mb-1">Xem các đơn hàng</button>';
+                }
+                echo $output;
+            ?>
             <form id="logout-form" action="./XuLy/validateuser.php" method="post">
                 <div class="row">
                     <div class="col-md-12 mb-3 mt-3">
@@ -105,7 +117,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> 
 
 <header class="header_area">
     <div class="classy-nav-container breakpoint-off d-flex align-items-center justify-content-between">
@@ -208,7 +220,7 @@
             <div id="user-info">
             <!-- User Login Info -->
                 <?php
-                   echo include ($_SERVER["DOCUMENT_ROOT"] . "/WEB2/XuLy/header.php");
+                    echo include($_SERVER["DOCUMENT_ROOT"] . "/WEB2/XuLy/header.php");
                 ?>
             </div>
             <!-- Cart Area -->

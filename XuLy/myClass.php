@@ -24,9 +24,9 @@ class Item
         $this->img.
         $this->price;
     }
-    function upQuality()
+    function upQuality($quality)
     {
-        $this->quality++;
+        $this->quality += $quality;
     }
 
 }

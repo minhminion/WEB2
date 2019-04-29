@@ -25,10 +25,8 @@
         }
     }
     $output .= '</div>
-
                     <!-- Cart Summary -->
                     <div class="cart-amount-summary">
-
                         <h2>Hóa Đơn</h2>
                         <ul class="summary-table">
                             <li><span>Tổng:</span> <span>'.number_format($total,0,".",".").' đ</span></li>
@@ -41,7 +39,7 @@
                         </div>
                     </div>
                 </div>';
-   
+    
     $myObj = new stdClass();
     $myObj->num = $num;
     $myObj->output = $output;

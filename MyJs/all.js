@@ -2,7 +2,8 @@
 $(document).ready(function(){
         load_data();
         load_cart_item();
-        checkout();
+        checkOutBag();
+        checkOutDetails();
 
         function load_data(page)
         {
@@ -36,20 +37,33 @@ $(document).ready(function(){
         }
 
         //CHECK OUT
-        function checkout()
+        function checkOutBag()
         {
             $.ajax({
-                url :"./XuLy/checkout-bag.php",
+                url :"./XuLy/checkOutBag.php",
                 method:"POST",
                 datatype:"json",
                 success:function(data)
                 {
                     data = JSON.parse(data);
                     $(".checkout-bag").html(data.checkOutBag);
+                }
+            })
+        }
+        function checkOutDetails()
+        {
+            $.ajax({
+                url :"./XuLy/checkOutDetails.php",
+                method:"POST",
+                datatype:"json",
+                success:function(data)
+                {
+                    data = JSON.parse(data);
                     $(".order-details-form").html(data.checkOutDetails);
                 }
             })
         }
+
 
         function login_logout(post_url,request_method,form_data)
         {
@@ -58,9 +72,10 @@ $(document).ready(function(){
                 method: request_method,
                 datatype: "json",
                 data: form_data,
-                datatype: "json",
                 success:function(data)
                 {
+                    
+                    console.log(data);
                     data = JSON.parse(data);
                     console.log(data);
                     if(data.islogin == false)
@@ -78,6 +93,31 @@ $(document).ready(function(){
                     {
                         $(".login-error").html(data.output);
                     }
+                }
+            })
+        }
+
+        $(document).on("click",".btn-decinc",function(e)
+        {
+            $id = $(this).attr("id");
+            $quality = $(this).attr("quality");
+            console.log($id);
+            console.log($quality);
+            valueCart($quality,$id);
+        })
+
+        function valueCart(quality,id)
+        {
+            $.ajax({
+                url: "./XuLy/cart-quality.php",
+                method:'POST',
+                data: { id: id, quality: quality },
+                success:function(data)
+                {
+                    console.log(data);
+                    $("#"+$id+"-quality").val(data);
+                    load_cart_item();
+                    checkOutDetails();
                 }
             })
         }
@@ -163,7 +203,8 @@ $(document).ready(function(){
                     data = JSON.parse(data);
                     $("#cart-list").html(data.output);
                     $(".sizeBag").html(data.num);
-                    checkout();
+                    checkOutBag();
+                    checkOutDetails();
                 }
             });
         });
@@ -270,6 +311,8 @@ $(document).ready(function(){
             }
         });
     });
+
+    $("")
 
 // FUNCTION   
     function addsuccess(name)

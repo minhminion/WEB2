@@ -19,16 +19,24 @@
     {
         $username = $_POST['username'];
         $pass = $_POST['password'];
-        $sql = "SELECT * FROM user WHERE userNAME='$username' AND state ='1' " ;
+
+        $sql = "SELECT * FROM user,customer WHERE userNAME='$username' AND user.userID = customer.userID AND state ='1' " ;
         $result = conSQL::executeQuery($sql);
         while($row = mysqli_fetch_array($result))
         {
             if(password_verify($pass,$row["userPass"])) 
             { 
+                $customer = new stdClass();
+                $customer->userId = $row['userID']; 
+                $customer->userName = $row['userName']; 
+                $customer->firstName = $row['firstName']; 
+                $customer->lastName = $row["lastName"]; 
+                $customer->email = $row["email"];
+
                 $loginSuccess = true;
                 $islogin = true;
                 $_SESSION["isLOGIN"] = 1;
-                $_SESSION["userName"] = $row["userName"];
+                $_SESSION["user"] = $customer;
                 $_SESSION["AUTHENTICATION"] = $row["userAuthentication"];
                 $output = include("./header.php");
             }
@@ -37,13 +45,12 @@
     $myObj->islogin = $islogin;
     $myObj->login = $loginSuccess;
     $myObj->output = $output;
-
     echo json_encode($myObj);
 
     // header("Location: ../index.php");
     function logout()
     {
-        unset($_SESSION["userName"]);
+        unset($_SESSION["user"]);
         unset($_SESSION["AUTHENTICATION"]);
         $_SESSION['isLOGIN'] = 0;
     }

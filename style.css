@@ -1,3 +1,6 @@
+body{
+    padding : 0;
+}
 .product-desc li
 {
     margin-left: 20px;

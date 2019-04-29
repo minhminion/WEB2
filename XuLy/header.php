@@ -2,8 +2,10 @@
     $output = "";
     if(isset($_SESSION["isLOGIN"]) && $_SESSION["isLOGIN"] == "1")
     {
+        $customer = $_SESSION['user'];
+        $output = $customer->userName;
         $output = '<div class="user-login-info" data-toggle="modal" data-target="#logout">
-                <a style="width:12em;"> Chào,'.$_SESSION['userName'].' </a>
+                <a style="width:12em;"> Chào,'.$customer->userName.' </a>
                 </div>';
     }
     else
