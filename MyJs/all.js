@@ -290,17 +290,23 @@ $(document).ready(function(){
                 data:{info : $(this).serialize()},
                 success:function(data)
                 {
-                    console.log($(".error").toArray());
-                    var error = $(".error");
-                    var infoE = data.split("?");
-                    console.log(infoE[7]);
-                    console.log(infoE[8]);
-                    for(var i = 0 ; i<= error.length ;i++)
+                    console.log(data);
+                    data = JSON.parse(data);
+                    if(data.isRegister == false)
                     {
-                        var s = infoE[i];
-                        error[i].innerText = s;
-                    }
+                        $infoE = data.error;
+                        var error = $(".error");
 
+                        for(var i = 0 ; i<= error.length ;i++)
+                        {
+                            var s = $infoE[i];
+                            error[i].innerText = s;
+                        }
+                    }
+                    else
+                    {
+                        sweetAlert("success","Đăng ký thành công")
+                    }
                     
                 }
             })

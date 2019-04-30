@@ -1,5 +1,7 @@
 <?php
 require("./conSQL.php");
+$isRegister = false;
+$error = array();
 
 $firstNameError = "";
 $lastNameError = "";
@@ -7,6 +9,7 @@ $userError = "";
 $emailError = "";
 $pswdError = "";
 $confirmpswdError = "";
+
 if(isset($_POST['info'])){
 $firstName  = GetParameter($_POST['info'],"firstName");
 $lastName  = GetParameter($_POST['info'],"lastName");
@@ -38,7 +41,8 @@ $confirmpassword  = GetParameter($_POST['info'],"confirmpassword");
 		if(!preg_match("/^[A-Za-z0-9]{5,32}$/",$user)){
 			$userError = "Tên đăng nhập gồm 5 kí tự trở lên, không bao gồm kí tự đặc biệt";
 		}
-		else if(conSQL :: executeQuery("SELECT * FROM user WHERE userName='$user' "))
+		$rs = conSQL :: executeQuery("SELECT * FROM user WHERE userName='$user' ");
+		if(mysqli_num_rows($rs))
 		{
 			$userError = "Tên đăng nhập đã tồn tại";
 		}
@@ -83,13 +87,32 @@ $confirmpassword  = GetParameter($_POST['info'],"confirmpassword");
 		$data = stripslashes($data);
 		$data = htmlspecialchars($data);
 		return $data;
-    }
-    echo $firstNameError."?";
-    echo $lastNameError."?";
-    echo $userError."?";
-    echo $emailError."?";
-    echo $pswdError."?";
-    echo $confirmpswdError."?";
-	echo $confirmpassword."?";
-	echo $email
+	}
+
+	function isArrayEmpty($error)
+	{
+		foreach ($error as $s)
+		{
+			if(!empty($s))
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+	array_push($error,$firstNameError);
+	array_push($error,$lastNameError);
+	array_push($error,$userError);
+	array_push($error,$emailError);
+	array_push($error,$pswdError);
+	array_push($error,$confirmpswdError);
+
+	
+
+	$myObj = new stdClass();
+	$myObj->isRegister = $isRegister;
+	$myObj->error = $error;
+	$myObj->isEmpty = isArrayEmpty($error);
+
+	echo json_encode($myObj);
 ?>
