@@ -170,7 +170,7 @@
                         <?php
                             if(isset($_SESSION['isLOGIN']) && $_SESSION["isLOGIN"] == 1 && $_SESSION["AUTHENTICATION"] == 0)
                             {
-                                echo '<li><a href="admin.php">Admin</a><li>';
+                                echo '<li><a href="./dashboard/admin.php">Admin</a><li>';
                             }
                         ?>
                     </ul>
