@@ -22,7 +22,9 @@
             {
                 $item = new Item;
                 $quality = isset($_POST['quality']) ? $_POST['quality'] : 1;
-                $item->__contruct($_POST['id'],$_POST['name'],$_POST['brand'],$_POST['img'],$_POST['price'],$quality);
+                $max = isset($_POST['max']) ? $_POST['max'] : 0 ;
+                $item->__contruct($_POST['id'],$_POST['name'],$_POST['brand'],$_POST['img'],$_POST['price'],$quality,$max);
+                // echo $max." ".$item->toString();
                 array_push($_SESSION['id'],$item);
             }
         }

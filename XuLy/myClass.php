@@ -7,14 +7,16 @@ class Item
     var $img = "";
     var $price = "";
     var $quality = 1;
-    function __contruct($id,$name,$brand,$img,$price)
+    var $max = "";
+    function __contruct($id,$name,$brand,$img,$price,$quality,$max)
     {
         $this->id .= $id; 
         $this->name .= $name; 
         $this->brand .= $brand; 
         $this->img .= $img;
         $this->price .= $price; 
-
+        $this->quality = $quality;
+        $this->max .= $max;
     }
     function toString()
     {
@@ -22,7 +24,8 @@ class Item
         $this->name .
         $this->brand .
         $this->img.
-        $this->price;
+        $this->price.
+        $this->max;
     }
     function upQuality($quality)
     {

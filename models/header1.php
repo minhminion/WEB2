@@ -95,25 +95,11 @@
             <h4 class="modal-title">Thông tin</h4>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
-            <div class="modal-body user-info">
+            <div  id="user-login-info" class="modal-body user-info">
             <?php
-                $output = "";
-                if(isset($_SESSION['isLOGIN']) && $_SESSION["isLOGIN"] == 1)
-                {
-                    $customer = $_SESSION['user'];
-                    $output =   '<div class="mb-1"><strong> Họ và tên :</strong> '.$customer->firstName.' '.$customer->lastName.'</div><br>'.
-                                '<div class="mb-1"><strong> Email :</strong> '.$customer->email.'</div><br>'.
-                                '<button type="button" class="btn btn-primary mb-1">Xem các đơn hàng</button>';
-                }
-                echo $output;
+                $output = include($_SERVER["DOCUMENT_ROOT"] . "/WEB2/XuLy/header.php");
+                echo $output->userInfo;
             ?>
-            <form id="logout-form" action="./XuLy/validateuser.php" method="post">
-                <div class="row">
-                    <div class="col-md-12 mb-3 mt-3">
-                        <input type="submit" class="form-control" value="Đăng xuất">
-                    </div>
-                </div>
-            </form>
             </div>
         </div>
     </div>
@@ -220,7 +206,8 @@
             <div id="user-info">
             <!-- User Login Info -->
                 <?php
-                    echo include($_SERVER["DOCUMENT_ROOT"] . "/WEB2/XuLy/header.php");
+                    $output = include($_SERVER["DOCUMENT_ROOT"] . "/WEB2/XuLy/header.php");
+                    echo $output->user;
                 ?>
             </div>
             <!-- Cart Area -->

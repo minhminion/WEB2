@@ -58,6 +58,7 @@ $(document).ready(function(){
                 datatype:"json",
                 success:function(data)
                 {
+                    // console.log(data);
                     data = JSON.parse(data);
                     $(".order-details-form").html(data.checkOutDetails);
                 }
@@ -75,23 +76,26 @@ $(document).ready(function(){
                 success:function(data)
                 {
                     
-                    console.log(data);
+                    // console.log(data);
                     data = JSON.parse(data);
                     console.log(data);
                     if(data.islogin == false)
                     {
                         $("#logout").modal("hide");
-                        $("#user-info").html(data.output);
+                        $("#user-info").html(data.user);
+                        $("#user-login-info").html(data.userInfo);
                     }
                     else if(data.login == true)
                     {
                         $("#login").modal("hide");
+                        console.log(data.user);
+                        $("#user-info").html(data.user);
+                        $("#user-login-info").html(data.userInfo);
                         loginSuccess();
-                        $("#user-info").html(data.output);
                     }
                     else
                     {
-                        $(".login-error").html(data.output);
+                        $(".login-error").html(data.error);
                     }
                 }
             })
@@ -101,23 +105,40 @@ $(document).ready(function(){
         {
             $id = $(this).attr("id");
             $quality = $(this).attr("quality");
+            $min = $(this).attr("min");
+            $max = $(this).attr("max");
             console.log($id);
             console.log($quality);
-            valueCart($quality,$id);
+            console.log($min);
+            console.log($max);
+            valueCart($quality,$id,$min,$max);
         })
 
-        function valueCart(quality,id)
+        function valueCart(quality,id,min,max)
         {
+            $max = max
             $.ajax({
                 url: "./XuLy/cart-quality.php",
                 method:'POST',
-                data: { id: id, quality: quality },
+                data: { id: id, 
+                        quality: quality, 
+                        min: min,
+                        max: max},
                 success:function(data)
                 {
+
                     console.log(data);
-                    $("#"+$id+"-quality").val(data);
-                    load_cart_item();
-                    checkOutDetails();
+                    console.log(parseInt(max));
+                    console.log(parseInt(data) <= parseInt(max));
+                    if(parseInt(data) <= parseInt(max))
+                    {
+                        $("#"+$id+"-quality").val(data);
+                        load_cart_item();
+                        checkOutDetails();
+                    }
+                    else{
+                        alert("Hàng không đủ");
+                    }
                 }
             })
         }
@@ -133,13 +154,43 @@ $(document).ready(function(){
         });
 
         // LOGOUT
-        $('#logout-form').on("submit",function(event){
+        $('#logout-form').submit(function(event){
+            logout(event);
+        });
+        function logout(event)
+        {
             event.preventDefault();
             var post_url = "./XuLy/validateuser.php";
             var request_method = $(this).attr("method"); //get form GET/POST method
             var form_data = $(this).serialize(); //Encode form elements for submission
             console.log(form_data);
             login_logout(post_url,request_method,form_data);
+        }
+
+        // XÁC NHẬN MUA
+        $(document).on("click","#checkOutConfirm",function()
+        {
+            // alert("click");
+            $.ajax({
+                url: "./XuLy/checkOutConfirm.php",
+                method:"POST",
+                success:function(data)
+                {
+                    console.log(data);
+                    data = JSON.parse(data);
+                    console.log(data);
+                    if(data.isLogin == false)
+                    {
+                        SuggestLogin();
+                    } else if(data.isBagEmpty == true)
+                    {
+                        sweetAlert("error","Không có hàng trong giỏ");
+                    }
+                    else{
+                        $(".checkout-bag").html(data.output);
+                    }
+                }
+            })
         });
 
         // Phân Trang
@@ -164,24 +215,27 @@ $(document).ready(function(){
             var brand = $(this).attr("brand");
             var img = $(this).attr("img");
             var price = $(this).attr("price");
+            var max = $(this).attr("max");
             var quality = $(".quality-item").val();
             console.log(id+name+brand+img+price);
-            load_cart_item(id,name,brand,img,price,quality);
+            load_cart_item(id,name,brand,img,price,quality,max);
             addsuccess(name);
         });
 
 
 
         /*** Sự kiện tạo giỏ hàng */ 
-        function load_cart_item(id,name,brand,img,price,quality)
+        function load_cart_item(id,name,brand,img,price,quality,max)
         {
+            console.log(max);
             $.ajax({
                 url:"./XuLy/upToSession.php",
                 method:"POST",
-                data:{id : id,name: name,brand: brand,img: img,price: price,quality :quality},
+                data:{id : id,name: name,brand: brand,img: img,price: price,quality :quality ,max :max},
                 datatype:"json",
                 success:function(data)
                 {
+                    // console.log(data);
                     data = JSON.parse(data);
                     $("#cart-list").html(data.output);
                     $(".sizeBag").html(data.num);
@@ -379,7 +433,31 @@ $(document).ready(function(){
                 },
             onClose: () => {
                 clearInterval(timerInterval)
+                window.location.reload();
                 }
+            }
+        )
+    }
+
+    function SuggestLogin()
+    {
+        Swal.fire(
+            {
+            type : "warning",
+            title : "Vui lòng đăng nhập trước khi mua ",
+            onClose: () => {
+                $("#login").modal("toggle");
+                }
+            }
+        )
+    }
+
+    function sweetAlert(type,message)
+    {
+        Swal.fire(
+            {
+                type: type,
+                title: message,
             }
         )
     }

@@ -28,13 +28,14 @@
                                     <td>'.$item->name.'</td>
                                     <td>'.number_format($item->price,0,".",".").'</td>
                                     <td>
+                                    '.$item->max.'
                                     <div class="input-group m-auto" style="width:13em">
                                         <div class="input-group-prepend">
-                                            <button style="min-width: 2.5rem" class="btn btn-decinc btn-decrement btn-outline-secondary" id="'.$item->id.'" quality="-1" type="button"><strong>-</strong></button>
+                                            <button style="min-width: 2.5rem" class="btn btn-decinc btn-decrement btn-outline-secondary" min=1 max="'.$item->max.'" id="'.$item->id.'" quality="-1" type="button"><strong>-</strong></button>
                                         </div>
-                                            <input type="number" class="form-control qty m-auto text-center" id="'.$item->id.'-quality" min="1" value="'.$item->quality.'">
+                                            <input type="number" class="form-control qty m-auto text-center" id="'.$item->id.'-quality" min=1 max="'.$item->max.'" value="'.$item->quality.'">
                                         <div class="input-group-append">
-                                            <button style="min-width: 2.5rem" class="btn btn-decinc btn-increment btn-outline-secondary" id="'.$item->id.'" quality="1" type="button"><strong>+</strong></button>
+                                            <button style="min-width: 2.5rem" class="btn btn-decinc btn-increment btn-outline-secondary" min=1 max="'.$item->max.'" id="'.$item->id.'" quality="1" type="button"><strong>+</strong></button>
                                         </div>
                                     </div>
                                     </td>

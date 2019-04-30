@@ -3,9 +3,8 @@
             <div class="row">
             <div class="col-12 col-md-12 col-lg-7 ml-md-5 checkout-bag">
             </div>
-                <div class="col-12 col-md-12 col-lg-4 ">
+                <div class="col-12 col-md-12 col-lg-4 ">                    
                     <div class="order-details-confirmation">
-
                         <div class="cart-page-heading">
                             <h5>Giỏ hàng</h5>
                             <p>Chi tiết</p>
@@ -71,7 +70,7 @@
                             </div>
                         </div>
 
-                        <a href="#" class="btn essence-btn">Place Order</a>
+                        <a href="#" id="checkOutConfirm" class="btn essence-btn ">Place Order</a>
                     </div>
                 </div>
             </div>

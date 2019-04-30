@@ -144,7 +144,8 @@
                                             brand="'.$row["brandName"].'"  
                                             img="'.$row["IMG"].'" 
                                             price="'.$row["productPrice"].'"
-                                        >Mua Ngay</a>
+                                            max ='.$row["productAmount"].'
+                                         >Mua Ngay</a>
                                     </div>
                                 </div>
                             </div>

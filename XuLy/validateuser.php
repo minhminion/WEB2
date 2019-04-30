@@ -5,15 +5,20 @@
     $myObj = new stdClass();
     $islogin = true;
     $loginSuccess = false;
-    $output = ' <div class="alert alert-danger" role="alert" data-aos="fade-left">
+    $output ="";
+    $error = ' <div class="alert alert-danger" role="alert" data-aos="fade-left">
                     Sai tài khoản hoặc mật khẩu !!!
                 </div>';
-            
+    $user ="";
+    $userInfo="";        
+
     if(isset($_SESSION["isLOGIN"]) && $_SESSION["isLOGIN"] == 1)
     {
         logout();
         $islogin = false;
         $output = include("./header.php");
+        $user = $output->user;
+        $userInfo = $output->userInfo;
     }
     else
     {
@@ -39,15 +44,19 @@
                 $_SESSION["user"] = $customer;
                 $_SESSION["AUTHENTICATION"] = $row["userAuthentication"];
                 $output = include("./header.php");
+                $user = $output->user;
+                $userInfo = $output->userInfo;
             }
         }
     }
     $myObj->islogin = $islogin;
     $myObj->login = $loginSuccess;
-    $myObj->output = $output;
+    $myObj->user =  $user;
+    $myObj->userInfo = $userInfo;
+    $myObj->error = $error;
+    
     echo json_encode($myObj);
 
-    // header("Location: ../index.php");
     function logout()
     {
         unset($_SESSION["user"]);
