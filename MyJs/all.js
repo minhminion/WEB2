@@ -26,6 +26,7 @@ $(document).ready(function(){
                 datatype:"json",
                 success:function(data)
                 {
+                    console.log(data);
                     data = JSON.parse(data);
                     console.log(data);
                     $("#title-shop").html(data.cetorgry);
@@ -179,12 +180,13 @@ $(document).ready(function(){
                     console.log(data);
                     data = JSON.parse(data);
                     console.log(data);
-                    if(data.isLogin == false)
-                    {
-                        SuggestLogin();
-                    } else if(data.isBagEmpty == true)
+                    if(data.isBagEmpty == true)
                     {
                         sweetAlert("error","Không có hàng trong giỏ");
+                    }
+                    else if(data.isLogin == false)
+                    {
+                        SuggestLogin();
                     }
                     else{
                         $(".checkout-bag").html(data.output);
@@ -292,6 +294,7 @@ $(document).ready(function(){
                 {
                     console.log(data);
                     data = JSON.parse(data);
+                    console.log(data.isRegister);
                     if(data.isRegister == false)
                     {
                         $infoE = data.error;
@@ -305,7 +308,16 @@ $(document).ready(function(){
                     }
                     else
                     {
-                        sweetAlert("success","Đăng ký thành công")
+                        $("#register").modal("toggle");
+                        Swal.fire(
+                            {
+                                type: "succes",
+                                title: "Đăng ký thành công",
+                                onClose: () => {
+                                    window.location.reload();
+                                    }
+                            }
+                        )
                     }
                     
                 }

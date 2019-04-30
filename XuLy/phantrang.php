@@ -134,25 +134,44 @@
                                 </a>
                                 <p class="product-price">'.number_format($row["productPrice"],0,".",".").' Đ</p>
 
-                                <!-- Hover Content -->
-                                <div class="hover-content">
-                                    <!-- Add to Cart -->
-                                    <div>
-                                        <a class="btn essence-btn add-to-cart-btn" style="color:white;"
-                                        id="'.$row["productID"].'" 
-                                            name="'.$row["productName"].'" 
-                                            brand="'.$row["brandName"].'"  
-                                            img="'.$row["IMG"].'" 
-                                            price="'.$row["productPrice"].'"
-                                            max ='.$row["productAmount"].'
-                                         >Mua Ngay</a>
-                                    </div>
-                                </div>
+                                <!-- Hover Content -->'
+                                    .productAmount($row["productID"],$row["productName"],$row["brandName"],$row["IMG"],$row["productPrice"],$row["productAmount"]).
+                                    '
                             </div>
                         </div>
                     </div>';
     }
     $output .="</div>";
+
+function productAmount($id,$name,$brand,$img,$price,$amount)
+{
+    $out='
+        <div class="btn-disable">
+            <div>
+                <a class="btn essence-btn" style="color:white;">
+                    Hết Hàng
+                </a>
+            </div>     
+        </div>';
+    if($amount > 0)
+    {
+        $out ='
+            <div class="hover-content">
+                <div>
+                <a class="btn essence-btn add-to-cart-btn" style="color:white;"
+                    id="'.$id.'" 
+                        name="'.$name.'" 
+                        brand="'.$brand.'"  
+                        img="'.$img.'" 
+                        price="'.$price.'"
+                        max ='.$amount.'
+                    >Mua Ngay</a>
+                </div>
+            </div>';
+    }
+    return $out;
+}
+
 if($page == 1)
 {
     $prev = 1;

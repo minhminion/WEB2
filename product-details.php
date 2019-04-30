@@ -9,7 +9,7 @@
 
 <body>
     <?php
-        include("./models/header.php");
+        include("./models/header1.php");
         include("./models/details.php");
         include("./models/footer.php");
         include("./models/shopbag.php");

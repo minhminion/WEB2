@@ -1,5 +1,7 @@
 <?php
 require("./conSQL.php");
+session_start();
+
 $isRegister = false;
 $error = array();
 
@@ -13,7 +15,7 @@ $confirmpswdError = "";
 if(isset($_POST['info'])){
 $firstName  = GetParameter($_POST['info'],"firstName");
 $lastName  = GetParameter($_POST['info'],"lastName");
-$user = GetParameter($_POST['info'],"user");
+$userName = GetParameter($_POST['info'],"user");
 $email  = GetParameter($_POST['info'],"email");
 $email = urldecode($email);
 $password  = GetParameter($_POST['info'],"password");
@@ -35,13 +37,13 @@ $confirmpassword  = GetParameter($_POST['info'],"confirmpassword");
 		}
 	}
 	
-	if(empty($user)){
+	if(empty($userName)){
 		$userError = "Vui lòng nhập tên đăng nhập";
 	} else{
-		if(!preg_match("/^[A-Za-z0-9]{5,32}$/",$user)){
+		if(!preg_match("/^[A-Za-z0-9]{5,32}$/",$userName)){
 			$userError = "Tên đăng nhập gồm 5 kí tự trở lên, không bao gồm kí tự đặc biệt";
 		}
-		$rs = conSQL :: executeQuery("SELECT * FROM user WHERE userName='$user' ");
+		$rs = conSQL :: executeQuery("SELECT * FROM user WHERE userName='$userName' ");
 		if(mysqli_num_rows($rs))
 		{
 			$userError = "Tên đăng nhập đã tồn tại";
@@ -100,6 +102,12 @@ $confirmpassword  = GetParameter($_POST['info'],"confirmpassword");
 		}
 		return true;
 	}
+
+	function getID($id)
+	{
+		return "00".$id;
+	}
+
 	array_push($error,$firstNameError);
 	array_push($error,$lastNameError);
 	array_push($error,$userError);
@@ -107,12 +115,34 @@ $confirmpassword  = GetParameter($_POST['info'],"confirmpassword");
 	array_push($error,$pswdError);
 	array_push($error,$confirmpswdError);
 
-	
+	if(isArrayEmpty($error))
+	{
+		$isRegister = true;
+		$result = conSQL :: executeQuery("SELECT * FROM customer");
+		$id = mysqli_num_rows($result);
+		$userId = getID($id+1);
+		$pass = password_hash($password , PASSWORD_DEFAULT);
 
+		$sql1 = 'INSERT INTO `customer` VALUES ("'.$userId.'","'.$firstName.'","'.$lastName.'","'.$email.'")';
+		conSQL :: executeQuery($sql1);
+
+		$sql2 = 'INSERT INTO `user` VALUES ("'.$userId.'","'.$userName.'","'.$pass.'","2","1")';
+		conSQL :: executeQuery($sql2);
+
+		$customer = new stdClass();
+		$customer->userId = $userId; 
+		$customer->userName = $userName; 
+		$customer->firstName = $firstName; 
+		$customer->lastName = $lastName; 
+		$customer->email = $email;
+
+		$_SESSION["isLOGIN"] = 1;
+		$_SESSION["user"] = $customer;
+		$_SESSION["AUTHENTICATION"] = 2;
+	}
 	$myObj = new stdClass();
 	$myObj->isRegister = $isRegister;
 	$myObj->error = $error;
-	$myObj->isEmpty = isArrayEmpty($error);
 
 	echo json_encode($myObj);
 ?>

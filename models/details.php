@@ -50,13 +50,13 @@
                 </span> 
             </div> 
                 <div class="cart-fav-box d-flex align-items-center mt-5">
-                    <button value="5" class="btn essence-btn add-to-cart-btn" 
+                    <button value="5" class="btn essence-btn '.productAmount($row["productAmount"]).' " 
                     id="'.$row["productID"].'" 
                     name="'.$row["productName"].'" 
                     brand="'.$row["brandName"].'" 
                     img="'.$row["IMG"].'" 
                     price="'.$row["productPrice"].'"
-                    >Add to cart</button>
+                    >Mua Ngay</button>
                     <div class="product-favourite ml-4">
                         <a href="#" class="favme fa fa-heart"></a>
                     </div>
@@ -65,6 +65,16 @@
         }
     }
     echo $out;
+
+    function productAmount($amount)
+    {
+        $out = "disable";
+        if($amount > 0)
+        {
+            $out = "add-to-cart-btn";
+        }
+        return $out;
+    }
 ?>
 </section>
 <!-- ##### Single Product Details Area End ##### -->
