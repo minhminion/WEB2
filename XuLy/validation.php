@@ -15,6 +15,7 @@ $confirmpswdError = "";
 if(isset($_POST['info'])){
 $firstName  = GetParameter($_POST['info'],"firstName");
 $lastName  = GetParameter($_POST['info'],"lastName");
+$lastName = urlencode($lastName);
 $userName = GetParameter($_POST['info'],"user");
 $email  = GetParameter($_POST['info'],"email");
 $email = urldecode($email);
@@ -141,6 +142,7 @@ $confirmpassword  = GetParameter($_POST['info'],"confirmpassword");
 		$_SESSION["AUTHENTICATION"] = 2;
 	}
 	$myObj = new stdClass();
+	$myObj->firstName = $firstName;
 	$myObj->isRegister = $isRegister;
 	$myObj->error = $error;
 

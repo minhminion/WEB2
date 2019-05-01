@@ -42,42 +42,34 @@
                 <div class="login-wrap">
                     <div class="login-content">
                         <div class="login-logo">
-                            <a href="#">
+                            <a href="../index.php">
                                 <img src="images/icon/logo.png" alt="CoolAdmin">
                             </a>
                         </div>
                         <div class="login-form">
-                            <form action="" method="post">
+                        <div class="login-error">
+
+                        </div>
+                            <form id="login">
+                                <input type="hidden" name="isAdmin" value="1">
                                 <div class="form-group">
-                                    <label>Email Address</label>
-                                    <input class="au-input au-input--full" type="email" name="email" placeholder="Email">
+                                    <label>Tên tài khoản</label>
+                                    <input class="au-input au-input--full" type="text" name="username" placeholder="Tài khoản">
                                 </div>
                                 <div class="form-group">
-                                    <label>Password</label>
-                                    <input class="au-input au-input--full" type="password" name="password" placeholder="Password">
+                                    <label>Mật khẩu</label>
+                                    <input class="au-input au-input--full" type="password" name="password" placeholder="Mật khẩu">
                                 </div>
                                 <div class="login-checkbox">
                                     <label>
                                         <input type="checkbox" name="remember">Remember Me
                                     </label>
                                     <label>
-                                        <a href="#">Forgotten Password?</a>
+                                        <a href="#">Quên mật khẩu?</a>
                                     </label>
                                 </div>
                                 <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">sign in</button>
-                                <div class="social-login-content">
-                                    <div class="social-button">
-                                        <button class="au-btn au-btn--block au-btn--blue m-b-20">sign in with facebook</button>
-                                        <button class="au-btn au-btn--block au-btn--blue2">sign in with twitter</button>
-                                    </div>
-                                </div>
                             </form>
-                            <div class="register-link">
-                                <p>
-                                    Don't you have account?
-                                    <a href="#">Sign Up Here</a>
-                                </p>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -91,24 +83,40 @@
     <!-- Bootstrap JS-->
     <script src="vendor/bootstrap-4.1/popper.min.js"></script>
     <script src="vendor/bootstrap-4.1/bootstrap.min.js"></script>
-    <!-- Vendor JS       -->
-    <script src="vendor/slick/slick.min.js">
-    </script>
+    <!-- Vendor JS-->
     <script src="vendor/wow/wow.min.js"></script>
     <script src="vendor/animsition/animsition.min.js"></script>
-    <script src="vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
-    </script>
-    <script src="vendor/counter-up/jquery.waypoints.min.js"></script>
-    <script src="vendor/counter-up/jquery.counterup.min.js">
-    </script>
-    <script src="vendor/circle-progress/circle-progress.min.js"></script>
-    <script src="vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
-    <script src="vendor/chartjs/Chart.bundle.min.js"></script>
-    <script src="vendor/select2/select2.min.js">
-    </script>
+    
 
     <!-- Main JS-->
     <script src="js/main.js"></script>
+    <script>
+        $("#login").submit(function(event)
+        {
+            event.preventDefault()
+            $.ajax({
+                url: "../XuLy/validateuser.php",
+                method: "POST",
+                data : $(this).serialize(),
+                datatype :'json',
+                success:function(data)
+                {
+                    console.log(data);
+                    data = JSON.parse(data)
+                    if(data.login == true)
+                    {   
+                        window.location.href = "./admin.php";
+                    }
+                    else
+                    {    
+                        $(".login-error").html(data.error);
+                    }
+
+                }
+            })
+        })
+    </script>
+    
 
 </body>
 

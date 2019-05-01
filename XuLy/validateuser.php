@@ -2,6 +2,12 @@
     require('../XuLy/conSQL.php');
     session_start();
 
+    $isAdmin = "";    
+    if(isset($_POST['isAdmin']))
+    {
+        $isAdmin = "AND userAuthentication = '0' ";
+    }
+
     $myObj = new stdClass();
     $islogin = true;
     $loginSuccess = false;
@@ -25,7 +31,7 @@
         $username = $_POST['username'];
         $pass = $_POST['password'];
 
-        $sql = "SELECT * FROM user,customer WHERE userNAME='$username' AND user.userID = customer.userID AND state ='1' " ;
+        $sql = "SELECT * FROM user,customer WHERE userNAME='$username' AND user.userID = customer.userID AND state ='1' $isAdmin " ;
         $result = conSQL::executeQuery($sql);
         while($row = mysqli_fetch_array($result))
         {
