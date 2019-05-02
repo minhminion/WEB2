@@ -2,10 +2,10 @@
 -- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Apr 24, 2019 at 02:55 PM
--- Server version: 10.1.36-MariaDB
--- PHP Version: 7.2.10
+-- Máy chủ: 127.0.0.1
+-- Thời gian đã tạo: Th5 02, 2019 lúc 04:14 AM
+-- Phiên bản máy phục vụ: 10.1.36-MariaDB
+-- Phiên bản PHP: 7.2.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,13 +19,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `web2_1`
+-- Cơ sở dữ liệu: `web2_1`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `authentication`
+-- Cấu trúc bảng cho bảng `authentication`
 --
 
 CREATE TABLE `authentication` (
@@ -34,7 +34,7 @@ CREATE TABLE `authentication` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `authentication`
+-- Đang đổ dữ liệu cho bảng `authentication`
 --
 
 INSERT INTO `authentication` (`authenID`, `authenRole`) VALUES
@@ -45,7 +45,21 @@ INSERT INTO `authentication` (`authenID`, `authenRole`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `brand`
+-- Cấu trúc bảng cho bảng `bill`
+--
+
+CREATE TABLE `bill` (
+  `billID` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `billPurchaser` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `billDate` datetime NOT NULL,
+  `billDelivery` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `billTotal` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `brand`
 --
 
 CREATE TABLE `brand` (
@@ -54,7 +68,7 @@ CREATE TABLE `brand` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `brand`
+-- Đang đổ dữ liệu cho bảng `brand`
 --
 
 INSERT INTO `brand` (`brandID`, `brandName`) VALUES
@@ -67,7 +81,7 @@ INSERT INTO `brand` (`brandID`, `brandName`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cetorgry`
+-- Cấu trúc bảng cho bảng `cetorgry`
 --
 
 CREATE TABLE `cetorgry` (
@@ -76,7 +90,7 @@ CREATE TABLE `cetorgry` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `cetorgry`
+-- Đang đổ dữ liệu cho bảng `cetorgry`
 --
 
 INSERT INTO `cetorgry` (`cetorgryID`, `cetorgryName`) VALUES
@@ -88,7 +102,28 @@ INSERT INTO `cetorgry` (`cetorgryID`, `cetorgryName`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product`
+-- Cấu trúc bảng cho bảng `customer`
+--
+
+CREATE TABLE `customer` (
+  `userID` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `firstName` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `lastName` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(200) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `customer`
+--
+
+INSERT INTO `customer` (`userID`, `firstName`, `lastName`, `email`) VALUES
+('001', 'Lưu', 'Bảo Minh', 'minhminion2015@gmail.com'),
+('002', 'Nguyen', 'Van', 'thanos@gmail.com');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `product`
 --
 
 CREATE TABLE `product` (
@@ -104,7 +139,7 @@ CREATE TABLE `product` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `product`
+-- Đang đổ dữ liệu cho bảng `product`
 --
 
 INSERT INTO `product` (`productID`, `productName`, `productDescription`, `productPrice`, `productAmount`, `productCetorgry`, `productBrand`, `IMG`, `state`) VALUES
@@ -113,9 +148,9 @@ INSERT INTO `product` (`productID`, `productName`, `productDescription`, `produc
 ('003', 'Asus ROG Strix Flare COD', 'ANB%acas', 4390000, 10, '001', '002', 'bp3.jpg', 1),
 ('004', 'Asus ROG Keypad Claymore Bond', 'ANB%acas', 1390000, 10, '001', '002', 'bp4.jpg', 1),
 ('005', 'Asus ROG Claymore Core', 'ANB%acas', 3800000, 10, '001', '002', 'bp5.jpg', 1),
-('006', 'Corsair K68 - Blue Led', 'ANB%acas', 2590000, 0, '001', '004', 'bp10.jpg', 1),
-('007', 'Bàn Phím Corsair K70 RGB MK.2 Low Profile', 'ANB%acas', 405000, 0, '001', '004', 'bp6.jpg', 1),
-('008', 'Corsair K65 LUX RGB', '', 3150000, 0, '001', '004', 'bp7.jpg', 1),
+('006', 'Corsair K68 - Blue Led', 'ANB%acas', 2590000, 10, '001', '004', 'bp10.jpg', 1),
+('007', 'Bàn Phím Corsair K70 RGB MK.2 Low Profile', 'ANB%acas', 405000, 10, '001', '004', 'bp6.jpg', 1),
+('008', 'Corsair K65 LUX RGB', '', 3150000, 10, '001', '004', 'bp7.jpg', 1),
 ('009', 'Corsair K95 RGB Platinum Gunmetal', '', 5190000, 0, '001', '004', 'bp8.jpg', 1),
 ('010', 'Corsair K63', '', 1990000, 0, '001', '004', 'bp9.jpg', 1),
 ('011', 'Logitech G512 RGB', '', 3000000, 0, '001', '003', 'bp11.jpg', 1),
@@ -125,7 +160,7 @@ INSERT INTO `product` (`productID`, `productName`, `productDescription`, `produc
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Cấu trúc bảng cho bảng `user`
 --
 
 CREATE TABLE `user` (
@@ -137,36 +172,50 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `user`
+-- Đang đổ dữ liệu cho bảng `user`
 --
 
 INSERT INTO `user` (`userID`, `userName`, `userPass`, `userAuthentication`, `state`) VALUES
-('001', 'minhmnion', '$2y$10$ePrfBoEb4Cf2itkXAgt/g.DyZIOmFxYdK44JgxnNayMIvLUI.p.BO', '0', 1);
+('001', 'minhminion', '$2y$10$DmnYIA8M0OnupukAzn188u7H2nBdYvwmoDWo.j934t72LWAUST1JW', '0', 1),
+('002', 'thanos', '$2y$10$KAzm0pURxfuKPfsXF6iG.er4Zl0H/6Vcziuy0FV59w/z9zegaJkyW', '2', 1);
 
 --
--- Indexes for dumped tables
+-- Chỉ mục cho các bảng đã đổ
 --
 
 --
--- Indexes for table `authentication`
+-- Chỉ mục cho bảng `authentication`
 --
 ALTER TABLE `authentication`
   ADD PRIMARY KEY (`authenID`);
 
 --
--- Indexes for table `brand`
+-- Chỉ mục cho bảng `bill`
+--
+ALTER TABLE `bill`
+  ADD PRIMARY KEY (`billID`),
+  ADD KEY `billPurchaser` (`billPurchaser`);
+
+--
+-- Chỉ mục cho bảng `brand`
 --
 ALTER TABLE `brand`
   ADD PRIMARY KEY (`brandID`);
 
 --
--- Indexes for table `cetorgry`
+-- Chỉ mục cho bảng `cetorgry`
 --
 ALTER TABLE `cetorgry`
   ADD PRIMARY KEY (`cetorgryID`);
 
 --
--- Indexes for table `product`
+-- Chỉ mục cho bảng `customer`
+--
+ALTER TABLE `customer`
+  ADD PRIMARY KEY (`userID`);
+
+--
+-- Chỉ mục cho bảng `product`
 --
 ALTER TABLE `product`
   ADD PRIMARY KEY (`productID`),
@@ -174,28 +223,30 @@ ALTER TABLE `product`
   ADD KEY `FK_Cetogry` (`productCetorgry`) USING BTREE;
 
 --
--- Indexes for table `user`
+-- Chỉ mục cho bảng `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`userID`),
-  ADD KEY `userAuthentication` (`userAuthentication`);
+  ADD PRIMARY KEY (`userName`) USING BTREE,
+  ADD KEY `userAuthentication` (`userAuthentication`),
+  ADD KEY `userID` (`userID`);
 
 --
--- Constraints for dumped tables
+-- Các ràng buộc cho các bảng đã đổ
 --
 
 --
--- Constraints for table `product`
+-- Các ràng buộc cho bảng `product`
 --
 ALTER TABLE `product`
   ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`productBrand`) REFERENCES `brand` (`brandID`),
   ADD CONSTRAINT `product_ibfk_2` FOREIGN KEY (`productCetorgry`) REFERENCES `cetorgry` (`cetorgryID`);
 
 --
--- Constraints for table `user`
+-- Các ràng buộc cho bảng `user`
 --
 ALTER TABLE `user`
-  ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`userAuthentication`) REFERENCES `authentication` (`authenID`);
+  ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`userAuthentication`) REFERENCES `authentication` (`authenID`),
+  ADD CONSTRAINT `user_ibfk_2` FOREIGN KEY (`userID`) REFERENCES `customer` (`userID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
