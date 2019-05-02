@@ -97,7 +97,7 @@
             </div>
             <div  id="user-login-info" class="modal-body user-info">
             <?php
-                $output = include($_SERVER["DOCUMENT_ROOT"] . "/WEB2/XuLy/header.php");
+                $output = include("..//WEB2/XuLy/header.php");
                 echo $output->userInfo;
             ?>
             </div>
@@ -206,7 +206,7 @@
             <div id="user-info">
             <!-- User Login Info -->
                 <?php
-                    $output = include($_SERVER["DOCUMENT_ROOT"] . "/WEB2/XuLy/header.php");
+                    $output = include("../WEB2/XuLy/header.php");
                     echo $output->user;
                 ?>
             </div>
