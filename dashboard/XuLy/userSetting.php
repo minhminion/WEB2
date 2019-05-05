@@ -1,5 +1,6 @@
 <?php
     require("./../../XuLy/conSQL.php");
+    header("Content-type: text/html; charset=utf-8");
 
     if(isset($_POST['do']) && isset($_POST['userId']) )
     { 
@@ -19,9 +20,25 @@
         {
             resetPass($userId);
         }
+        else if($do == "editUser")
+        {
+            $str = $_POST['firstName'];
+            // $str = preg_replace_callback('/\\\\u([0-9a-fA-F]{4})/', function ($match) {
+            //     return mb_convert_encoding(pack('H*', $match[1]), 'UTF-8', 'UTF-16BE');
+            // }, $str);
+
+            $myObj = new stdClass();
+            $myObj->firstName = utf8_urldecode($str);
+            $myObj->lastName = html_entity_decode($_POST['lastName']);
+            $myObj->email = $_POST['email'];
+
+            echo json_encode($myObj);
+        }
     }
 
-
+    function utf8_urldecode($str) {
+        return html_entity_decode(preg_replace("/u([0-9a-f]{3,4})/i", "&#x\\1;", urldecode($str)), null, 'UTF-8');
+    }
 
     function blockUser($userId,$state)
     {
@@ -86,4 +103,5 @@
         }   
         return $rs;
     }
+
 ?>

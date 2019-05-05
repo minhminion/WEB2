@@ -34,6 +34,52 @@ $(document).ready(function()
         resetPass($userId);
     })
 
+    $(document).on("click",".edit-user",function(e)
+    {
+        var userId = $(this).attr("userid");
+        var firstName = $(this).attr("firstName");
+        var lastName = $(this).attr("lastName");
+        var email = $(this).attr("email");
+
+        $(document).find('input[name="userId"]').val(userId);
+        $(document).find('input[name="firstName"]').val(firstName);
+        $(document).find('input[name="lastName"]').val(lastName);
+        $(document).find('input[name="email"]').val(email);
+
+        $("#userEdit").modal("toggle");
+    })
+
+    $(document).on("submit","#userEdit",function(event)
+    {
+        event.preventDefault();
+
+        $userId = $(this).find('input[name="userId"]').val();  
+        $firstName = $(this).find('input[name="firstName"]').val();  
+        $lastName = $(this).find('input[name="lastName"]').val();  
+        $email = $(this).find('input[name="email"]').val();  
+
+        console.log($firstName);
+
+        $do = "editUser";
+        $.ajax({
+            url :"../dashboard/XuLy/userSetting.php",
+            method:"POST",
+            data : {userId: $userId , 
+                    do : $do ,
+                    firstName : $firstName ,
+                    lastName : $lastName ,
+                    email : $email},
+            datatype :'json',
+            success:function(data)
+            {
+                console.log(data);
+                data = JSON.parse(data);
+                // alert("Done");
+                // window.location.reload();
+            }
+        })
+    })
+
     function blockUser(userId,state)
     {
         $do = "block";
@@ -53,6 +99,8 @@ $(document).ready(function()
             }
         })
     }
+
+
     function resetPass(userId)
     {
         $do = "resetPass";

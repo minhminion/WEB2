@@ -14,6 +14,7 @@ $confirmpswdError = "";
 
 if(isset($_POST['info'])){
 $firstName  = GetParameter($_POST['info'],"firstName");
+$firstName = urldecode($firstName);
 $lastName  = GetParameter($_POST['info'],"lastName");
 $lastName = urlencode($lastName);
 $userName = GetParameter($_POST['info'],"user");

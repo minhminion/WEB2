@@ -12,7 +12,7 @@ $(document).ready(function(){
             $max = $("#sortPrice").attr('max');
             $search = decodeURI(GetURLParameter('search'));
             $search = $search.replace("+"," ");
-            console.log($search);
+            console.log(GetURLParameter('search'));
             $.ajax({
                 url:"./XuLy/phantrang.php",
                 method:"POST",
@@ -286,6 +286,7 @@ $(document).ready(function(){
         $("#DK").on("submit",function(e)
         {
             e.preventDefault();
+            console.log(decodeURI($(this).serialize()));
             $.ajax({
                 url:"./XuLy/validation.php",
                 method:"POST",
