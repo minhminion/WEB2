@@ -69,7 +69,6 @@ $(document).ready(function()
                     firstName : $firstName ,
                     lastName : $lastName ,
                     email : $email},
-            datatype :'json',
             success:function(data)
             {
                 console.log(data);

@@ -27,12 +27,13 @@
             //     return mb_convert_encoding(pack('H*', $match[1]), 'UTF-8', 'UTF-16BE');
             // }, $str);
 
-            $myObj = new stdClass();
-            $myObj->firstName = utf8_urldecode($str);
-            $myObj->lastName = html_entity_decode($_POST['lastName']);
-            $myObj->email = $_POST['email'];
+            echo $str;
+            // $myObj = new stdClass();
+            // $myObj->firstName = utf8_urldecode($str);
+            // $myObj->lastName = html_entity_decode($_POST['lastName']);
+            // $myObj->email = $_POST['email'];
 
-            echo json_encode($myObj);
+            // echo json_encode($myObj);
         }
     }
 
