@@ -21,15 +21,7 @@
     {
         $customer = $_SESSION['user'];
         $userInfo =   '<div class="mb-1"><strong> Họ và tên :</strong> '.$customer->firstName.' '.$customer->lastName.'</div><br>'.
-                    '<div class="mb-1"><strong> Email :</strong> '.$customer->email.'</div><br>'.
-                    '<button type="button" class="btn btn-primary mb-1">Xem các đơn hàng</button>
-                    <form id="logout-form">
-                        <div class="row">
-                            <div class="col-md-12 mb-3 mt-3">
-                                <input type="submit" class="form-control" value="Đăng xuất">
-                            </div>
-                        </div>
-                    </form>';   
+                    '<div class="mb-1"><strong> Email :</strong> '.$customer->email.'</div><br>';   
     }
     
     $output = new stdClass();

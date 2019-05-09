@@ -67,7 +67,7 @@
             {
                 $error = "Vui lòng nhập email hợp lệ";
             }
-            else if(mysqli_num_rows(conSQL :: executeQuery("SELECT * FROM customer WHERE email='$email' AND userID NOT IN ($userId)")))
+            else if(mysqli_num_rows(conSQL::executeQuery('SELECT * FROM customer WHERE email="'.$email.'" AND userID NOT IN ("'.$userId.'")')))
             {
                 $error = "Email đã đăng ký";
             }

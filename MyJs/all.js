@@ -4,6 +4,26 @@ $(document).ready(function(){
         load_cart_item();
         checkOutBag();
         checkOutDetails();
+        loadUserInfo();
+
+        function loadUserInfo()
+        {
+            $.ajax({
+                url:"./XuLy/userInfo.php",
+                method:"POST",
+                datatype:"json",
+                success:function(data)
+                {
+                    console.log(data);
+                    data = JSON.parse(data);
+                    console.log(data.userId);
+                    // $('#editUser').find('input[name="userid"]').val(data.userId);
+                    $('#editUser').find('input[name="firstName"]').val(data.firstName);
+                    $('#editUser').find('input[name="lastName"]').val(data.lastName);
+                    $('#editUser').find('input[name="email"]').val(data.email);
+                }
+            })
+        }
 
         function load_data(page)
         {
@@ -77,7 +97,7 @@ $(document).ready(function(){
                 success:function(data)
                 {
                     
-                    // console.log(data);
+                    console.log(data);
                     data = JSON.parse(data);
                     console.log(data);
                     if(data.islogin == false)
@@ -510,7 +530,42 @@ $(document).ready(function(){
     
     }
     
+    $(document).on("submit","#editUser",function(event)
+    {
+        event.preventDefault();
 
+        $userId = $(this).find('input[name="userId"]').val();  
+        $firstName = $(this).find('input[name="firstName"]').val();  
+        $lastName = $(this).find('input[name="lastName"]').val();  
+        $email = $(this).find('input[name="email"]').val();  
+
+        console.log($userId);
+
+        $do = "editUser";
+        $.ajax({
+            url :"./dashboard/XuLy/userSetting.php",
+            method:"POST",
+            data : {userId: $userId , 
+                    do : $do ,
+                    firstName : $firstName ,
+                    lastName : $lastName ,
+                    email : $email},
+            success:function(data)
+            {
+                console.log(data);
+                data = JSON.parse(data);
+                if(data.complete == true)
+                {
+                    alert("Done");
+                }
+                else
+                {
+                    $(".editUser-error").html(data.error);
+                }
+                // window.location.reload();
+            }
+        })
+    })
 
 
     

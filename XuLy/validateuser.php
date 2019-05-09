@@ -16,7 +16,11 @@
                     Sai tài khoản hoặc mật khẩu !!!
                 </div>';
     $user ="";
-    $userInfo="";        
+    $userInfo="";    
+    
+    $firstName="";
+    $lastName="";
+    $email="";
 
     if(isset($_SESSION["isLOGIN"]) && $_SESSION["isLOGIN"] == 1)
     {

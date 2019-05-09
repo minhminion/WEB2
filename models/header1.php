@@ -99,11 +99,94 @@
             <?php
                 $output = include("..//WEB2/XuLy/header.php");
                 echo $output->userInfo;
-            ?>
+            ?> 
+            <button type="button" class="btn btn-primary mb-1">Xem các đơn hàng</button>
+            <button type="button" onclick="editUser()" class="btn btn-primary mb-1">Sửa thông tin</button>
+            <button type="button" onclick="changePass()" class="btn btn-primary mb-1">Thay mật khẩu</button>
+            <form id="logout-form">
+                <div class="row">
+                    <div class="col-md-12 mb-3 mt-3">
+                        <input type="submit" class="form-control" value="Đăng xuất">
+                    </div>
+                </div>
+            </form>
             </div>
         </div>
     </div>
 </div> 
+<!-- Form Sửa thông tin -->
+<div class="modal fade" id="editUser" role="dialog" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+    <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+            <h4 class="modal-title">Sửa thông tin</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="editUser-error"></div>
+            <div class="modal-body">
+            <form id="edituser" action="" method="post">
+                <div class="row">
+                    <input type="hidden" class="form=control" name="userId" value="">
+                    <div class="col-md-6 mb-3">
+                        <label for="last_name">Họ*<span class="error"></span></label>
+                        <input type="text" class="form-control" name="firstName" value="" placeholder="Nguyễn Văn">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="last_name">Tên*<span class="error"></span></label>
+                        <input type="text" class="form-control" name="lastName" value="" placeholder="A">
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <label for="last_name">Email*<span class="error"></span></label>
+                        <input type="text" class="form-control" name="email" value="" placeholder="admin1234@gmail.com">
+                    </div>
+                    <div class="col-md-12 mb-3 mt-3">
+                        <input type="submit" class="form-control" value="Xác nhận" name="submit">
+                    </div>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Form thay password -->
+<div class="modal fade" id="changePass" role="dialog" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+    <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+            <h4 class="modal-title">Thay mật khẩu</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+            <form id="changepass" action="" method="post">
+                <div class="row">
+                    <div class="form-group col-md-12 mb-3">
+                        <label for="password">Mật khẩu hiện tại<span>*</span></label>
+                        <div class="input-group" id="show_hide_password">
+                            <input type="password" name="oldpassword" class="form-control" id="password" value="" required="" placeholder="Mật khẩu">
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fa fa-eye-slash" aria-hidden="true"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <label for="last_name">Mật khẩu mới<span class="error"></span></label>
+                        <input type="password" class="form-control" name="password" value="" placeholder="Mật khẩu">
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <label for="last_name">Nhập lại mật khẩu*<span class="error"></span></label>
+                        <input type="password" class="form-control" name="confirmpassword" value="" placeholder="Mật khẩu">
+                    </div>
+                    <div class="col-md-12 mb-3 mt-3">
+                        <input type="submit" class="form-control" value="Xác nhận">
+                    </div>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 <header class="header_area">
     <div class="classy-nav-container breakpoint-off d-flex align-items-center justify-content-between">
@@ -236,4 +319,15 @@
         }
     });
     });
+
+    function editUser()
+    {
+        $("#editUser").modal("toggle");
+        $("#logout").modal("toggle")
+    }
+    function changePass()
+    {
+        $("#changePass").modal("toggle");
+        $("#logout").modal("toggle")
+    }
 </script>
