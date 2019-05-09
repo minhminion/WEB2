@@ -1,6 +1,7 @@
 <?php
     require("./../../XuLy/conSQL.php");
     header("Content-type: text/html; charset=utf-8");
+    session_start();
 
     if(isset($_POST['do']) && isset($_POST['userId']) )
     { 
@@ -77,6 +78,13 @@
                 $complete = true;
                 $sql = 'UPDATE customer SET firstName ="'.$firstName.'", lastName ="'.$lastName.'", email="'.$email.'" WHERE userID ="'.$userId.'"';
                 conSQL :: executeQuery($sql);
+                if(isset($_SESSION['user']) && $_SESSION['user']->userId == $userId)
+                {
+                    $_SESSION['user']->firstName = $firstName;
+                    $_SESSION['user']->lastName = $lastName; 
+                    $_SESSION['user']->email = $email;
+    
+                }
             }
 
             $error = '<div class="alert alert-danger" role="alert" data-aos="fade-left">
@@ -89,6 +97,66 @@
 
             echo json_encode($myObj);
 
+        }
+        else if($do == "changePass")
+        {
+            $complete = false;
+            $error = "";
+
+            $userName = $_POST["userName"]; 
+            $oldPass = $_POST["oldPass"];
+            $newPass = $_POST["newPass"];
+            $confirmPass = $_POST["confirmPass"];
+
+            if(empty($oldPass)){
+                $error = "Vui lòng nhập mật khẩu hiện tại";
+            } 
+            else 
+            {
+                $sql = "SELECT * FROM user WHERE userNAME='$userName' AND state ='1' " ;
+                $result = conSQL::executeQuery($sql);
+                while($row = mysqli_fetch_array($result))
+                {
+                    if(!password_verify($oldPass,$row["userPass"])) 
+                    {
+                        $error = "Sai mật khẩu hiện tại !!";
+                    }
+                    else if(empty($newPass))
+                    {
+                        $error = "Vui lòng nhập mật khẩu mới";
+                    } 
+                    else if(!preg_match("/^((?=\S*?[A-Z])(?=\S*?[a-z])(?=\S*?[0-9]).{6,})\S$/",$newPass))
+                    {
+                            $error = "Vui lòng nhập mật khẩu hợp lệ, gồm 6 kí tự trở lên bao gồm chữ in hoa, chữ thường và số";
+                    }
+                    else if(empty($confirmPass)){
+                        $error = "Vui lòng nhập mật khẩu nhập lại";
+                    } 
+                    else if(!($newPass === $confirmPass))
+                    {
+                        $error = "Mật khẩu nhập lại phải trùng với mật khẩu";
+                    }
+                }
+            }
+
+            
+            
+            if(empty($error))
+            {
+                $complete = true;
+                $sql = 'UPDATE user SET userPass="'.password_hash($newPass,PASSWORD_DEFAULT).'" WHERE userName ="'.$userName.'"';
+                conSQL :: executeQuery($sql);
+            }
+
+            $error = '<div class="alert alert-danger" role="alert" data-aos="fade-left">
+                         '.$error.'
+                        </div>';
+
+            $myObj = new stdClass();
+            $myObj->complete = $complete;
+            $myObj->error = $error;
+
+            echo json_encode($myObj);
         }
     }
 

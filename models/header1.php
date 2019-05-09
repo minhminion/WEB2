@@ -158,25 +158,28 @@
             <h4 class="modal-title">Thay mật khẩu</h4>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
+            <div class="changePass-error"></div>
             <div class="modal-body">
             <form id="changepass" action="" method="post">
                 <div class="row">
+                    <input type="hidden" name="userName" value>
+                    <input type="hidden" name="userId" value>
                     <div class="form-group col-md-12 mb-3">
                         <label for="password">Mật khẩu hiện tại<span>*</span></label>
                         <div class="input-group" id="show_hide_password">
-                            <input type="password" name="oldpassword" class="form-control" id="password" value="" required="" placeholder="Mật khẩu">
+                            <input type="password" name="oldPass" class="form-control" value="" placeholder="Mật khẩu">
                             <div class="input-group-append">
                                 <span class="input-group-text"><i class="fa fa-eye-slash" aria-hidden="true"></i></span>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-12 mb-3">
-                        <label for="last_name">Mật khẩu mới<span class="error"></span></label>
-                        <input type="password" class="form-control" name="password" value="" placeholder="Mật khẩu">
+                        <label for="last_name">Mật khẩu mới</label>
+                        <input type="password" class="form-control" name="newPass" value="" placeholder="Mật khẩu">
                     </div>
                     <div class="col-md-12 mb-3">
-                        <label for="last_name">Nhập lại mật khẩu*<span class="error"></span></label>
-                        <input type="password" class="form-control" name="confirmpassword" value="" placeholder="Mật khẩu">
+                        <label for="last_name">Nhập lại mật khẩu*</label>
+                        <input type="password" class="form-control" name="confirmPass" value="" placeholder="Mật khẩu">
                     </div>
                     <div class="col-md-12 mb-3 mt-3">
                         <input type="submit" class="form-control" value="Xác nhận">

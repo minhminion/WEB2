@@ -17,7 +17,10 @@ $(document).ready(function(){
                     console.log(data);
                     data = JSON.parse(data);
                     console.log(data.userId);
-                    // $('#editUser').find('input[name="userid"]').val(data.userId);
+                    $("#changePass").find('input[name="userName"]:hidden').val(data.userName);
+                    $("#changePass").find('input[name="userId"]:hidden').val(data.userId);
+
+                    $('#editUser').find('input[name="userId"]:hidden').val(data.userId);
                     $('#editUser').find('input[name="firstName"]').val(data.firstName);
                     $('#editUser').find('input[name="lastName"]').val(data.lastName);
                     $('#editUser').find('input[name="email"]').val(data.email);
@@ -105,6 +108,7 @@ $(document).ready(function(){
                         $("#logout").modal("hide");
                         $("#user-info").html(data.user);
                         $("#user-login-info").html(data.userInfo);
+                        window.location.reload();
                     }
                     else if(data.login == true)
                     {
@@ -500,6 +504,18 @@ $(document).ready(function(){
             }
         )
     }
+    function reloadAfterAlert(type,message)
+    {
+        Swal.fire(
+            {
+            type : type,
+            title : message,
+            onClose: () => {
+                window.location.reload();
+                }
+            }
+        )
+    }
 
     function GetURLParameter(sParam) {
         var sPageURL = window.location.search.substring(1);
@@ -556,11 +572,50 @@ $(document).ready(function(){
                 data = JSON.parse(data);
                 if(data.complete == true)
                 {
-                    alert("Done");
+                    reloadAfterAlert("success","Sửa thành công")
                 }
                 else
                 {
                     $(".editUser-error").html(data.error);
+                }
+            }
+        })
+    })
+
+    $(document).on("submit","#changePass",function(event)
+    {
+        event.preventDefault();
+
+        $userId = $(this).find('input[name="userId"]').val();  
+        $userName = $(this).find('input[name="userName"]').val();  
+        $oldPass = $(this).find('input[name="oldPass"]').val();  
+        $newPass = $(this).find('input[name="newPass"]').val();  
+        $confirmPass = $(this).find('input[name="confirmPass"]').val();  
+
+        console.log($userName);
+        console.log($userId);
+
+        $do = "changePass";
+        $.ajax({
+            url :"./dashboard/XuLy/userSetting.php",
+            method:"POST",
+            data : {userId: $userId , 
+                    do : $do ,
+                    userName: $userName ,
+                    oldPass : $oldPass ,
+                    newPass : $newPass ,
+                    confirmPass : $confirmPass},
+            success:function(data)
+            {
+                console.log(data);
+                data = JSON.parse(data);
+                if(data.complete == true)
+                {
+                    sweetAlert("success","Mật khẩu đã thay đổi")
+                }
+                else
+                {
+                    $(".changePass-error").html(data.error);
                 }
                 // window.location.reload();
             }

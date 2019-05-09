@@ -6,6 +6,7 @@
 
         $myObj = new stdClass();
         $myObj->userId = $customer->userId;
+        $myObj->userName = $customer->userName;
         $myObj->firstName = $customer->firstName;
         $myObj->lastName = $customer->lastName;
         $myObj->email = $customer->email;
