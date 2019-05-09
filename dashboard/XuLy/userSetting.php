@@ -33,6 +33,9 @@
             $myObj->email = $_POST['email'];
 
             echo json_encode($myObj);
+<<<<<<< HEAD
+>>>>>>> parent of 71ef4e1... update
+=======
 >>>>>>> parent of 71ef4e1... update
         }
     }
