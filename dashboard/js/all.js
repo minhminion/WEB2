@@ -70,7 +70,10 @@ $(document).ready(function()
                     lastName : $lastName ,
                     email : $email},
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of 71ef4e1... update
             datatype :'json',
 >>>>>>> parent of 71ef4e1... update
             success:function(data)
