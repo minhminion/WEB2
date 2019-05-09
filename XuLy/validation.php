@@ -16,7 +16,7 @@ if(isset($_POST['info'])){
 $firstName  = GetParameter($_POST['info'],"firstName");
 $firstName = urldecode($firstName);
 $lastName  = GetParameter($_POST['info'],"lastName");
-$lastName = urlencode($lastName);
+$lastName = urldecode($lastName);
 $userName = GetParameter($_POST['info'],"user");
 $email  = GetParameter($_POST['info'],"email");
 $email = urldecode($email);
@@ -42,11 +42,11 @@ $confirmpassword  = GetParameter($_POST['info'],"confirmpassword");
 	if(empty($userName)){
 		$userError = "Vui lòng nhập tên đăng nhập";
 	} else{
+		$rs = conSQL :: executeQuery("SELECT * FROM user WHERE userName='$userName' ");
 		if(!preg_match("/^[A-Za-z0-9]{5,32}$/",$userName)){
 			$userError = "Tên đăng nhập gồm 5 kí tự trở lên, không bao gồm kí tự đặc biệt";
 		}
-		$rs = conSQL :: executeQuery("SELECT * FROM user WHERE userName='$userName' ");
-		if(mysqli_num_rows($rs))
+		else if(mysqli_num_rows($rs))
 		{
 			$userError = "Tên đăng nhập đã tồn tại";
 		}
@@ -55,8 +55,13 @@ $confirmpassword  = GetParameter($_POST['info'],"confirmpassword");
 	if(empty($email)){
 		$emailError = "Vui lòng nhập email";
 	} else{
+		$rs = conSQL :: executeQuery("SELECT * FROM customer WHERE email='$email' ");
 		if(!preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/",$email)){
 			$emailError = "Vui lòng nhập email hợp lệ";
+		}
+		else if(mysqli_num_rows($rs))
+		{
+			$emailError = "Email đã đăng ký";
 		}
 	}
 	
@@ -143,7 +148,6 @@ $confirmpassword  = GetParameter($_POST['info'],"confirmpassword");
 		$_SESSION["AUTHENTICATION"] = 2;
 	}
 	$myObj = new stdClass();
-	$myObj->firstName = $firstName;
 	$myObj->isRegister = $isRegister;
 	$myObj->error = $error;
 

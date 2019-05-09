@@ -24,6 +24,9 @@
     <script src="vendor/vector-map/jquery.vmap.world.js"></script>
 
     <!-- Main JS-->
-    <script src="js/main.js"></script>
     <script src="js/all.js"></script>
-
+    <script src="js/main.js"></script>
+    <script src="../js/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
