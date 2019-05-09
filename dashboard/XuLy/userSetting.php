@@ -29,6 +29,7 @@
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             echo $str;
             // $myObj = new stdClass();
             // $myObj->firstName = utf8_urldecode($str);
@@ -39,6 +40,8 @@
 =======
 =======
 >>>>>>> parent of 71ef4e1... update
+=======
+>>>>>>> parent of 71ef4e1... update
             $myObj = new stdClass();
             $myObj->firstName = utf8_urldecode($str);
             $myObj->lastName = html_entity_decode($_POST['lastName']);
@@ -46,6 +49,9 @@
 
             echo json_encode($myObj);
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of 71ef4e1... update
+=======
 >>>>>>> parent of 71ef4e1... update
 =======
 >>>>>>> parent of 71ef4e1... update

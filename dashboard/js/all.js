@@ -71,7 +71,10 @@ $(document).ready(function()
                     email : $email},
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of 71ef4e1... update
 =======
 >>>>>>> parent of 71ef4e1... update
             datatype :'json',
