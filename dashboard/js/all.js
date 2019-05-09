@@ -73,7 +73,10 @@ $(document).ready(function()
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of 71ef4e1... update
 =======
 >>>>>>> parent of 71ef4e1... update
 =======

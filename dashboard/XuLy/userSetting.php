@@ -34,6 +34,9 @@
 
             echo json_encode($myObj);
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of 71ef4e1... update
+=======
 >>>>>>> parent of 71ef4e1... update
 =======
 >>>>>>> parent of 71ef4e1... update
