@@ -29,6 +29,9 @@
                         <label for="user">Email<span>*</span></label>
                         <input type="text" name="email" class="form-control"  value="" required="" placeholder="abc@example.com">
                     </div>
+                    <div class="col-md-12 mb-3">
+                        
+                    </div>
                     <div class="col-md-12 mb-3 mt-3">
                         <input type="submit" class="form-control" value="Xác nhận">
                     </div>
@@ -132,7 +135,7 @@
                                                                             <span class="block-email">'.$row['email'].'</span>
                                                                         </td>
                                                                         <td>
-                                                                            '.authentication($row['userAuthentication']).'
+                                                                            '.authentication($row['userID'],$row['userAuthentication']).'
                                                                         </td>
                                                                         <td id="'.$row['userID'].'-state">
                                                                             '.state($row["state"]).'
@@ -164,10 +167,10 @@
                                                         return $rs;
                                                     }
 
-                                                    function authentication($authen)
+                                                    function authentication($userId,$authen)
                                                     {
                                                         $option = array("Admin","Sale","Customer");    
-                                                        $rs = '  <div class="rs-select2--trans rs-select2--sm" value="2">
+                                                        $rs = '  <div class="rs-select2--trans rs-select2--sm userAuthen" value="2" id="'.$userId.'-authen" userid='.$userId.' >
                                                                     <select class="js-select2" name="property">';
                                                         foreach($option as $key => $s)
                                                         {
@@ -201,6 +204,8 @@
                                                         }   
                                                         return $rs;
                                                     }
+
+                                                    
                                                 ?>      
                                             </tbody>
                                         </table>
