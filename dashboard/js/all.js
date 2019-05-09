@@ -69,16 +69,55 @@ $(document).ready(function()
                     firstName : $firstName ,
                     lastName : $lastName ,
                     email : $email},
+            success:function(data)
+            {
+                console.log(data);
+                data = JSON.parse(data);
+                if(data.complete == true)
+                {
+                    alert("Done");
+                }
+                else
+                {
+                    $(".user-edit-error").html(data.error);
+                }
+                // window.location.reload();
+            }
+        })
+    })
+
+    $(document).on("select2:select",".userAuthen",function(e)
+    {
+        $userId = $(this).attr("userid")
+        $newAuthen = e.params.data.id;
+        console.log($newAuthen);
+        console.log($userId);
+        $confirm = confirm("Bạn muốn thay đổi quyền của user ??")
+        console.log($confirm);
+        authentication($userId,$newAuthen,$confirm);
+
+    });
+
+    function authentication(userId,authen,confirm)
+    {
+        console.log(confirm);
+        $do = "authentication";
+        $.ajax({
+            url :"../dashboard/XuLy/userSetting.php",
+            method:"POST",
+            data : {userId: userId ,authen: authen ,do : $do,confirm : confirm},
             datatype :'json',
             success:function(data)
             {
                 console.log(data);
                 data = JSON.parse(data);
+                $("#"+userId+"-authen").html(data.authentication);
                 // alert("Done");
+                reloadComboBox("#"+userId+"-row");
                 // window.location.reload();
             }
         })
-    })
+    }
 
     function blockUser(userId,state)
     {
@@ -95,6 +134,8 @@ $(document).ready(function()
                 // alert("Done");
                 $("#"+userId+"-state").html(data.state);
                 $("#"+userId+"-state-btn").html(data.stateBtn);
+                $("#"+userId+"-authen").html(data.authentication);
+                reloadComboBox("#"+userId+"-row");
                 // window.location.reload();
             }
         })
@@ -116,6 +157,23 @@ $(document).ready(function()
                 // window.location.reload();
             }
         })
+    }
+
+    function reloadComboBox($this)
+    {
+        "use strict";
+        try {
+            $.each($(""+$this+" .js-select2"),function () {
+              console.log("1");
+              $(this).select2({
+                minimumResultsForSearch: 20,
+                dropdownParent: $(this).next('.dropDownSelect2')
+              });
+            });
+        
+          } catch (error) {
+            console.log(error);
+          }
     }
 
 })
