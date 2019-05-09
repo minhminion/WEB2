@@ -1498,8 +1498,8 @@
 
   // Select 2
   try {
-    $.each($(".js-select2"),function () {
-      console.log("1");
+
+    $(".js-select2").each(function () {
       $(this).select2({
         minimumResultsForSearch: 20,
         dropdownParent: $(this).next('.dropDownSelect2')
@@ -1509,6 +1509,7 @@
   } catch (error) {
     console.log(error);
   }
+
 
 })(jQuery);
 (function ($) {

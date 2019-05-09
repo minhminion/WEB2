@@ -1,4 +1,3 @@
-
 <div class="checkout_area section-padding-80">
         <div class="container-fluid">
             <div class="row">

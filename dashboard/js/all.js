@@ -69,6 +69,10 @@ $(document).ready(function()
                     firstName : $firstName ,
                     lastName : $lastName ,
                     email : $email},
+<<<<<<< HEAD
+=======
+            datatype :'json',
+>>>>>>> parent of 71ef4e1... update
             success:function(data)
             {
                 console.log(data);

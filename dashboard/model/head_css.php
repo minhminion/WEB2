@@ -6,10 +6,10 @@
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title>M2N - ADMIN</title>
+    <title>Dashboard 2</title>
 
     <!-- Fontfaces CSS-->
-    <link href="../css/font-face.css" rel="stylesheet" media="all">
+    <link href="css/font-face.css" rel="stylesheet" media="all">
     <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
     <link href="vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
     <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
@@ -28,6 +28,5 @@
     <link href="vendor/vector-map/jqvmap.min.css" rel="stylesheet" media="all">
 
     <!-- Main CSS-->
-    <link href="../css/theme.css" rel="stylesheet" media="all">
-
-    <link rel="stylesheet" href="../css/aos.css">
+    <link href="css/theme.css" rel="stylesheet" media="all">
+    
