@@ -1,8 +1,23 @@
 <?php
+    include("./myClass.php");
+    require("./conSQL.php");
     session_start();
     $isLogin = false;
     $isBagEmpty = true;
-    $output ="";
+    $isAddressError = true;
+    $error='';
+
+    $userName = $_POST['userName'];
+    $userId = $_POST['userId'];
+    $firstName = $_POST['firstName'];
+    $lastName = $_POST['lastName'];
+    $country = $_POST['country'];
+    $street_address = $_POST['street_address'];
+    $phone = $_POST['phone'];
+    $email = $_POST['email'];
+    $description = $_POST['description'];
+
+    $receiptSQL="";
 
     if(isset($_SESSION['isLOGIN']) && $_SESSION['isLOGIN'] == 1)
     {
@@ -12,66 +27,71 @@
     {
         $isBagEmpty = false;
     }
-    $output='
-            <div class="checkout_details_area col-10 m-auto clearfix " data-aos="fade-right">
-                <div class="cart-page-heading mb-30">
-                    <h5>Billing Address</h5>
-                </div>
 
-                <form action="#" method="post">
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label for="first_name">Họ <span>*</span></label>
-                            <input type="text" class="form-control" id="first_name" value="" required>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label for="last_name">Tên <span>*</span></label>
-                            <input type="text" class="form-control" id="last_name" value="" required>
-                        </div>
-                        <div class="col-12 mb-3">
-                            <label for="country">Thành Phố <span>*</span></label>
-                            <select class="w-100" id="country">
-                                <option value="usa">United States</option>
-                                <option value="uk">United Kingdom</option>
-                                <option value="ger">Germany</option>
-                                <option value="fra">France</option>
-                                <option value="ind">India</option>
-                                <option value="aus">Australia</option>
-                                <option value="bra">Brazil</option>
-                                <option value="cana">Canada</option>
-                            </select>
-                        </div>
-                        <div class="col-12 mb-3">
-                            <label for="street_address">Địa chỉ <span>*</span></label>
-                            <input type="text" class="form-control mb-3" id="street_address" value="">
-                            <input type="text" class="form-control" id="street_address2" value="">
-                        </div>
-                        <div class="col-12 mb-3">
-                            <label for="phone_number">Số điện thoại <span>*</span></label>
-                            <input type="number" class="form-control" id="phone_number" min="0" value="">
-                        </div>
-                        <div class="col-12 mb-4">
-                            <label for="email_address">Email Address <span>*</span></label>
-                            <input type="email" class="form-control" id="email_address" value="">
-                        </div>
+    // Kiểm tra địa chỉ đơn hàng
+    if(empty($firstName)){
+        $error = " Vui lòng nhập họ";
+    } 
+    else if(!preg_match("/^[a-zA-Z _ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ]{2,}+$/",$firstName))
+    {
+        $error = "Họ gồm 2 kí tự trở lên, không bao gồm kí tự đặc biệt";
+    }
+    else if(empty($lastName))
+    {
+        $error = "Vui lòng nhập tên";
+    } 
+    else if(!preg_match("/^[a-zA-Z _ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ]{2,}+$/",$lastName))
+    {
+        $error = "Tên gồm 2 kí tự trở lên, không bao gồm kí tự đặc biệt";
+    }
+    else if(empty($street_address)){
+        $error = "Vui lòng nhập địa chỉ";
+    }   
+    else if(empty($phone)){
+        $error = "Vui lòng số điện thoại ";
+    }   
+    else if(empty($email)){
+        $error = "Vui lòng nhập email";
+    } 
+    else if(!preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/",$email))
+    {
+        $error = "Vui lòng nhập email hợp lệ";
+    }
 
-                        <div class="col-12">
-                            <div class="custom-control custom-checkbox d-block mb-2">
-                                <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                <label class="custom-control-label" for="customCheck1">Terms and conitions</label>
-                            </div>
-                            <div class="custom-control custom-checkbox d-block mb-2">
-                                <input type="checkbox" class="custom-control-input" id="customCheck2">
-                                <label class="custom-control-label" for="customCheck2">Create an accout</label>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>';
+    if(empty($error))
+    {
+        $isAddressError = false;
+    }
+
+    if($isLogin == true
+        && $isBagEmpty == false
+        && $isAddressError == false)
+    {
+        $total = 0;
+        foreach($_SESSION['id'] as $key => $item)
+        {
+            $total += $item->price*$item->quality;
+            $receiptDetailSQL ='INSERT INTO receiptdetail VALUES ("","'.$userName.'","'.$firstName.'","'.$lastName.'","'.$country.'","'.$phone.'","'.$email.'","'.$description.'")';
+        }
+
+        $total = $total/100*(100-15);
+        $receiptSQL='INSERT INTO receipt VALUES ("","'.$userName.'","'.$firstName.'","'.$lastName.'","'.$country.'","'.$street_address.'",
+                                                    "'.$phone.'","'.$email.'","'.$description.'",'.$total.',"'.date("Y-m-d H:i:s").'")';
+        conSQL :: executeQuery($receiptSQL);
+
+
+    }
+
+    $error = '<div class="alert alert-danger" role="alert" data-aos="fade-left">
+                    '.$error.'
+                </div>';
+
     $myObj = new stdClass();
     $myObj->isLogin = $isLogin;
     $myObj->isBagEmpty = $isBagEmpty;
-    $myObj->output = $output;
+    $myObj->isAddressError = $isAddressError;
+    $myObj->error = $error;
+    $myObj->sql = $receiptSQL;
 
     echo json_encode($myObj);
 ?>

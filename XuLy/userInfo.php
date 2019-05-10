@@ -12,4 +12,5 @@
         $myObj->email = $customer->email;
         echo json_encode($myObj);
     }
+    else echo false
 ?>

@@ -74,3 +74,27 @@ input[type="number"] {
     background-color: darkgray;
 }
 
+.checkout-info
+{
+    display: none;
+}
+
+.checkout-paging .pagination
+{
+    margin:auto;
+}
+
+.checkout-paging .pagination .page-item
+{
+    margin:0;
+}
+
+.checkout-paging .pagination .page-item a
+{
+    font-size: 1em;
+    width: 150px;
+}
+.checkout-paging .pagination .page-item .active
+{
+    color: blue;
+}

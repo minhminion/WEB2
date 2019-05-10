@@ -5,6 +5,7 @@ $(document).ready(function(){
         checkOutBag();
         checkOutDetails();
         loadUserInfo();
+        // loadUserInfoCheckOut();
 
         function loadUserInfo()
         {
@@ -14,18 +15,68 @@ $(document).ready(function(){
                 datatype:"json",
                 success:function(data)
                 {
-                    console.log(data);
-                    data = JSON.parse(data);
-                    console.log(data.userId);
-                    $("#changePass").find('input[name="userName"]:hidden').val(data.userName);
-                    $("#changePass").find('input[name="userId"]:hidden').val(data.userId);
+                    if(data != false)
+                    {
+                        data = JSON.parse(data);
+                        $("#changePass").find('input[name="userName"]:hidden').val(data.userName);
+                        $("#changePass").find('input[name="userId"]:hidden').val(data.userId);
 
-                    $('#editUser').find('input[name="userId"]:hidden').val(data.userId);
-                    $('#editUser').find('input[name="firstName"]').val(data.firstName);
-                    $('#editUser').find('input[name="lastName"]').val(data.lastName);
-                    $('#editUser').find('input[name="email"]').val(data.email);
+                        $('#editUser').find('input[name="userId"]:hidden').val(data.userId);
+                        $('#editUser').find('input[name="firstName"]').val(data.firstName);
+                        $('#editUser').find('input[name="lastName"]').val(data.lastName);
+                        $('#editUser').find('input[name="email"]').val(data.email);
+                    }
                 }
             })
+        }
+
+        $("#checkOutAddress").ready(function()
+        {
+            loadUserInfoCheckOut();
+        })
+        function loadUserInfoCheckOut()
+        {
+            $.ajax({
+                url:"./XuLy/userInfo.php",
+                method:"POST",
+                datatype:"json",
+                success:function(data)
+                {
+                    if(data != false)
+                    {
+                        data = JSON.parse(data);
+                        $("#checkOutAddress").find('input[name="userName"]:hidden').val(data.userName);
+                        $("#checkOutAddress").find('input[name="userId"]:hidden').val(data.userId)
+                        $('#checkOutAddress').find('input[name="firstName"]').val(data.firstName);
+                        $('#checkOutAddress').find('input[name="lastName"]').val(data.lastName);
+                        $('#checkOutAddress').find('input[name="email"]').val(data.email);
+                    }
+                }
+            })
+        }
+
+        $(document).on("click",".checkout-paging .page-link",function(event)
+        {
+            event.preventDefault();
+            checkOutChange($(this).attr("div"));
+        })
+
+        function checkOutChange(div)
+        {
+            if(div == "checkout-info")
+            {
+                $("."+div).css("display","block");
+                $(".checkout-bag").css("display","none");
+                $("."+div+"-btn").addClass("active")
+                $(".checkout-bag-btn").removeClass("active")
+            }
+            else if(div == "checkout-bag")
+            {
+                $("."+div).css("display","block");
+                $(".checkout-info").css("display","none");
+                $("."+div+"-btn").addClass("active")
+                $(".checkout-info-btn").removeClass("active")
+            }
         }
 
         function load_data(page)
@@ -196,12 +247,30 @@ $(document).ready(function(){
         $(document).on("click","#checkOutConfirm",function()
         {
             // alert("click");
+            $userName = $("#checkOutAddress").find('input[name="userName"]:hidden').val();
+            $userId = $("#checkOutAddress").find('input[name="userId"]:hidden').val();
+            $firstName = $('#checkOutAddress').find('input[name="firstName"]').val();
+            $lastName = $('#checkOutAddress').find('input[name="lastName"]').val();
+            $country = $("select.country").children("option:selected").val();
+            $street_address = $("#checkOutAddress").find('input[name="street_address"]').val();
+            $phone =$("#checkOutAddress").find('input[name="phone"]').val();
+            $email = $('#checkOutAddress').find('input[name="email"]').val();
+            $description = $('textarea#description').val();
+
             $.ajax({
                 url: "./XuLy/checkOutConfirm.php",
                 method:"POST",
+                data: { userName : $userName,
+                        userId : $userId,
+                        firstName : $firstName,
+                        lastName : $lastName,
+                        country : $country,
+                        street_address : $street_address,
+                        phone : $phone,
+                        email : $email,
+                        description : $description},
                 success:function(data)
                 {
-                    console.log(data);
                     data = JSON.parse(data);
                     console.log(data);
                     if(data.isBagEmpty == true)
@@ -212,8 +281,15 @@ $(document).ready(function(){
                     {
                         SuggestLogin();
                     }
+                    else if(data.isAddressError == true){
+                        $('html, body').animate({
+                            scrollTop: $(".checkout_area").offset().top
+                          }, 800)
+                        checkOutChange("checkout-info");
+                        $(".checkOutAddress-error").html(data.error);
+                    }
                     else{
-                        $(".checkout-bag").html(data.output);
+                        sweetAlert("success","Cám ơn quý khách đã mua hàng");
                     }
                 }
             })
@@ -611,7 +687,8 @@ $(document).ready(function(){
                 data = JSON.parse(data);
                 if(data.complete == true)
                 {
-                    sweetAlert("success","Mật khẩu đã thay đổi")
+                    sweetAlert("success","Mật khẩu đã thay đổi");
+                    $("#changePass").modal("toggle");
                 }
                 else
                 {

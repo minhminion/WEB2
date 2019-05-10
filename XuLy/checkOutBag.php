@@ -28,7 +28,6 @@
                                     <td>'.$item->name.'</td>
                                     <td>'.number_format($item->price,0,".",".").'</td>
                                     <td>
-                                    '.$item->max.'
                                     <div class="input-group m-auto" style="width:13em">
                                         <div class="input-group-prepend">
                                             <button style="min-width: 2.5rem" class="btn btn-decinc btn-decrement btn-outline-secondary" min=1 max="'.$item->max.'" id="'.$item->id.'" quality="-1" type="button"><strong>-</strong></button>
