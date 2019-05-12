@@ -1,6 +1,15 @@
 <?php
     require("./../../XuLy/conSQL.php");
     $page="";
+
+    $cetorgry="";
+    $brand ="";
+    $search="";
+    $where="";
+
+    $data = array();
+    array_push($data,1);
+
     if(isset($_POST["page"]))
     {
         $page = $_POST["page"];
@@ -9,9 +18,49 @@
         $page = 1;
     }
 
+    if(isset($_POST["cetorgry"]))
+    {
+        if($_POST['cetorgry'] != "")
+        {
+            $cetorgry = 'productCetorgry="'.$_POST["cetorgry"].'"';
+            array_push($data,$cetorgry);
+        }
+    }
+
+    if(isset($_POST["brand"]))
+    {
+        if($_POST['brand'] != "")
+        {
+            $brand = 'productBrand="'.$_POST["brand"].'"';
+            array_push($data,$brand);
+        }
+    }
+
+    if(isset($_POST["search"]))
+    {
+        if($_POST['search'] != "")
+        {
+            $search = 'productName LIKE "'.$_POST["search"].'%"';
+            array_push($data,$search);
+        }
+    }
+
+    foreach ($data as $i => $s)
+    {
+        if($i+1 == count($data))
+        {
+            $where .= $s ;
+        }
+        else
+        {
+            $where .= $s." AND ";
+        }
+    }
+
     $record_page = 5;
 
-    $page_query = "SELECT * FROM product WHERE 1";
+    $page_query = "SELECT * FROM product WHERE $where";
+    // echo $page_query;
     $page_result = conSQL::executeQuery($page_query);
     $total_record = mysqli_num_rows($page_result); 
     $total_page = ceil($total_record/$record_page);
@@ -19,22 +68,20 @@
 
     $output = '';
     $start_form = ($page - 1)*$record_page;
-    $query = "SELECT * FROM product,cetorgry,brand WHERE productCetorgry = cetorgryID AND productBrand=brandID LIMIT $start_form,$record_page";
+    $query = "SELECT * FROM product,cetorgry,brand WHERE $where AND productCetorgry = cetorgryID AND productBrand=brandID LIMIT $start_form,$record_page";
     $result = conSQL::executeQuery($query);
 
     while($row = mysqli_fetch_array($result))
     {
+        $state = $row['state'] == 1 ? 0 : 1;
         $output .=' <tr class="tr-shadow">
                         <td>'.$row['productID'].'</td>
                         <td class="desc">'.$row['productName'].'</td>
                         <td>'.$row['cetorgryName'].'</td>
                         <td>'.$row['brandName'].'</td>
-                        <td>
-                            lori@example.com_create_guid
-                        </td>
                         <td>'.$row['productAmount'].'</td>
                         <td>'.number_format($row['productPrice'],0,".",".").'</td>
-                        <td>
+                        <td id="'.$row['productID'].'-state">
                             '.productStatus($row['state']).'
                         </td>
                         <td>
@@ -45,11 +92,8 @@
                                 <button class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit">
                                     <i class="zmdi zmdi-edit"></i>
                                 </button>
-                                <button class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete">
-                                    <i class="zmdi zmdi-delete"></i>
-                                </button>
-                                <button class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="More">
-                                    <i class="zmdi zmdi-more"></i>
+                                <button id="'.$row['productID'].'-block" class="item block-product" data-toggle="tooltip" state="'.$state.'" data-placement="top" title="" productid="'.$row['productID'].'" data-original-title="Delete">
+                                    '.stateIcon($state).'
                                 </button>
                             </div>
                         </td>
@@ -61,9 +105,9 @@
 
     if($page == 1)
     {
-        $prev = 1;
+        $prev = $page;
     }
-    else if($page == $total_page)
+    if($page == $total_page)
     {
         $next = $page;
     }  
@@ -77,7 +121,7 @@
     {
         if($i == $page)
         {
-            $paging .= '<li class="page-item active" id="'.$i.'"><a class="page-link">'.$i.'</a></li>';
+            $paging .= '<li class="page-item active" id="'.$i.'"><a class="page-link" href="#">'.$i.'</a></li>';
         }
         else
         {
@@ -90,6 +134,7 @@
     $myobj->output = $output;
     $myobj->total = $total_page;
     $myobj->paging = $paging;
+    $myobj->sql = $page_query;
 
     echo json_encode($myobj);
 
@@ -101,5 +146,17 @@
             $out='<span class="status--process">Đang bán</span>';
             return $out;
         }
+        return $out;
+    }
+
+    function stateIcon($state)
+    {
+        $out ='<i class="zmdi zmdi-delete"></i>';
+        if($state == 1)
+        {
+            $out ='<i class="zmdi zmdi-check"></i>';
+            return $out;
+        }
+        return $out;
     }
 ?>

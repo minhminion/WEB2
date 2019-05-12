@@ -2,18 +2,27 @@ $(document).ready(function()
 {
     isLogin();
     pagingProduct();
+    activeMenuItem();
 
     function pagingProduct(page)
     {
+        $cetorgry = $(".product-cetorgry").val();
+        $brand = $(".product-brand").val();
+        $search = $("#searchProduct").val();
+        console.log($search);
+
         $.ajax({
             url:"./XuLy/pagingProductTable.php",
             method:"POST",
-            data:{page:page,},
+            data:{  page:page,
+                    cetorgry : $cetorgry ,
+                    brand : $brand,
+                    search : $search},
             datatype:"json",
             success:function(data)
             {
-                data = JSON.parse(data);
                 console.log(data);
+                data = JSON.parse(data);
                 $(".productTable").html(data.output);
                 $(".productPaging").html(data.paging);
             }
@@ -96,8 +105,8 @@ $(document).ready(function()
                     email : $email},
             success:function(data)
             {
-                console.log(data);
                 data = JSON.parse(data);
+                console.log(data);
                 if(data.complete == true)
                 {
                     alert("Done");
@@ -122,6 +131,56 @@ $(document).ready(function()
         authentication($userId,$newAuthen,$confirm);
 
     });
+
+    $(document).on("click",".product-filter",function()
+    {
+        pagingProduct();
+    });
+
+
+    $(document).on("click",".block-product",function()
+    {
+    $productId = $(this).attr("productid");
+        $state = $(this).attr("state");
+        $messge ="Bạn muốn tiếp tục bán sản phẩm này ??";
+        if($state == 0)
+        {
+            $messge = "Bạn muốn ngưng bán sản phẩm này ??";
+        }
+        if(confirm($messge))
+        {
+            blockProduct($productId,$state);
+        }
+    });
+
+    $("#searchProduct").keypress(function(event){
+    
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        if(keycode == '13'){
+            pagingProduct();
+        }
+    })
+
+    function blockProduct(productId,state)
+    {
+        $do = "block";
+        $.ajax({
+            url :"../dashboard/XuLy/productSetting.php",
+            method:"POST",
+            data : {productId : productId ,state: state ,do : $do},
+            datatype :'json',
+            success:function(data)
+            {
+                data = JSON.parse(data);
+                console.log(data);
+                $("#"+productId+"-state").html(data.state);
+                $("#"+productId+"-block").attr('state',data.isBlock);
+                $("#"+productId+"-block").html(data.btnIcon);
+                // pagingProduct();
+            }
+        })
+    }
+
 
     function authentication(userId,authen,confirm)
     {
@@ -201,4 +260,23 @@ $(document).ready(function()
           }
     }
 
+    function activeMenuItem()
+    {
+        $url = $(location).attr("href");
+        $parts = $url.split("/");
+        $last_part = $parts[$parts.length-1];
+        console.log($last_part)
+        switch ($last_part)
+        {
+            case "admin.php":
+                $(".dashboard").addClass("active");
+            break;
+            case "productTable.php":
+                $(".product").addClass("active");
+            break;
+            case "userTable.php":
+                $(".user").addClass("active");
+            break;
+        }
+    }
 })

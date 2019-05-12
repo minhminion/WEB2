@@ -2,7 +2,9 @@
 <html lang="en">
 
 <head>
-    <?php include("./model/head_css.php") ?>
+    <?php 
+        include("./model/head_css.php");
+    ?>
 </head>
 
 <body class="animsition">
@@ -56,8 +58,22 @@
                             </div>
                             <div class="col-md-6 col-lg-3">
                                 <div class="statistic__item">
-                                    <h2 class="number">388,688</h2>
-                                    <span class="desc">items sold</span>
+                                    <h2 class="number">
+                                        <?php
+                                            $total = 0;
+                                            $sql='  SELECT receiptdetail.productID,sum(receiptdetail.quality) as quality 
+                                                    FROM `receipt` INNER JOIN receiptdetail ON receipt.receiptID = receiptdetail.receiptID 
+                                                    WHERE receipt.status = 1 
+                                                    GROUP BY receiptdetail.productID';
+                                            $rs = conSQL :: executeQuery($sql);
+                                            while($row = mysqli_fetch_array($rs))
+                                            {
+                                                $total += $row["quality"];
+                                            }
+                                            echo $total;
+                                        ?>
+                                    </h2>
+                                    <span class="desc">Sản phẩm bán được</span>
                                     <div class="icon">
                                         <i class="zmdi zmdi-shopping-cart"></i>
                                     </div>

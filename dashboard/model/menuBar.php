@@ -15,22 +15,29 @@
         </div>
         <nav class="navbar-sidebar2">
             <ul class="list-unstyled navbar__list">
-                <li class="active">
+                <li class="dashboard">
                     <a href="admin.php">
                         <i class="fas fa-tachometer-alt"></i>Thống kê
                     </a>
                 </li>
-                <li>
+                <li class="inbox">
                     <a href="inbox.html">
                         <i class="fas fa-chart-bar"></i>Inbox</a>
-                    <span class="inbox-num">3</span>
+                    <span class="inbox-num">
+                        <?php
+                            require("./../XuLy/conSQL.php");
+                            $sql = 'SELECT * FROM receipt WHERE receipt.status=0';
+                            $rs = conSQL :: executeQuery($sql);
+                            echo mysqli_num_rows($rs);
+                        ?>
+                    </span>
                 </li>
-                <li>
+                <li class="user">
                     <a href="userTable.php">
                         <i class="fas fa-users"></i>Tài khoản
                     </a>
                 </li>
-                <li>
+                <li class="product">
                     <a href="productTable.php">
                         <i class="fas fa-shopping-basket"></i>Sản phẩm
                     </a>
