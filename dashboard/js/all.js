@@ -1,6 +1,31 @@
 $(document).ready(function()
 {
     isLogin();
+    pagingProduct();
+
+    function pagingProduct(page)
+    {
+        $.ajax({
+            url:"./XuLy/pagingProductTable.php",
+            method:"POST",
+            data:{page:page,},
+            datatype:"json",
+            success:function(data)
+            {
+                data = JSON.parse(data);
+                console.log(data);
+                $(".productTable").html(data.output);
+                $(".productPaging").html(data.paging);
+            }
+        })
+    }
+    $(document).on("click",".page-item",function(event)
+        {
+            event.preventDefault();
+            var page = $(this).attr("id");
+            console.log(page);
+            pagingProduct(page);
+        });
 
     function isLogin()
     {

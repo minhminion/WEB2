@@ -300,11 +300,11 @@ $(document).ready(function(){
         $(document).on("click",".page-item",function()
         {
             var page = $(this).attr("id");
-            window.scrollBy({
-                top: -1500,
-                left:0,
-                behavior:'smooth'
-            });
+            // window.scrollBy({
+            //     top: -1500,
+            //     left:0,
+            //     behavior:'smooth'
+            // });
             load_data(page);
         });
 

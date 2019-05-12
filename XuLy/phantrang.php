@@ -172,20 +172,17 @@ function productAmount($id,$name,$brand,$img,$price,$amount)
     return $out;
 }
 
-if($page == 1)
-{
-    $prev = 1;
-    $next = $page +1 ;
-    if($page == $total_page)
-    {
-        $next = $total_page;
-    }
-}
-else
-{    
     $prev = $page - 1;
     $next = $page + 1;
-}
+
+    if($page == 1)
+    {
+        $prev = 1;
+    }
+    else if($page == $total_page)
+    {
+        $next = $page;
+    }  
     $paging = "";
     $paging .=' <ul class="pagination mt-50 mb-70">
                 <li class="page-item" id="'.$prev.'"><a class="page-link"><i class="fa fa-angle-left"></i></a></li>';

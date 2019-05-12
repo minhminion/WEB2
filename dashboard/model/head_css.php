@@ -29,5 +29,6 @@
 
     <!-- Main CSS-->
     <link href="../css/theme.css" rel="stylesheet" media="all">
+    <link href="../css/style.css" rel="stylesheet" media="all">
 
     <link rel="stylesheet" href="../css/aos.css">

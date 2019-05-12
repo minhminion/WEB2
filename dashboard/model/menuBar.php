@@ -31,7 +31,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="userTable.php">
+                    <a href="productTable.php">
                         <i class="fas fa-shopping-basket"></i>Sản phẩm
                     </a>
                 </li>
