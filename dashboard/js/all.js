@@ -277,6 +277,9 @@ $(document).ready(function()
             case "userTable.php":
                 $(".user").addClass("active");
             break;
+            case "receiptTable.php":
+                $(".receipt").addClass("active");
+            break;
         }
     }
 })

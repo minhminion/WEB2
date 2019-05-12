@@ -118,7 +118,7 @@
                                             </thead>
                                             <tbody>
                                                 <?php
-                                                    require("./../XuLy/conSQL.php");
+                                                    // require("./../XuLy/conSQL.php");
                                                     $sql = "SELECT * FROM user,customer WHERE user.userID = customer.userID";
                                                     $result = conSQL :: executeQuery($sql);
                                                     $output = "";

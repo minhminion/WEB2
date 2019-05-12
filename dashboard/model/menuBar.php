@@ -20,9 +20,9 @@
                         <i class="fas fa-tachometer-alt"></i>Thống kê
                     </a>
                 </li>
-                <li class="inbox">
-                    <a href="inbox.html">
-                        <i class="fas fa-chart-bar"></i>Inbox</a>
+                <li class="receipt">
+                    <a href="receiptTable.php">
+                        <i class="fas fa-chart-bar"></i>Hóa đơn</a>
                     <span class="inbox-num">
                         <?php
                             require("./../XuLy/conSQL.php");
