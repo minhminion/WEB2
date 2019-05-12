@@ -161,6 +161,100 @@ $(document).ready(function()
         }
     })
 
+    $(document).on("change","#productImgChoice",function()
+    {
+        var input = this;
+        var url = $(this).val();
+        var ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
+        if (input.files && input.files[0] && (ext == "gif" || ext == "png" || ext == "jpeg" || ext == "jpg")) 
+        {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+            $('#productImg').attr('src',e.target.result);
+            }
+        reader.readAsDataURL(input.files[0]);
+        }
+        else
+        {
+            $('#productImg').attr('src','./../img/logoG.png');
+        }
+    })
+
+    $(document).on("submit","#product-form",function(event)
+    {
+        event.preventDefault();
+        uploadProduct("add");
+    })
+
+    function uploadProduct(make)
+    {
+        $do = make;
+        $input = $("#product-form");
+        $productId = $input.find("input[name='id']").val();
+        $productName = $input.find("input[name='name']").val();
+        $productCetorgry = $("#productCetorgry").val();
+        $productBrand = $("#productBrand").val();
+        $productPrice= $input.find("input[name='price']").val();
+        $productAmount = $input.find("input[name='amount']").val();
+        $productDescription = $input.find("input[name='description']").val();
+        $img="./../img/logoG.png";
+
+        // var file_data = $('#productImgChoice').prop('files')[0];
+        // console.log(file_data);
+        // //lấy ra kiểu file
+        // var type = file_data.type;
+        // console.log(type);
+        // //Xét kiểu file được upload
+        // var match = ["image/gif", "image/png", "image/jpg", "image/jpeg"];
+        // //kiểm tra kiểu file
+        // if (type == match[0] || type == match[1] || type == match[2] || type == match[3])
+        // {
+        //     //khởi tạo đối tượng form data
+        //     var form_data = new FormData();
+        //     //thêm files vào trong form data
+        //     form_data.append('productImg', file_data);
+        //     console.log(form_data);
+
+        var myImg = $('#productImgChoice');
+        form_data = new FormData();
+        if(myImg.prop('files').length > 0)
+        {
+            file =myImg.prop('files')[0];
+            form_data.append("productImg", file);
+        }
+
+            $.ajax({
+                url :"../dashboard/XuLy/uploadProduct.php",
+                method:"POST",
+                data :{ 
+                        do : $do,
+                        productId : $productId,
+                        productName : $productName,
+                        productCetorgry : $productCetorgry,
+                        productBrand : $productBrand,
+                        productPrice : $productPrice,
+                        productAmount : $productAmount,
+                        productDescription : $productDescription,
+                        form_data
+                        },
+                // processData: false,
+                success:function(data)
+                {
+                    console.log(data);
+                    // data = JSON.parse(data);
+                    // $("#"+userId+"-authen").html(data.authentication);
+                    // // alert("Done");
+                    // reloadComboBox("#"+userId+"-row");
+                    // window.location.reload();
+                }
+            })
+        // }
+        // else {
+        //     alert("Chỉ up file hình ");
+        // }
+    }
+
     function blockProduct(productId,state)
     {
         $do = "block";

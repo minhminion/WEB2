@@ -25,7 +25,6 @@
                         <i class="fas fa-chart-bar"></i>Hóa đơn</a>
                     <span class="inbox-num">
                         <?php
-                            require("./../XuLy/conSQL.php");
                             $sql = 'SELECT * FROM receipt WHERE receipt.status=0';
                             $rs = conSQL :: executeQuery($sql);
                             echo mysqli_num_rows($rs);

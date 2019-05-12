@@ -3,46 +3,10 @@
 
 <head>
     <?php 
+        require("./../XuLy/conSQL.php");
         include("./model/head_css.php") 
     ?>
 </head>
-<div class="modal fade" id="userEdit" role="dialog" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-    <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-            <h4 class="modal-title">Chỉnh sửa</h4>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <div class="user-edit-error"></div>
-            <div class="modal-body">
-            <form id="userEdit-form">
-                <div class="row">
-                    <input type="hidden" name="userId" class="form-control" value="" required="" placeholder="Nguyễn Văn">
-                    <div class="col-md-12 mb-3">
-                        <label for="user">Họ<span>*</span></label>
-                        <input type="text" name="firstName" class="form-control" value="" required="" placeholder="Nguyễn Văn">
-                    </div>
-                    <div class="form-group col-md-12 mb-3">
-                        <label for="password">Tên<span>*</span></label>
-                        <input type="text" name="lastName" class="form-control" value="" required="" placeholder="A">
-                    </div>
-                    <div class="col-md-12 mb-3">
-                        <label for="user">Email<span>*</span></label>
-                        <input type="text" name="email" class="form-control"  value="" required="" placeholder="abc@example.com">
-                    </div>
-                    <div class="col-md-12 mb-3">
-                        
-                    </div>
-                    <div class="col-md-12 mb-3 mt-3">
-                        <input type="submit" class="form-control" value="Xác nhận">
-                    </div>
-                </div>
-            </form>
-            </div>
-        </div>
-    </div>
-</div>
 
 <body class="animsition">
     <div class="page-wrapper">

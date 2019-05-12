@@ -3,48 +3,102 @@
 
 <head>
     <?php 
+        require("./../XuLy/conSQL.php");
         include("./model/head_css.php") 
     ?>
 </head>
-<div class="modal fade" id="userEdit" role="dialog" tabindex="-1" aria-hidden="true">
+
+
+<body class="animsition">
+<div class="modal fade" id="productEdit" role="dialog" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
     <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
-            <h4 class="modal-title">Chỉnh sửa</h4>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Chỉnh sửa</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
-            <div class="user-edit-error"></div>
-            <div class="modal-body">
-            <form id="userEdit-form">
-                <div class="row">
-                    <input type="hidden" name="userId" class="form-control" value="" required="" placeholder="Nguyễn Văn">
-                    <div class="col-md-12 mb-3">
-                        <label for="user">Họ<span>*</span></label>
-                        <input type="text" name="firstName" class="form-control" value="" required="" placeholder="Nguyễn Văn">
-                    </div>
-                    <div class="form-group col-md-12 mb-3">
-                        <label for="password">Tên<span>*</span></label>
-                        <input type="text" name="lastName" class="form-control" value="" required="" placeholder="A">
-                    </div>
-                    <div class="col-md-12 mb-3">
-                        <label for="user">Email<span>*</span></label>
-                        <input type="text" name="email" class="form-control"  value="" required="" placeholder="abc@example.com">
-                    </div>
-                    <div class="col-md-12 mb-3">
-                        
-                    </div>
-                    <div class="col-md-12 mb-3 mt-3">
-                        <input type="submit" class="form-control" value="Xác nhận">
+            <div class="product-error"></div>
+                <div class="modal-body">
+                    <form id="product-form">
+                        <div class="row">
+                        <div class="form-group col-md-12 mb-3">
+                                <label for="">Mã sản phẩm:</label>
+                                <input type="text" name="id" class="form-control" placeholder="Mã sản phẩm" id="">
+                            </div>
+                            <div class="form-group col-md-12 mb-3">
+                                <label for="">Tên sản phẩm:</label>
+                                <input type="text" name="name" class="form-control" placeholder="Tên sản phẩm" id="">
+                            </div>
+                            <div class="form-group col-md-6 mb-3">
+                                <label for="">Loại sản phẩm:</label>
+                                <select name="category" class="form-control" id="productCetorgry">
+                                    <?php
+                                        $output="";
+                                        $sql = 'SELECT * FROM cetorgry WHERE 1';
+                                        // echo $sql;
+                                        $rs = conSQL::executeQuery($sql);
+                                        while($row = mysqli_fetch_array($rs))
+                                        {
+                                            $output .= '<option value="'.$row['cetorgryID'].'">'.$row['cetorgryName'].'</option>';
+                                        }
+                                        echo $output;
+                                    ?>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6 mb-3">
+                                <label for="">Thương hiệu:</label>
+                                <select name="brand" class="form-control" id="productBrand">
+                                    <?php
+                                        $output="";
+                                        $sql = 'SELECT * FROM brand WHERE 1';
+                                        // echo $sql;
+                                        $rs = conSQL::executeQuery($sql);
+                                        while($row = mysqli_fetch_array($rs))
+                                        {
+                                            $output .= '<option value="'.$row['brandID'].'">'.$row['brandName'].'</option>';
+                                        }
+                                        echo $output;
+                                    ?>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-12 mb-3">
+                                <label for="">Ảnh sản phẩm:</label>
+                                <img class="mx-auto d-block" id="productImg" width="320">
+                                <input type="file" accept=".jpeg,.jpg,.png,.gif" name="img" id="productImgChoice" class="form-control">
+                            </div>
+                            <div class="form-group col-md-7 mb-3">
+                                <label for="">Giá sản phẩm:</label>
+                                <input type="text" name="price" class="form-control" placeholder="Nhập giá" id="">
+                            </div>
+                            <div class="form-group col-md-5 mb-3">
+                                <label for="">Số lượng:</label>
+                                <input type="text" name="amount" class="form-control" placeholder="Nhập số lượng" id="">
+                            </div>
+                            <div class="form-group col-md-12 mb-3">
+                                <label for="description">Mô tả</label>
+                                <textarea class="form-control rounded-0" id="description" rows="5"></textarea>
+                            </div>
+                            <!-- <div class="col-md-12 mb-3">
+                                <label for="">Thứ tự:</label>
+                                <input type="text" name="ordernum" id=""class="form-control" placeholder="Thứ tự">
+                            </div> -->
+                            <!-- <div class="col-md-12 mb-3">
+                                <label for="" style="display:block;">Trạng thái:</label>
+                                <label for="rad1" class="radio-inline"><input type="radio" checked="check" name="status" id="rad1" value="1">Hiển thị</label>
+                                <label for="rad2" class="radio-inline"><input type="radio" name="status" id="rad2" value="0">Không hiển thị</label>
+                            </div> -->
+                            <div class="col-md-12 mb-3">
+                                <input type="submit" value="Thêm mới" name="submit" class="form-control btn btn-primary"> 
+                            </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
-            </form>
             </div>
         </div>
     </div>
 </div>
-
-<body class="animsition">
     <div class="page-wrapper">
         <?php include("./model/menuBar.php") ?>
         <!-- PAGE CONTAINER-->
@@ -129,7 +183,7 @@
                                         </div>
                                     </div>
                                     <div class="table-data__tool-right">
-                                        <button class="au-btn au-btn-icon au-btn--green au-btn--small">
+                                        <button class="au-btn au-btn-icon au-btn--green au-btn--small" data-toggle="modal" data-target="#productEdit">
                                             <i class="zmdi zmdi-plus"></i>Thêm sản phẩm</button>
                                     </div>
                                 </div>

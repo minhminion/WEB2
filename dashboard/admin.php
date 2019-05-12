@@ -3,6 +3,7 @@
 
 <head>
     <?php 
+        require("./../XuLy/conSQL.php");
         include("./model/head_css.php");
     ?>
 </head>
