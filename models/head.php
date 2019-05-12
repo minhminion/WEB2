@@ -22,3 +22,5 @@
 
 <script src="./js/sweetalert2.min.js"></script>
 <link rel="stylesheet" href="./css/sweetalert2.min.css">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.min.css">

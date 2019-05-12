@@ -85,7 +85,6 @@
         </div>
     </div>
 </div>
- 
 <!-- Form đăng xuất -->
 <div class="modal fade" id="logout" role="dialog" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
@@ -100,7 +99,7 @@
                 $output = include("..//WEB2/XuLy/header.php");
                 echo $output->userInfo;
             ?> 
-            <button type="button" class="btn btn-primary mb-1">Xem các đơn hàng</button>
+            <a class="btn btn-primary mb-1" href="./customerReceipt.php">Xem các đơn hàng</a>
             <button type="button" onclick="editUser()" class="btn btn-primary mb-1">Sửa thông tin</button>
             <button type="button" onclick="changePass()" class="btn btn-primary mb-1">Thay mật khẩu</button>
             <form id="logout-form">
@@ -190,7 +189,6 @@
         </div>
     </div>
 </div>
-
 <header class="header_area">
     <div class="classy-nav-container breakpoint-off d-flex align-items-center justify-content-between">
         <!-- Classy Menu -->

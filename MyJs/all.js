@@ -271,6 +271,7 @@ $(document).ready(function(){
                         description : $description},
                 success:function(data)
                 {
+                    console.log(data);
                     data = JSON.parse(data);
                     console.log(data);
                     if(data.isBagEmpty == true)
@@ -289,7 +290,7 @@ $(document).ready(function(){
                         $(".checkOutAddress-error").html(data.error);
                     }
                     else{
-                        sweetAlert("success","Cám ơn quý khách đã mua hàng");
+                        reloadAfterAlert("success","Cám ơn quý khách đã mua hàng");
                     }
                 }
             })

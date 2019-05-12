@@ -18,7 +18,9 @@
     $description = $_POST['description'];
 
     $receiptSQL="";
-
+    $receiptDetailSQL=array();
+    $result="";
+    
     if(isset($_SESSION['isLOGIN']) && $_SESSION['isLOGIN'] == 1)
     {
         $isLogin = true;
@@ -67,18 +69,25 @@
         && $isBagEmpty == false
         && $isAddressError == false)
     {
+        $id = IdMax();
         $total = 0;
         foreach($_SESSION['id'] as $key => $item)
         {
             $total += $item->price*$item->quality;
-            $receiptDetailSQL ='INSERT INTO receiptdetail VALUES ("","'.$userName.'","'.$firstName.'","'.$lastName.'","'.$country.'","'.$phone.'","'.$email.'","'.$description.'")';
+            $SQL ='INSERT INTO receiptdetail VALUES ("'.$id.'","'.$item->id.'","'.$item->name.'",'.$item->quality.','.$item->price.','.($item->price*$item->quality).')';
+            array_push($receiptDetailSQL,$SQL);
         }
-
         $total = $total/100*(100-15);
-        $receiptSQL='INSERT INTO receipt VALUES ("","'.$userName.'","'.$firstName.'","'.$lastName.'","'.$country.'","'.$street_address.'",
-                                                    "'.$phone.'","'.$email.'","'.$description.'",'.$total.',"'.date("Y-m-d H:i:s").'")';
+        $receiptSQL='INSERT INTO receipt VALUES ("'.$id.'","'.$userName.'","'.$firstName.'","'.$lastName.'","'.$country.'","'.$street_address.'",
+                                                    "'.$phone.'","'.$email.'","'.$description.'",'.$total.',"'.date("Y-m-d H:i:s").'","0")';
         conSQL :: executeQuery($receiptSQL);
-
+        
+        foreach($receiptDetailSQL as $s)
+        {
+            conSQL :: executeQuery($s);
+            $result = $s;
+        }
+        unset($_SESSION['id']);
 
     }
 
@@ -91,7 +100,22 @@
     $myObj->isBagEmpty = $isBagEmpty;
     $myObj->isAddressError = $isAddressError;
     $myObj->error = $error;
-    $myObj->sql = $receiptSQL;
+    $myObj->sql = $result;
 
     echo json_encode($myObj);
+
+    function IdMax()
+    {
+        $sql = 'SELECT receiptID FROM receipt';
+        $rs = conSQL :: executeQuery($sql);
+        $id = 0;
+        while($row = mysqli_fetch_array($rs))
+        {
+            if($row['receiptID'] > $id)
+            {
+                $id = $row['receiptID'];
+            } 
+        }
+        return $id+1;
+    }
 ?>
