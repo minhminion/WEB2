@@ -10,6 +10,7 @@
 
 
 <body class="animsition">
+<!-- FORM ADD PRODUCT -->
 <div class="modal fade" id="productEdit" role="dialog" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
     <!-- Modal content-->
@@ -24,7 +25,7 @@
                         <div class="row">
                             <div class="form-group col-md-12 mb-3">
                                 <label for="">Mã sản phẩm:</label>
-                                <input type="text" name="id" class="form-control" placeholder="Mã sản phẩm" id="">
+                                <input type="text" name="id" class="form-control" placeholder="Mã sản phẩm" id="productId">
                             </div>
                             <div class="form-group col-md-12 mb-3">
                                 <label for="">Tên sản phẩm:</label>
@@ -80,7 +81,7 @@
                                 <textarea class="form-control rounded-0" id="description" name="description" rows="5"></textarea>
                             </div>
                             <div class="col-md-12 mb-3">
-                                <input type="submit" value="Thêm mới" name="submit" class="form-control btn btn-primary"> 
+                                <input type="submit" value="Thêm mới" do="add" name="submit" class="form-control btn btn-primary"> 
                             </div>
                         </div>
                     </form>
@@ -173,7 +174,7 @@
                                         </div>
                                     </div>
                                     <div class="table-data__tool-right">
-                                        <button class="au-btn au-btn-icon au-btn--green au-btn--small" data-toggle="modal" data-target="#productEdit">
+                                        <button class="au-btn au-btn-icon au-btn--green au-btn--small btn-product-edit" data-toggle="modal" data-target="#productEdit">
                                             <i class="zmdi zmdi-plus"></i>Thêm sản phẩm</button>
                                     </div>
                                 </div>

@@ -50,8 +50,10 @@
                 $img ="noImage.png";
             }
             else{
-                move_uploaded_file($_FILES['image']['tmp_name'], './../../img/sanpham/'.$_FILES['image']['name']);
-                $img=$_FILES['image']['name'];
+                $file_extensions = strtolower(pathinfo($_FILES['image']['name'],PATHINFO_EXTENSION));
+                $imgName = $productId.$file_extensions;
+                move_uploaded_file($_FILES['image']['tmp_name'], './../../img/sanpham/'.$imgName);
+                $img=$imgName;
             }
         }
 
@@ -60,11 +62,18 @@
             $complete = true;
             $sql='INSERT INTO product VALUES ("'.$productId.'" , "'.$productName.'" , "'.$productDescription.'" , "'.$productPrice.'" ,"'.$productAmount.'" ,"'.$productCetorgry.'" ,"'.$productBrand.'","'.$img.'",1)';
             // echo $sql;
-            // if($do == 'add')
-            // {
-            //     $sql = 'UPDATE product SET firstName ="'.$firstName.'", lastName ="'.$lastName.'", email="'.$email.'" WHERE userID ="'.$userId.'"';
-            // }
-
+            if($do == 'edit')
+            {
+                $sql = 'UPDATE product SET 
+                        productName="'.$productName.'",
+                        productDescription="'.$productDescription.'",
+                        productPrice="'.$productPrice.'",
+                        productAmount="'.$productAmount.'",
+                        productCetorgry="'.$productCetorgry.'",
+                        productBrand="'.$productBrand.'",
+                        IMG="'.$img.'" 
+                        WHERE productID="'.$productId.'" ';
+            }
             conSQL :: executeQuery($sql);
         }
     }

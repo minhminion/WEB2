@@ -89,7 +89,7 @@
                                 <button class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Send">
                                     <i class="zmdi zmdi-mail-send"></i>
                                 </button>
-                                <button class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit">
+                                <button productid="'.$row['productID'].'" class="item edit-product" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit">
                                     <i class="zmdi zmdi-edit"></i>
                                 </button>
                                 <button id="'.$row['productID'].'-block" class="item block-product" data-toggle="tooltip" state="'.$state.'" data-placement="top" title="" productid="'.$row['productID'].'" data-original-title="Delete">

@@ -188,12 +188,16 @@ $(document).ready(function()
         // var form = $(this);
         var form_data = new FormData($(this)[0]);
         console.log(form_data);
-        $do = 'add';
-    
+        $do = $('#product-form').find('input[name="submit"]').attr("do");
+        console.log($do);
+        
         $.ajax({
             url :"./../dashboard/XuLy/uploadProduct.php",
             method:"POST",
-            data :form_data,
+            data :{
+                    do : $do,
+                    form_data,
+                },
             dataType:'json',
             cache : false,
             contentType:false,
@@ -217,6 +221,60 @@ $(document).ready(function()
         // return false;
     })
 
+    $(document).on('click','.edit-product',function(e)
+    {
+        $productId = $(this).attr('productid');
+
+        $.ajax({
+            url:"../dashboard/XuLy/productInfo.php",
+            method:'POST',
+            data: {
+                    id : $productId,
+            },
+            success:function(data)
+            {
+                data = JSON.parse(data);
+                console.log(data);
+
+                $('#product-form').find('input[name="id"]').val(data.id);
+                // $('#productId').attr('disable');
+                document.getElementById('productId').disabled = true;
+            
+                $('#product-form').find('input[name="name"]').val(data.name);
+                $('#productCetorgry').val(data.category);
+                $('#productBrand').val(data.brand);
+                $('#product-form').find('input[name="price"]').val(data.price);
+                $('#product-form').find('input[name="amount"]').val(data.amount);
+                $('#description').val(data.description);
+                $('#product-form').find('input[name="submit"]').val("Xác nhận");
+                $('#product-form').find('input[name="submit"]').attr("do","edit");
+
+                $('#productEdit').modal("toggle");
+
+            }
+        })
+    })
+
+    $(document).on('click','.btn-product-edit',function()
+    {
+        refeshProductEdit();
+    })
+
+    function refeshProductEdit()
+    {
+        $('#product-form').find('input[name="id"]').val("");
+        document.getElementById('productId').disabled = false;
+
+        $('#product-form').find('input[name="name"]').val("");
+        $('#productCetorgry').val("001");
+        $('#productBrand').val("001");
+        $('#product-form').find('input[name="price"]').val("");
+        $('#product-form').find('input[name="amount"]').val("");
+        $('#description').val("");
+
+        $('#product-form').find('input[name="submit"]').val("Thêm");
+        $('#product-form').find('input[name="submit"]').attr("do","add");
+    }
 
     function blockProduct(productId,state)
     {
