@@ -3,6 +3,8 @@ $(document).ready(function()
     isLogin();
     pagingProduct();
     activeMenuItem();
+    statistic();
+
 
     function pagingProduct(page)
     {
@@ -21,7 +23,7 @@ $(document).ready(function()
             datatype:"json",
             success:function(data)
             {
-                console.log(data);
+                // console.log(data);
                 data = JSON.parse(data);
                 $(".productTable").html(data.output);
                 $(".productPaging").html(data.paging);
@@ -194,10 +196,7 @@ $(document).ready(function()
         $.ajax({
             url :"./../dashboard/XuLy/uploadProduct.php",
             method:"POST",
-            data :{
-                    do : $do,
-                    form_data,
-                },
+            data :form_data,
             dataType:'json',
             cache : false,
             contentType:false,
@@ -236,9 +235,11 @@ $(document).ready(function()
                 data = JSON.parse(data);
                 console.log(data);
 
+                
+                $('#product-form').find('input[name="do"]').val("edit");
+
                 $('#product-form').find('input[name="id"]').val(data.id);
-                // $('#productId').attr('disable');
-                document.getElementById('productId').disabled = true;
+                document.getElementById('productId').setAttribute("readonly", true);
             
                 $('#product-form').find('input[name="name"]').val(data.name);
                 $('#productCetorgry').val(data.category);
@@ -260,10 +261,176 @@ $(document).ready(function()
         refeshProductEdit();
     })
 
+    function statistic()
+    {
+        var chartData="";
+        $.ajax({
+            url : '../dashboard/XuLy/statistic.php',
+            method : 'POST',
+            success:function(data)
+            {
+                console.log(data);
+                chartData = JSON.parse(data);
+                $("#my-recent-rep-chart").data('val',chartData.value);
+                $("#my-singelBarChart").data('val',chartData.value);
+            },
+            complete:function(data)
+            {
+                console.log(chartData)
+                DrawMyChart(chartData.label);
+                DrawMyChart1(chartData.label);
+            }
+        })
+
+    }
+
+    function DrawMyChart(myLabel)
+    {
+        const brandProduct = 'rgba(0,181,233,0.8)'
+        const brandService = 'rgba(0,173,95,0.8)'
+        
+        var elements = 10
+        var data1 = [52, 60, 55, 50, 65, 80, 57, 70, 105, 115, 90, 100, 20]
+        var data2 = [102, 70, 80, 100, 56, 53, 80, 75, 65, 90, 80, 70, 60]
+        
+        var label = myLabel.split(',');
+
+        var ctx = document.getElementById("my-recent-rep-chart");
+        var data = $("#my-recent-rep-chart").data('val');
+        data = data.split(",");
+
+        if (ctx) {
+        ctx.height = 450;
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+            labels: label,
+            datasets: [
+                {
+                label: 'My First dataset',
+                backgroundColor: brandService,
+                borderColor: 'transparent',
+                pointHoverBackgroundColor: '#fff',
+                borderWidth: 0,
+                data: data
+
+                },
+                {
+                label: 'My Second dataset',
+                backgroundColor: brandProduct,
+                borderColor: 'transparent',
+                pointHoverBackgroundColor: '#fff',
+                borderWidth: 0,
+                data: data2
+
+                }
+            ]
+            },
+            options: {
+            maintainAspectRatio: true,
+            legend: {
+                display: false
+            },
+            responsive: true,
+            scales: {
+                xAxes: [{
+                gridLines: {
+                    drawOnChartArea: true,
+                    color: '#f2f2f2'
+                },
+                ticks: {
+                    fontFamily: "Poppins",
+                    fontSize: 12
+                }
+                }],
+                yAxes: [{
+                ticks: {
+                    beginAtZero: true,
+                    maxTicksLimit: 5,
+                    stepSize: 50,
+                    max: 150,
+                    fontFamily: "Poppins",
+                    fontSize: 12
+                },
+                gridLines: {
+                    display: true,
+                    color: '#f2f2f2'
+
+                }
+                }]
+            },
+            elements: {
+                point: {
+                radius: 0,
+                hitRadius: 10,
+                hoverRadius: 4,
+                hoverBorderWidth: 3
+                }
+            }
+            }
+        });
+        }
+    }
+
+    function DrawMyChart1(myLabel)
+    {
+        var ctx = document.getElementById("my-singelBarChart");
+
+        var label = myLabel.split(',');
+
+        var ctx = document.getElementById("my-singelBarChart");
+        var data = $("#my-singelBarChart").data('val');
+        data = data.split(",");
+        
+        if (ctx) {
+        ctx.height = 450;
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+            labels: label,
+            datasets: [
+                {
+                label: "My First dataset",
+                data: data,
+                borderColor: "rgba(0, 123, 255, 0.9)",
+                borderWidth: "0",
+                backgroundColor: "rgba(0, 123, 255, 0.5)"
+                }
+            ]
+            },
+            options: {
+            legend: {
+                position: 'top',
+                labels: {
+                fontFamily: 'Poppins'
+                }
+
+            },
+            scales: {
+                xAxes: [{
+                ticks: {
+                    fontFamily: "Poppins"
+
+                }
+                }],
+                yAxes: [{
+                ticks: {
+                    beginAtZero: true,
+                    fontFamily: "Poppins"
+                }
+                }]
+            }
+            }
+        });
+        }
+    } 
+
     function refeshProductEdit()
     {
+        $('#product-form').find('input[name="do"]').val("add");
+
         $('#product-form').find('input[name="id"]').val("");
-        document.getElementById('productId').disabled = false;
+        document.getElementById('productId').removeAttribute('readonly');
 
         $('#product-form').find('input[name="name"]').val("");
         $('#productCetorgry').val("001");

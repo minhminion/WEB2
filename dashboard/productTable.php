@@ -22,6 +22,7 @@
             <div class="product-error"></div>
                 <div class="modal-body">
                     <form id="product-form" method="POST" action="./XuLy/uploadProduct.php" enctype="multipart/form-data">
+                        <input type='hidden' name='do' value="add">
                         <div class="row">
                             <div class="form-group col-md-12 mb-3">
                                 <label for="">Mã sản phẩm:</label>

@@ -135,15 +135,18 @@
                                             <div class="rs-select2--dark rs-select2--sm">
                                                 <select class="js-select2 au-select-dark" name="time">
                                                     <option selected="selected">All Time</option>
-                                                    <option value="">By Month</option>
-                                                    <option value="">By Day</option>
+                                                    <option value="month">By Month</option>
+                                                    <option value="day">By Day</option>
                                                 </select>
                                                 <div class="dropDownSelect2"></div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="recent-report__chart">
-                                        <canvas id="recent-rep2-chart"></canvas>
+                                        <canvas id="my-singelBarChart" data-val=""></canvas>
+                                    </div>
+                                    <div class="recent-report__chart">
+                                        <canvas id="my-recent-rep-chart" data-val=""></canvas>
                                     </div>
                                 </div>
                                 <!-- END RECENT REPORT 2 -->

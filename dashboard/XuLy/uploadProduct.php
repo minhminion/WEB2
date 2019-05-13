@@ -1,8 +1,8 @@
 <?php
     require('./../../XuLy/conSQL.php');    
 
-    $complete= false;
-    $error ="";
+    $complete = false;
+    $error = "";
 
     $productId="";
     $productName="";
@@ -15,7 +15,7 @@
 
     if($_POST)
     {
-        // $do = $_POST['do'];
+        $do = $_POST['do'];
         $productId = $_POST['id'];
         $productName = $_POST['name'];
         $productCetorgry = $_POST['category'];
@@ -51,12 +51,13 @@
             }
             else{
                 $file_extensions = strtolower(pathinfo($_FILES['image']['name'],PATHINFO_EXTENSION));
-                $imgName = $productId.$file_extensions;
+                $imgName = $productId.".".$file_extensions;
                 move_uploaded_file($_FILES['image']['tmp_name'], './../../img/sanpham/'.$imgName);
                 $img=$imgName;
             }
         }
 
+        
         if(empty($error))
         {
             $complete = true;
@@ -77,17 +78,17 @@
             conSQL :: executeQuery($sql);
         }
     }
-
-    
-
-    $error = '<div class="alert alert-danger" role="alert" data-aos="fade-left">
-                    '.$error.'
-                </div>';
-
+            
+            
+            
+    $error = '<div class="alert alert-danger" role="alert" data-aos="fade-left">'.$error.'</div>';
+            
+            
+            
     $myObj = new stdClass();
+    $myObj->complete1 = $error;
     $myObj->complete = $complete;
     $myObj->error = $error;
-
     echo json_encode($myObj);
     
 
