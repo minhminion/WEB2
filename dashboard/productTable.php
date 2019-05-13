@@ -20,9 +20,9 @@
             </div>
             <div class="product-error"></div>
                 <div class="modal-body">
-                    <form id="product-form">
+                    <form id="product-form" method="POST" action="./XuLy/uploadProduct.php" enctype="multipart/form-data">
                         <div class="row">
-                        <div class="form-group col-md-12 mb-3">
+                            <div class="form-group col-md-12 mb-3">
                                 <label for="">Mã sản phẩm:</label>
                                 <input type="text" name="id" class="form-control" placeholder="Mã sản phẩm" id="">
                             </div>
@@ -65,35 +65,25 @@
                             <div class="form-group col-md-12 mb-3">
                                 <label for="">Ảnh sản phẩm:</label>
                                 <img class="mx-auto d-block" id="productImg" width="320">
-                                <input type="file" accept=".jpeg,.jpg,.png,.gif" name="img" id="productImgChoice" class="form-control">
+                                <input type="file" accept=".jpeg,.jpg,.png,.gif" name="image" id="productImgChoice" class="form-control">
                             </div>
                             <div class="form-group col-md-7 mb-3">
                                 <label for="">Giá sản phẩm:</label>
-                                <input type="text" name="price" class="form-control" placeholder="Nhập giá" id="">
+                                <input type="number" name="price" class="form-control" placeholder="Nhập giá" id="">
                             </div>
                             <div class="form-group col-md-5 mb-3">
                                 <label for="">Số lượng:</label>
-                                <input type="text" name="amount" class="form-control" placeholder="Nhập số lượng" id="">
+                                <input type="number" name="amount" class="form-control" placeholder="Nhập số lượng" id="">
                             </div>
                             <div class="form-group col-md-12 mb-3">
                                 <label for="description">Mô tả</label>
-                                <textarea class="form-control rounded-0" id="description" rows="5"></textarea>
+                                <textarea class="form-control rounded-0" id="description" name="description" rows="5"></textarea>
                             </div>
-                            <!-- <div class="col-md-12 mb-3">
-                                <label for="">Thứ tự:</label>
-                                <input type="text" name="ordernum" id=""class="form-control" placeholder="Thứ tự">
-                            </div> -->
-                            <!-- <div class="col-md-12 mb-3">
-                                <label for="" style="display:block;">Trạng thái:</label>
-                                <label for="rad1" class="radio-inline"><input type="radio" checked="check" name="status" id="rad1" value="1">Hiển thị</label>
-                                <label for="rad2" class="radio-inline"><input type="radio" name="status" id="rad2" value="0">Không hiển thị</label>
-                            </div> -->
                             <div class="col-md-12 mb-3">
                                 <input type="submit" value="Thêm mới" name="submit" class="form-control btn btn-primary"> 
                             </div>
-                            </div>
-                        </form>
-                    </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

@@ -26,6 +26,8 @@
     <!-- Main JS-->
     <script src="js/all.js"></script>
     <script src="js/main.js"></script>
+
+    <script src="./../js/sweetalert2.min.js"></script>
     <script src="../js/aos.js"></script>
     <script>
         AOS.init();

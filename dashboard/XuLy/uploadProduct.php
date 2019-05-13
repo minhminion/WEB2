@@ -1,4 +1,7 @@
 <?php
+    require('./../../XuLy/conSQL.php');    
+
+    $complete= false;
     $error ="";
 
     $productId="";
@@ -7,31 +10,76 @@
     $productBrand="";
     $productPrice="";
     $productAmount="";
-    $img="abc";
+    $productDescription="";
+    $img="";
 
-    if  (isset($_POST['productId']) && isset($_POST['productName']) && isset($_POST['productCetorgry']) && 
-        isset($_POST['productBrand']) && isset($_POST['productPrice']) && isset($_POST['productAmount']))
+    if($_POST)
     {
-        $img = "OK";
-        $productId = $_POST['productId'];
-        $productName = $_POST['productName'];
-        $productCetorgry = $_POST['productCetorgry'];
-        $productBrand = $_POST['productBrand'];
-        $productPrice = $_POST['productPrice'];
-        $productAmount = $_POST['productAmount'];
+        // $do = $_POST['do'];
+        $productId = $_POST['id'];
+        $productName = $_POST['name'];
+        $productCetorgry = $_POST['category'];
+        $productBrand = $_POST['brand'];
+        $productPrice = $_POST['price'];
+        $productAmount = $_POST['amount'];
+        $productDescription = $_POST['description'];
 
-        if(isset($_FILES['productImg']))
+        if(empty($productId)){
+            $error = " Vui lòng nhập mã sản phẩm";
+        } 
+        else if(empty($productName))
         {
-            if($_FILES['productImg']["error"] > 0)
+            $error = "Vui lòng tên sản phẩm";
+        } 
+        else if(!preg_match("/^[a-zA-Z _ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ]{1,}+$/",$productName))
+        {
+            $error = "Tên sản không có kí tự đặc biệt";
+        }
+        else if(empty($productPrice))
+        {
+            $error = "Vui lòng nhập giá sản phẩm";
+        } 
+        else if(empty($productAmount))
+        {
+            $error = "Vui lòng điển số lượng";
+        } 
+        else if (isset($_FILES['image']))
+        {
+            if ($_FILES['image']['error'] > 0)
             {
-                $error ="Lỗi hình ảnh";
                 $img ="noImage.png";
             }
             else{
-                move_uploaded_file($_FILES['productImg']['tmp_name'],'./'.$_FILES['productImg']['name']);
-                $img = $_FILES['productImg']['name'];
+                move_uploaded_file($_FILES['image']['tmp_name'], './../../img/sanpham/'.$_FILES['image']['name']);
+                $img=$_FILES['image']['name'];
             }
         }
+
+        if(empty($error))
+        {
+            $complete = true;
+            $sql='INSERT INTO product VALUES ("'.$productId.'" , "'.$productName.'" , "'.$productDescription.'" , "'.$productPrice.'" ,"'.$productAmount.'" ,"'.$productCetorgry.'" ,"'.$productBrand.'","'.$img.'",1)';
+            // echo $sql;
+            // if($do == 'add')
+            // {
+            //     $sql = 'UPDATE product SET firstName ="'.$firstName.'", lastName ="'.$lastName.'", email="'.$email.'" WHERE userID ="'.$userId.'"';
+            // }
+
+            conSQL :: executeQuery($sql);
+        }
     }
-    echo $img;
-?>
+
+    
+
+    $error = '<div class="alert alert-danger" role="alert" data-aos="fade-left">
+                    '.$error.'
+                </div>';
+
+    $myObj = new stdClass();
+    $myObj->complete = $complete;
+    $myObj->error = $error;
+
+    echo json_encode($myObj);
+    
+
+    ?>

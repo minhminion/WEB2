@@ -181,79 +181,42 @@ $(document).ready(function()
         }
     })
 
-    $(document).on("submit","#product-form",function(event)
+    $(document).on('submit','#product-form',function(e)
     {
-        event.preventDefault();
-        uploadProduct("add");
+        e.preventDefault();
+
+        // var form = $(this);
+        var form_data = new FormData($(this)[0]);
+        console.log(form_data);
+        $do = 'add';
+    
+        $.ajax({
+            url :"./../dashboard/XuLy/uploadProduct.php",
+            method:"POST",
+            data :form_data,
+            dataType:'json',
+            cache : false,
+            contentType:false,
+            processData: false,
+            // async:false,
+            success:function(data)
+            {
+                console.log(data);
+                if(data.complete == true)
+                {
+                    $("#productEdit").modal('toggle');
+                    sweetAlert("success","Thêm thành công");
+                }
+                else
+                {
+                    $(".product-error").html(data.error);
+                }
+            }
+        })
+
+        // return false;
     })
 
-    function uploadProduct(make)
-    {
-        $do = make;
-        $input = $("#product-form");
-        $productId = $input.find("input[name='id']").val();
-        $productName = $input.find("input[name='name']").val();
-        $productCetorgry = $("#productCetorgry").val();
-        $productBrand = $("#productBrand").val();
-        $productPrice= $input.find("input[name='price']").val();
-        $productAmount = $input.find("input[name='amount']").val();
-        $productDescription = $input.find("input[name='description']").val();
-        $img="./../img/logoG.png";
-
-        // var file_data = $('#productImgChoice').prop('files')[0];
-        // console.log(file_data);
-        // //lấy ra kiểu file
-        // var type = file_data.type;
-        // console.log(type);
-        // //Xét kiểu file được upload
-        // var match = ["image/gif", "image/png", "image/jpg", "image/jpeg"];
-        // //kiểm tra kiểu file
-        // if (type == match[0] || type == match[1] || type == match[2] || type == match[3])
-        // {
-        //     //khởi tạo đối tượng form data
-        //     var form_data = new FormData();
-        //     //thêm files vào trong form data
-        //     form_data.append('productImg', file_data);
-        //     console.log(form_data);
-
-        var myImg = $('#productImgChoice');
-        form_data = new FormData();
-        if(myImg.prop('files').length > 0)
-        {
-            file =myImg.prop('files')[0];
-            form_data.append("productImg", file);
-        }
-
-            $.ajax({
-                url :"../dashboard/XuLy/uploadProduct.php",
-                method:"POST",
-                data :{ 
-                        do : $do,
-                        productId : $productId,
-                        productName : $productName,
-                        productCetorgry : $productCetorgry,
-                        productBrand : $productBrand,
-                        productPrice : $productPrice,
-                        productAmount : $productAmount,
-                        productDescription : $productDescription,
-                        form_data
-                        },
-                // processData: false,
-                success:function(data)
-                {
-                    console.log(data);
-                    // data = JSON.parse(data);
-                    // $("#"+userId+"-authen").html(data.authentication);
-                    // // alert("Done");
-                    // reloadComboBox("#"+userId+"-row");
-                    // window.location.reload();
-                }
-            })
-        // }
-        // else {
-        //     alert("Chỉ up file hình ");
-        // }
-    }
 
     function blockProduct(productId,state)
     {
@@ -375,5 +338,15 @@ $(document).ready(function()
                 $(".receipt").addClass("active");
             break;
         }
+    }
+
+    function sweetAlert(type,message)
+    {
+        Swal.fire(
+            {
+                type: type,
+                title: message,
+            }
+        )
     }
 })

@@ -30,4 +30,5 @@
     <!-- Main CSS-->
     <link href="../css/theme.css" rel="stylesheet" media="all">
 
-    <link rel="stylesheet" href="../css/aos.css">
+    <link rel="stylesheet" href="./../css/aos.css">
+    <link rel="stylesheet" href="./../css/sweetalert2.min.css">
