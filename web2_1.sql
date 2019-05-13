@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 12, 2019 lúc 04:06 AM
+-- Thời gian đã tạo: Th5 13, 2019 lúc 05:41 AM
 -- Phiên bản máy phục vụ: 10.1.36-MariaDB
 -- Phiên bản PHP: 7.2.10
 
@@ -144,7 +144,7 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`productID`, `productName`, `productDescription`, `productPrice`, `productAmount`, `productCetorgry`, `productBrand`, `IMG`, `state`) VALUES
-('001', 'Asus Cerberus', 'ANB%acas', 890000, 10, '001', '002', 'bp1.jpg', 1),
+('001', 'Asus Cerberus', 'ANB%acasaaadasdasdsadasdasdasdasdasdasdasdasd', 890000, 10, '001', '002', 'bp1.jpg', 1),
 ('002', 'Asus ROG Claymore', 'ANB%acas', 4490000, 10, '001', '002', 'bp2.jpg', 1),
 ('003', 'Asus ROG Strix Flare COD', 'ANB%acas', 4390000, 10, '001', '002', 'bp3.jpg', 1),
 ('004', 'Asus ROG Keypad Claymore Bond', 'ANB%acas', 1390000, 10, '001', '002', 'bp4.jpg', 1),
