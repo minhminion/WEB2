@@ -1,0 +1,15 @@
+int max = 0;
+        String s ="";
+        for(HoaDonDTO hd : dsHD)
+        {
+            int id = Integer.parseInt(hd.getMaHD());
+            if(id > max)
+            {
+                max = id;
+            }
+        }
+        for(int i = 0 ; i < 3-String.valueOf(max+1).length();i++ )
+        {
+            s+="0";
+        }
+        return s+(max+1);

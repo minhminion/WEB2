@@ -8,7 +8,7 @@
     ?>
 </head>
 
-<body class="animsition">
+<body class="animsition" id="stattstic">
     <div class="page-wrapper">
         <?php include("./model/menuBar.php") ?>
         <!-- PAGE CONTAINER-->

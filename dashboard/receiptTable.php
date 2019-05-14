@@ -54,8 +54,8 @@
                                         <div class="rs-select2--light rs-select2--md">
                                             <select class="js-select2 select2-hidden-accessible product-cetorgry" name="property" tabindex="-1" aria-hidden="true">
                                                 <option selected="selected" value="">Sắp xếp</option>
-                                                <option value="">Ngày</option>
-                                                <option value="">Tổng tiền</option>
+                                                <option value="date">Ngày</option>
+                                                <option value="total">Tổng tiền</option>
                                             </select>
                                             <div class="dropDownSelect2"></div>
                                         </div>
@@ -69,16 +69,6 @@
                                         </div>
                                         <button class="au-btn-filter product-filter">
                                             <i class="zmdi zmdi-filter-list"></i>Lọc</button>
-                                    </div>
-                                    <div class="col col-md-6">
-                                        <div class="input-group">
-                                            <div class="input-group-addon">Tên sản phẩm</div>
-                                            <input type="text" id="searchProduct" name="input3-group2" placeholder="Tìm kiếm ... " class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="table-data__tool-right">
-                                        <button class="au-btn au-btn-icon au-btn--green au-btn--small">
-                                            <i class="zmdi zmdi-plus"></i>Thêm sản phẩm</button>
                                     </div>
                                 </div>
                                 <div class="table-responsive m-b-40">
@@ -95,49 +85,11 @@
                                                 <th></th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <?php
-                                                $output="";        
-
-                                                $sql='SELECT * FROM receipt ';
-                                                $rs = conSQL :: executeQuery($sql);
-                                                while($row = mysqli_fetch_array($rs))
-                                                {
-                                                    $output.='  <tr>
-                                                                    <td>'.$row['receiptID'].'</td>
-                                                                    <td>'.$row['firstName'].' '.$row['lastName'].'</td>
-                                                                    <td>'.$row['userName'].'</td>
-                                                                    <td>'.$row['address'].'</td>
-                                                                    <td>'.number_format($row['receiptTotal'],0,".",".").'</td>
-                                                                    '.receiptState($row['status']).'
-                                                                    <td>'.$row['receiptDate'].'</td>
-                                                                    <td>
-                                                                        <div class="table-data-feature">
-                                                                            <button class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Xử lý dơn hàng">
-                                                                                <i class="zmdi zmdi-mail-send"></i>
-                                                                            </button>
-                                                                            <button id="'.$row['receiptID'].'-block" class="item block-product" data-toggle="tooltip" data-placement="top" title="" receiptid="'.$row['receiptID'].'" data-original-title="Chi tiết">
-                                                                                <i class="zmdi zmdi-more"></i>
-                                                                            </button>
-                                                                        </div>
-                                                                    </td>
-                                                                </tr>';
-                                                }
-                                                echo $output;
-
-                                                function receiptState($state)
-                                                {
-                                                    $out = '<td class="denied">Đang xử lý</td>';
-                                                    if($state == 1)
-                                                    {
-                                                        $out = '<td class="process">Đã xử lý</td>';
-                                                    }
-                                                    return $out;
-                                                }
-                                            ?>
-                                            
+                                        <tbody class="receiptTable">
                                         </tbody>
                                     </table>
+                                    <div class="receiptPaging mt-3">
+                                    </div>
                                 </div>
                                 <!-- END DATA TABLE-->
                             </div>

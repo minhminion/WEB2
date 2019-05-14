@@ -57,6 +57,7 @@
             }
         }
 
+        $productDescription = preg_replace("/[\n\r]/","%",$productDescription); 
         
         if(empty($error))
         {

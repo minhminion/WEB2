@@ -31,7 +31,6 @@
     $myChart = new stdClass();
     $myChart->label = ArraytoString($colMonth);
     $myChart->value = ArraytoString($data);
-
     echo json_encode($myChart);
 
     function ArraytoString($data)

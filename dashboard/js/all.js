@@ -2,8 +2,13 @@ $(document).ready(function()
 {
     isLogin();
     pagingProduct();
+    pagingReceipt();
     activeMenuItem();
     statistic();
+
+    // $('#statistic').onload(function()
+    // {
+    // })
 
 
     function pagingProduct(page)
@@ -30,6 +35,25 @@ $(document).ready(function()
             }
         })
     }
+
+    function pagingReceipt(page)
+    {
+
+        $.ajax({
+            url:"./XuLy/pagingReceipt.php",
+            method:"POST",
+            data:{  page:page,},
+            datatype:"json",
+            success:function(data)
+            {
+                // console.log(data);
+                data = JSON.parse(data);
+                $(".receiptTable").html(data.output);
+                $(".receiptPaging").html(data.paging);
+            }
+        })
+    }
+
     $(document).on("click",".page-item",function(event)
         {
             event.preventDefault();
@@ -152,6 +176,21 @@ $(document).ready(function()
         if(confirm($messge))
         {
             blockProduct($productId,$state);
+        }
+    });
+
+    $(document).on("click",".progress-receipt",function()
+    {
+        $receiptId = $(this).attr("receiptid");
+        $state = $(this).attr("state");
+        $messge ="Bạn muốn xủ lý hoán đơn này ??";
+        if($state == 0)
+        {
+            $messge = "Bạn muốn ngưng bán sản phẩm này ??";
+        }
+        if(confirm($messge))
+        {
+            progressReceipt($receiptId,$state);
         }
     });
 
@@ -458,6 +497,26 @@ $(document).ready(function()
                 $("#"+productId+"-state").html(data.state);
                 $("#"+productId+"-block").attr('state',data.isBlock);
                 $("#"+productId+"-block").html(data.btnIcon);
+                // pagingProduct();
+            }
+        })
+    }
+
+    function progressReceipt(receiptId,state)
+    {
+        $do = "progress";
+        $.ajax({
+            url :"../dashboard/XuLy/receiptSetting.php",
+            method:"POST",
+            data : {receiptId : receiptId ,state: state ,do : $do},
+            datatype :'json',
+            success:function(data)
+            {
+                data = JSON.parse(data);
+                console.log(data);
+                $("#"+receiptId+"-state").html(data.state);
+                $("#"+receiptId+"-progress-btn").html(data.btnProgress);
+                $("#progressingNum").html(data.totalProgressing);
                 // pagingProduct();
             }
         })
