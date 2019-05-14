@@ -111,8 +111,8 @@
                             <div class="col-xl-12">
                                 <!-- RECENT REPORT 2-->
                                 <div class="recent-report2">
-                                    <h3 class="title-3">recent reports</h3>
-                                    <div class="chart-info">
+                                    <h3 class="title-3">Tổng thu nhập (Triệu)</h3>
+                                    <div class="chart-info ">
                                         <div class="chart-info__left">
                                             <div class="chart-note">
                                                 <span class="dot dot--blue"></span>
@@ -122,31 +122,49 @@
                                                 <span class="dot dot--green"></span>
                                                 <span>Services</span>
                                             </div>
+                                            <div class="rs-select2--dark rs-select2--md">
+                                                <select class="js-select2 au-select-dark" name="time" id="selectTimeOrder">
+                                                    <option selected="selected">Thời gian</option>
+                                                    <option value="month">Theo tháng</option>
+                                                    <option value="day">theo ngày</option>
+                                                </select>
+                                                <div class="dropDownSelect2"></div>
+                                            </div>
                                         </div>
                                         <div class="chart-info-right">
-                                            <div class="rs-select2--dark rs-select2--md m-r-10">
-                                                <select class="js-select2" name="property">
-                                                    <option selected="selected">All Properties</option>
-                                                    <option value="">Products</option>
-                                                    <option value="">Services</option>
+                                            <div class="rs-select2--dark rs-select2--md m-r-10 selectMonth" style="visibility:hidden">
+                                                <select class="js-select2" name="property" id="selectMonth">
+                                                    <?php
+                                                        $month = date("M");
+                                                        $out = '<option selected="selected" value="">Tháng</option>';
+                                                        for($i = 1 ; $i <= 12 ;$i++)
+                                                        {
+                                                            $out .= '<option value="'.$i.'">Tháng '.$i.'</option>';
+                                                        }
+                                                        echo $out;
+                                                        ?>
                                                 </select>
                                                 <div class="dropDownSelect2"></div>
                                             </div>
-                                            <div class="rs-select2--dark rs-select2--sm">
-                                                <select class="js-select2 au-select-dark" name="time">
-                                                    <option selected="selected">All Time</option>
-                                                    <option value="month">By Month</option>
-                                                    <option value="day">By Day</option>
+                                            <div class="rs-select2--dark rs-select2--md m-r-10 selectYear" style="visibility:hidden">
+                                                <select class="js-select2" name="property" id="selectYear">
+                                                    <?php
+                                                        $year = date("Y");
+                                                        $out = '<option selected="selected" value="">Năm</option>';
+                                                        for($i = $year ; $i > ($year-20) ;$i--)
+                                                        {
+                                                            $out .= '<option value="'.$i.'">'.$i.'</option>';
+                                                        }
+                                                        echo $out;
+                                                    ?>
                                                 </select>
                                                 <div class="dropDownSelect2"></div>
                                             </div>
+                                            
                                         </div>
                                     </div>
-                                    <div class="recent-report__chart">
+                                    <div class="recent-report__chart" id="myReportChart">
                                         <canvas id="my-singelBarChart" data-val=""></canvas>
-                                    </div>
-                                    <div class="recent-report__chart">
-                                        <canvas id="my-recent-rep-chart" data-val=""></canvas>
                                     </div>
                                 </div>
                                 <!-- END RECENT REPORT 2 -->

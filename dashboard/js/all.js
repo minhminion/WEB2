@@ -3,13 +3,43 @@ $(document).ready(function()
     isLogin();
     pagingProduct();
     pagingReceipt();
+    pagingUser();
     activeMenuItem();
     statistic();
+
 
     // $('#statistic').onload(function()
     // {
     // })
 
+    $(document).on("change","#selectTimeOrder",function()
+    {
+        switch ($(this).val())
+        {
+            case 'month':
+                $(".selectYear").css("visibility","visible");
+                $(".selectMonth").css("visibility","hidden");
+            break;
+            case 'day':
+                $(".selectYear").css("visibility","visible");
+                $(".selectMonth").css("visibility","visible");
+            break;
+            default:
+                $(".selectYear").css("visibility","hidden");
+                $(".selectMonth").css("visibility","hidden");
+            break;
+        }
+    })
+
+    $(document).on("change","#selectMonth",function()
+    {
+        statistic();
+    })
+
+    $(document).on("change","#selectYear",function()
+    {
+        statistic();
+    })
 
     function pagingProduct(page)
     {
@@ -39,20 +69,74 @@ $(document).ready(function()
     function pagingReceipt(page)
     {
 
+        $order = $("#receiptOrder").val();
+        switch($order)
+        {
+            case 'date': 
+                $order = "receiptDate";
+            break;
+            case 'total': 
+                $order = "receiptTotal";
+            break;
+        }
+        $DescOrAsc = $("#receiptDescOrAsc").val();
+
         $.ajax({
             url:"./XuLy/pagingReceipt.php",
             method:"POST",
-            data:{  page:page,},
+            data:{  page:page,
+                    order : $order,
+                    DescOrAsc : $DescOrAsc,
+                    },
             datatype:"json",
             success:function(data)
             {
-                // console.log(data);
+                console.log(data);
                 data = JSON.parse(data);
                 $(".receiptTable").html(data.output);
                 $(".receiptPaging").html(data.paging);
             }
         })
     }
+
+    function pagingUser(page)
+    {
+        $search = $("#searchUser").val();
+        console.log($("#searchUser"));
+
+        $.ajax({
+            url:"./XuLy/pagingUser.php",
+            method:"POST",
+            data:{  page:page,
+                    search : $search,
+                    },
+            datatype:"json",
+            success:function(data)
+            {
+                data = JSON.parse(data);
+                console.log(data);
+                $(".userTable").html(data.output);
+                $(".userPaging").html(data.paging);
+            },
+            complete:function()
+            {
+                reloadComboBox();
+            }
+        })
+    }
+
+    $(document).on("click",".searchUser-btn",function(event)
+    {
+        pagingUser();
+    });
+
+    $("#searchUser").keypress(function(event)
+    {
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        if(keycode == '13'){
+            pagingUser();
+        }
+    });
 
     $(document).on("click",".page-item",function(event)
         {
@@ -61,6 +145,13 @@ $(document).ready(function()
             console.log(page);
             pagingProduct(page);
         });
+
+    $(document).on("click",".info-receipt",function(event)
+    {
+        getReceiptInfo($(this).attr('receiptid'))
+
+        $("#receiptInfo").modal('toggle');
+    });
 
     function isLogin()
     {
@@ -79,6 +170,34 @@ $(document).ready(function()
                 }
             }
         })
+    }
+
+    function getReceiptInfo(receiptId)
+    {
+        $.ajax({
+            url:"./XuLy/receiptInfo.php",
+            method:"POST",
+            data: {receiptId : receiptId,},
+            datatype:"json",
+            success:function(data)
+            {
+                console.log(data);
+                data = JSON.parse(data);
+                $("#receiptInfoId").html(data.id);
+                $("#receiptInfoUser").html(data.user);
+                $("#receiptInfoName").html(data.name);
+                $("#receiptInfoCountry").html(data.country);
+                $("#receiptInfoAddress").html(data.address);
+                $("#receiptInfoPhone").html(data.phone);
+                $("#receiptInfoProduct").html(data.product);
+                $("#receiptInfoTotal").html(data.total);
+                $("#receiptInfoDescription").val(data.description);
+                // $(".userTable").html(data.output);
+                // $(".userPaging").html(data.paging);
+            },
+        })
+
+
     }
 
     $(document).on("click",".block-user",function()
@@ -163,6 +282,10 @@ $(document).ready(function()
         pagingProduct();
     });
 
+    $(document).on("click",".receipt-filter",function()
+    {
+        pagingReceipt();
+    });
 
     $(document).on("click",".block-product",function()
     {
@@ -303,21 +426,32 @@ $(document).ready(function()
     function statistic()
     {
         var chartData="";
+        var month=$("#selectMonth").val();
+        var year=$("#selectYear").val();
+        console.log("Tháng "+month+" Năm "+year);
+
         $.ajax({
             url : '../dashboard/XuLy/statistic.php',
             method : 'POST',
+            data: {
+                    month : month,
+                    year : year,
+            },
             success:function(data)
             {
                 console.log(data);
                 chartData = JSON.parse(data);
-                $("#my-recent-rep-chart").data('val',chartData.value);
-                $("#my-singelBarChart").data('val',chartData.value);
+                // $("#my-recent-rep-chart").data('val',chartData.value);
             },
             complete:function(data)
             {
                 console.log(chartData)
-                DrawMyChart(chartData.label);
-                DrawMyChart1(chartData.label);
+                // DrawMyChart(chartData.label);
+                $('#myReportChart').remove();
+                $(".recent-report2").append('<div class="recent-report__chart" id="myReportChart"><canvas id="my-singelBarChart" data-val=""></canvas></div>');
+                $("#my-singelBarChart").data('val',chartData.value);
+                DrawMyChart1(chartData.label,chartData.value);
+                
             }
         })
 
@@ -336,7 +470,7 @@ $(document).ready(function()
 
         var ctx = document.getElementById("my-recent-rep-chart");
         var data = $("#my-recent-rep-chart").data('val');
-        data = data.split(",");
+        if(data != null)data = data.split(",");
 
         if (ctx) {
         ctx.height = 450;
@@ -413,13 +547,12 @@ $(document).ready(function()
 
     function DrawMyChart1(myLabel)
     {
-        var ctx = document.getElementById("my-singelBarChart");
 
         var label = myLabel.split(',');
-
         var ctx = document.getElementById("my-singelBarChart");
         var data = $("#my-singelBarChart").data('val');
-        data = data.split(",");
+        
+        if(data != null)data = data.split(",");
         
         if (ctx) {
         ctx.height = 450;
@@ -586,10 +719,19 @@ $(document).ready(function()
 
     function reloadComboBox($this)
     {
+        if($this == null)
+        {
+            $class=".js-select2-user";
+        }
+        else
+        {
+            $class=""+$this+" .js-select2-user";
+        }
+
         "use strict";
         try {
-            $.each($(""+$this+" .js-select2"),function () {
-              console.log("1");
+            $.each($($class),function () {
+            //   console.log("1");
               $(this).select2({
                 minimumResultsForSearch: 20,
                 dropdownParent: $(this).next('.dropDownSelect2')

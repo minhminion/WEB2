@@ -6,9 +6,20 @@
     $brand ="";
     $search="";
     $where="";
+    $order = 1;
 
     $data = array();
     array_push($data,1);
+
+    if(!empty($_POST['order']))
+    {
+        $order = $_POST['order'];
+    }
+
+    if(!empty($_POST['DescOrAsc']))
+    {
+        $order .= " ".$_POST['DescOrAsc'];
+    }
 
     if(isset($_POST["page"]))
     {
@@ -18,6 +29,8 @@
         $page = 1;
     }
 
+
+    // echo $order;
     foreach ($data as $i => $s)
     {
         if($i+1 == count($data))
@@ -30,7 +43,7 @@
         }
     }
 
-    $record_page = 5;
+    $record_page = 7;
 
     $page_query = "SELECT * FROM receipt WHERE $where";
     // echo $page_query;
@@ -41,7 +54,7 @@
 
     $output = '';
     $start_form = ($page - 1)*$record_page;
-    $query = "SELECT * FROM receipt WHERE $where LIMIT $start_form,$record_page";
+    $query = "SELECT * FROM receipt WHERE $where ORDER BY $order LIMIT $start_form,$record_page";
     $result = conSQL::executeQuery($query);
 
     while($row = mysqli_fetch_array($result))

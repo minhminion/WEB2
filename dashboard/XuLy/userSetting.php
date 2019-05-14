@@ -204,7 +204,7 @@
 
         $option = array("Admin","Sale","Customer");    
         $rs ='
-                    <select class="js-select2" name="property">';
+                    <select class="js-select2-user" name="property">';
         foreach($option as $key => $s)
         {
             // $rs .= $key;

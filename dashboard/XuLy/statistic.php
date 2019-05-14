@@ -1,35 +1,102 @@
 <?php
     require("./../../XuLy/conSQL.php");
 
+    $step=1000000;
+    $output="";
+    $label="";
+    $data=[];
+
+
+    $by="";
+    $where='';
+    $groupBy="";
+
     $colMonth = [];
     for($i = 0 ; $i < 12 ; $i++)
     {
         $colMonth[$i] = "Tháng ".($i+1);
     }
-
-    $output="";
-
-    $data=[];
-    for($i = 0 ; $i < count($colMonth) ; $i++)
+    
+    $colDate = [];
+    for($i = 0 ; $i < 31 ; $i++)
     {
-        $data[$i] = 0;
+        $colDate[$i] = ($i+1);
     }
 
+    $whereData=array();
+    array_push($whereData,"receipt.status = 1");
     
-    $step=100000;
+    $groupByData=array();
+    array_push($groupByData,"month");
+    array_push($groupByData,"year");
+    
+    $sortYear=date("Y");
+    if(isset($_POST['year']) && !empty($_POST['year']))
+    {
+        $sortYear = $_POST['year'];
+    }
+    array_push($whereData,"YEAR(receiptDate) = ".$sortYear);
 
-    $sql='  SELECT SUM(receiptTotal) total,MONTH(receiptDate) month,YEAR(receiptDate) year 
-            FROM `receipt` WHERE receipt.status = 1 AND YEAR(receiptDate) = YEAR(CURRENT_TIMESTAMP) 
-            GROUP BY month,year';
+    // Theo Ngày
+    $sortMonth=date("M");
+    if(isset($_POST['month']) && !empty($_POST['month']))
+    {
+        $sortMonth = $_POST['month'];
+        array_push($whereData,"MONTH(receiptDate) = ".$sortMonth);
+        array_push($groupByData,"day");
+        for($i = 0 ; $i < count($colDate) ; $i++)
+        {
+            $data[$i] = 0;
+        }
+        $by='day';
+        $label = ArraytoString($colDate);
+    }
+    else{
+        for($i = 0 ; $i < count($colMonth) ; $i++)
+        {
+            $data[$i] = 0;
+        }
+        $by ='month';
+        $label = ArraytoString($colMonth);
+    }
+    /////////////////////
+    foreach ($whereData as $i => $s)
+    {
+        if($i+1 == count($whereData))
+        {
+            $where .= $s ;
+        }
+        else
+        {
+            $where .= $s." AND ";
+        }
+    }
+
+    foreach ($groupByData as $i => $s)
+    {
+        if($i+1 == count($groupByData))
+        {
+            $groupBy .= $s ;
+        }
+        else
+        {
+            $groupBy .= $s.",";
+        }
+    }
+
+    $sql='  SELECT SUM(receiptTotal) total,DAY(receiptDate) day,MONTH(receiptDate) month,YEAR(receiptDate) year 
+            FROM `receipt` WHERE '.$where.' GROUP BY '.$groupBy.''; 
+    // echo $sql;
+
     $rs = conSQL :: executeQuery($sql);
     while($row = mysqli_fetch_array($rs))
     {
-        $month = $row['month'];
-        $data[$month - 1] = $row['total']/$step; 
+        $n = $row[$by];
+        $data[$n - 1] = $row['total']/$step; 
     }
 
     $myChart = new stdClass();
-    $myChart->label = ArraytoString($colMonth);
+    $myChart->label = $label;
     $myChart->value = ArraytoString($data);
     echo json_encode($myChart);
 

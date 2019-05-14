@@ -91,6 +91,7 @@
         </div>
     </div>
 </div>
+
     <div class="page-wrapper">
         <?php include("./model/menuBar.php") ?>
         <!-- PAGE CONTAINER-->
