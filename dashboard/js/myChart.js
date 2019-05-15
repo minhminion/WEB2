@@ -1,6 +1,12 @@
 
 (function ($) {
 var ctx = document.getElementById("my-percent-chart");
+
+    var input = $("#my-percent-chart").data('val');
+    var data = [60,20,20];       
+    
+    if(input != null)data = input.split(",");
+
     if (ctx) {
       ctx.height = 280;
       var myChart = new Chart(ctx, {
@@ -8,18 +14,20 @@ var ctx = document.getElementById("my-percent-chart");
         data: {
           datasets: [
             {
-              label: "My First dataset",
-              data: [60,20,20],
+              label: "Loại mua",
+              data: data,
               backgroundColor: [
                 '#00b5e9',
-                '#fa4251'
+                '#fa4251',
+                '#00AD5F'
               ],
               hoverBackgroundColor: [
                 '#00b5e9',
-                '#fa4251'
+                '#fa4251',
+                '#00AD5F'
               ],
               borderWidth: [
-                0, 0
+                0, 0, 0
               ],
               hoverBorderColor: [
                 'transparent',
@@ -28,8 +36,9 @@ var ctx = document.getElementById("my-percent-chart");
             }
           ],
           labels: [
-            'Products',
-            'Services'
+            'Bàn Phìm',
+            'Chuột',
+            'Tai Nghe'
           ]
         },
         options: {

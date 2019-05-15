@@ -13,130 +13,72 @@
         <div class="row">
             <div class="col-12">
                 <div class="popular-products-slides owl-carousel">
-
-                    <!-- Single Product -->
-                    <div class="single-product-wrapper">
-                        <!-- Product Image -->
-                        <div class="product-img">
-                            <img src="./img/sanpham/bp1.jpg" alt="">
-                            <!-- Favourite -->
-                            <div class="product-favourite">
-                                <a href="#" class="favme fa fa-heart"></a>
-                            </div>
-                        </div>
-                        <!-- Product Description -->
-                        <div class="product-description">
-                            <span>Asus</span>
-                            <a href="single-product-details.html">
-                                <h6>Asus Cerberus</h6>
-                            </a>
-                            <p class="product-price">890.000Đ</p>
-
-                            <!-- Hover Content -->
-                            <div class="hover-content">
-                                <!-- Add to Cart -->
-                                <div class="add-to-cart-btn">
-                                    <a href="#" class="btn essence-btn">Mua Ngay</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Single Product -->
-                    <div class="single-product-wrapper">
-                        <!-- Product Image -->
-                        <div class="product-img">
-                            <img src="./img/sanpham/bp2.jpg" alt="">
-
-                            <!-- Favourite -->
-                            <div class="product-favourite">
-                                <a href="#" class="favme fa fa-heart"></a>
-                            </div>
-                        </div>
-                        <!-- Product Description -->
-                        <div class="product-description">
-                            <span>Asus</span>
-                            <a href="single-product-details.html">
-                                <h6>Asus ROG Claymore Core</h6>
-                            </a>
-                            <p class="product-price">3,800,000Đ</p>
-
-                            <!-- Hover Content -->
-                            <div class="hover-content">
-                                <!-- Add to Cart -->
-                                <div class="add-to-cart-btn">
-                                    <a href="#" class="btn essence-btn">Mua Ngay</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Single Product -->
-                    <div class="single-product-wrapper">
-                        <!-- Product Image -->
-                        <div class="product-img">
-                            <img src="./img/sanpham/bp3.jpg" alt="">
-
-                            <!-- Product Badge -->
-                            <div class="product-badge offer-badge">
-                                <span>-30%</span>
-                            </div>
-
-                            <!-- Favourite -->
-                            <div class="product-favourite">
-                                <a href="#" class="favme fa fa-heart"></a>
-                            </div>
-                        </div>
-                        <!-- Product Description -->
-                        <div class="product-description">
-                            <span>asus</span>
-                            <a href="single-product-details.html">
-                                <h6>Asus ROG Strix Flare COD</h6>
-                            </a>
-                            <p class="product-price"><span class="old-price">5,000,000đ</span>4,390,000Đ</p>
-
-                            <!-- Hover Content -->
-                            <div class="hover-content">
-                                <!-- Add to Cart -->
-                                <div class="add-to-cart-btn">
-                                    <a href="#" class="btn essence-btn">Mua Ngay</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Single Product -->
-                    <div class="single-product-wrapper">
-                        <!-- Product Image -->
-                        <div class="product-img">
-                            <img src="./img/sanpham/bp4.jpg" alt="">
-                            <!-- Product Badge -->
-                            <div class="product-badge new-badge">
-                                <span>New</span>
-                            </div>
-
-                            <!-- Favourite -->
-                            <div class="product-favourite">
-                                <a href="#" class="favme fa fa-heart"></a>
-                            </div>
-                        </div>
-                        <!-- Product Description -->
-                        <div class="product-description">
-                            <span>razer</span>
-                            <a href="single-product-details.html">
-                                <h6>Razer Blackwidow X Chroma Gunmetal</h6>
-                            </a>
-                            <p class="product-price">3,890,000đ</p>
-
-                            <!-- Hover Content -->
-                            <div class="hover-content">
-                                <!-- Add to Cart -->
-                                <div class="add-to-cart-btn">
-                                    <a href="#" class="btn essence-btn">Mua Ngay</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <?php
+                        require('./XuLy/conSQL.php');
+                        $output="";
+                        $query = "  SELECT product.*,brand.brandName 
+                                    FROM `product`,brand 
+                                    WHERE productBrand = brandID 
+                                    LIMIT 8";
+                        $result = conSQL::executeQuery($query);
+                        while($row = mysqli_fetch_array($result))
+                        {
+                            $output .=' <div class="single-product-wrapper">
+                                            <!-- Product Image -->
+                                            <div class="product-img">
+                                                <img src="./img/sanpham/'.$row["IMG"].'" alt="">
+                
+                                                <!-- Favourite -->
+                                                <div class="product-favourite">
+                                                    <a href="#" class="favme fa fa-heart"></a>
+                                                </div>
+                                            </div>
+                                            <!-- Product Description -->
+                                            <div class="product-description">
+                                                <span>'.$row["brandName"].'</span>
+                                                <a href="product-details.php?id='.$row["productID"].'">
+                                                    <h6>'.$row["productName"].'</h6>
+                                                </a>
+                                                <p class="product-price">'.number_format($row["productPrice"],0,".",".").' Đ</p>
+                
+                                                <!-- Hover Content -->'
+                                                    .productAmount($row["productID"],$row["productName"],$row["brandName"],$row["IMG"],$row["productPrice"],$row["productAmount"]).
+                                                    '
+                                            </div>
+                                        </div>';
+                        }
+                        function productAmount($id,$name,$brand,$img,$price,$amount)
+                        {
+                            $out='
+                                <div class="btn-disable">
+                                    <div>
+                                        <a class="btn essence-btn" style="color:white;">
+                                            Hết Hàng
+                                        </a>
+                                    </div>     
+                                </div>';
+                            if($amount > 0)
+                            {
+                                $out ='
+                                    <div class="hover-content">
+                                        <div>
+                                        <a class="btn essence-btn add-to-cart-btn" style="color:white;"
+                                            id="'.$id.'" 
+                                                name="'.$name.'" 
+                                                brand="'.$brand.'"  
+                                                img="'.$img.'" 
+                                                price="'.$price.'"
+                                                max ='.$amount.'
+                                            >Mua Ngay</a>
+                                        </div>
+                                    </div>';
+                            }
+                            return $out;
+                        }
+                        echo $output
+                    ?>
+                
+                   
                 </div>
             </div>
         </div>

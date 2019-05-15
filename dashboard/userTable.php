@@ -111,7 +111,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="table-responsive table-data">
+                                    <div class="table-responsive table-data h-100">
                                         <table class="table">
                                             <thead>
                                                 <tr>
@@ -126,7 +126,7 @@
                                             <tbody class="userTable">  
                                             </tbody>
                                         </table>
-                                        <div class='userPaging mt-3'>
+                                        <div class='userPaging mt-3 mb-4'>
                                         </div>
                                     </div> 
                                 </div>

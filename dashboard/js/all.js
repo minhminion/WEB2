@@ -432,6 +432,18 @@ $(document).ready(function()
         refeshProductEdit();
     })
 
+    $(document).on('click','.signOut',function(event)
+    {
+        event.preventDefault();
+        $.ajax({
+            url : "./XuLy/logOut.php",
+            success:function(data)
+            {
+                window.location.reload();
+            }
+        })
+    })
+
     function statistic()
     {
         var chartData="";

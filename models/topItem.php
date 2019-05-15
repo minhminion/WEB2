@@ -1,11 +1,11 @@
 <section class="welcome_area bg-img background-overlay" style="background-image: url(img/bg-img/bg-1-1.jpg);">
     <div class="container-fluid h-100">
         <div class="row h-100 align-items-center ml-5 pl-5 ml-lg-3">
-            <div class="col-12 col-lg-6">
+            <div class="col-12 col-lg-5">
                 <div class="hero-content">
-                    <h6>Top Gaming Keyboard</h6>
-                    <h2>Razer Huntsman Elite</h2>
-                    <a href="#" class="btn essence-btn">Xem ngay</a>
+                    <h6>Top Bàn Phím Gaming</h6>
+                    <h2>Razer Blackwidow Tournament Quartz Pink Edition</h2>
+                    <a href="product-details.php?id=013" class="btn essence-btn">Xem ngay</a>
                 </div>
             </div>
         </div>

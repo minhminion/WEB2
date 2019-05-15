@@ -11,7 +11,7 @@
                 <img src="images/icon/avatar-big-01.jpg" alt="John Doe" />
             </div>
             <h4 class="name"></h4>
-            <a class="signOut">Đăng xuất</a>
+            <a href="#" class="signOut" style="cursor: pointer;">Đăng xuất</a>
         </div>
         <nav class="navbar-sidebar2">
             <ul class="list-unstyled navbar__list">
@@ -31,17 +31,22 @@
                         ?>
                     </span>
                 </li>
-                <li class="user">
-                    <a href="userTable.php">
-                        <i class="fas fa-users"></i>Tài khoản
-                    </a>
-                </li>
                 <li class="product">
                     <a href="productTable.php">
                         <i class="fas fa-shopping-basket"></i>Sản phẩm
                     </a>
                 </li>
+                <?php
+                if(isset($_SESSION['isLOGIN']) && $_SESSION["isLOGIN"] == 1 && $_SESSION["AUTHENTICATION"] == 0)
+                {
+                    echo '  <li class="user">
+                                <a href="userTable.php">
+                                    <i class="fas fa-users"></i>Tài khoản
+                                </a>
+                            </li>';
+                }
                 
+                ?>
             </ul>
         </nav>
     </div>

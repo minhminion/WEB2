@@ -8,7 +8,7 @@
         {    
             $output .= '<div class="single-cart-item">
                             <a class="product-image">
-                                <img src="./img/sanpham/'.$item->img.'" class="cart-thumb" alt="">
+                                <img src="./img/sanpham/'.$item->img.'" class="cart-thumb" alt="" style="height:220px">
                                 <!-- Cart Item Desc -->
                                 <div class="cart-item-desc">
                                 <span class="product-remove" data="'.$item->id.'" ><i class="fa fa-close delete_item" aria-hidden="true"></i></span>

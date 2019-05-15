@@ -222,6 +222,8 @@
                                 <ul class="single-mega cn-col-4">
                                     <li class="title">Chuột</li>
                                     <li><a href="shop.php?cetorgry=002">All</a></li>
+                                    <li><a href="shop.php?brand=001?cetorgry=002">Razer</a></li>
+                                    <li><a href="shop.php?brand=003?cetorgry=002">Logitech</a></li>
                                     <li><a href="shop.php?brand=002?cetorgry=002">Asus</a></li>
                                     <li><a href="shop.php?brand=004?cetorgry=002">Corsair</a></li>
                                     <li><a href="shop.php?brand=005?cetorgry=002">Steelseries</a></li>
@@ -232,25 +234,16 @@
                                     <li><a href="shop.php?brand=001?cetorgry=003">Razer</a></li>
                                     <li><a href="shop.php?brand=003?cetorgry=003">Logitech</a></li>
                                     <li><a href="shop.php?brand=002?cetorgry=003">Asus</a></li>
+                                    <li><a href="shop.php?brand=004?cetorgry=003">Corsair</a></li>
+                                    <li><a href="shop.php?brand=005?cetorgry=003">Steelseries</a></li>
                                 </ul>
                             </div>
                         </li>
-                        <li><a href="#">Pages</a>
-                            <ul class="dropdown">
-                                <li><a href="index.html">Home</a></li>
-                                <li><a href="index.php?id=shop">Shop</a></li>
-                                <li><a href="single-product-details.html">Product Details</a></li>
-                                <li><a href="checkout.html">Checkout</a></li>
-                                <li><a href="single-blog.html">Single Blog</a></li>
-                                <li><a href="regular-page.html">Regular Page</a></li>
-                                <li><a href="contact.html">Contact</a></li>
-                            </ul>
-                        </li>
                         <li><a href="contact.html">Contact</a></li>
                         <?php
-                            if(isset($_SESSION['isLOGIN']) && $_SESSION["isLOGIN"] == 1 && $_SESSION["AUTHENTICATION"] == 0)
+                            if(isset($_SESSION['isLOGIN']) && $_SESSION["isLOGIN"] == 1 && ($_SESSION["AUTHENTICATION"] == 0 || $_SESSION["AUTHENTICATION"] == 1))
                             {
-                                echo '<li><a href="./dashboard/admin.php">Admin</a><li>';
+                                echo '<li><a href="./dashboard/admin.php">Quản trị</a><li>';
                             }
                         ?>
                     </ul>

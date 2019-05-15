@@ -12,40 +12,6 @@
                     <div class="header-button-item mr-0 js-sidebar-btn">
                         <i class="zmdi zmdi-menu"></i>
                     </div>
-                    <div class="setting-menu js-right-sidebar d-none d-lg-block">
-                        <div class="account-dropdown__body">
-                            <div class="account-dropdown__item">
-                                <a href="#">
-                                    <i class="zmdi zmdi-account"></i>Account</a>
-                            </div>
-                            <div class="account-dropdown__item">
-                                <a href="#">
-                                    <i class="zmdi zmdi-settings"></i>Setting</a>
-                            </div>
-                            <div class="account-dropdown__item">
-                                <a href="#">
-                                    <i class="zmdi zmdi-money-box"></i>Billing</a>
-                            </div>
-                        </div>
-                        <div class="account-dropdown__body">
-                            <div class="account-dropdown__item">
-                                <a href="#">
-                                    <i class="zmdi zmdi-globe"></i>Language</a>
-                            </div>
-                            <div class="account-dropdown__item">
-                                <a href="#">
-                                    <i class="zmdi zmdi-pin"></i>Location</a>
-                            </div>
-                            <div class="account-dropdown__item">
-                                <a href="#">
-                                    <i class="zmdi zmdi-email"></i>Email</a>
-                            </div>
-                            <div class="account-dropdown__item">
-                                <a href="#">
-                                    <i class="zmdi zmdi-notifications"></i>Notifications</a>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
             
@@ -64,7 +30,7 @@
                 <img src="images/icon/avatar-big-01.jpg" alt="John Doe" />
             </div>
             <h4 class="name">john doe</h4>
-            <a href="#">Sign out</a>
+            <a class="signOut" style="cursor: pointer;">Sign out</a>
         </div>
         <nav class="navbar-sidebar2">
             <ul class="list-unstyled navbar__list">
@@ -84,16 +50,21 @@
                         ?>
                     </span>
                 </li>
-                <li class="user">
-                    <a href="userTable.php">
-                        <i class="fas fa-users"></i>Tài khoản
-                    </a>
-                </li>
                 <li class="product">
                     <a href="productTable.php">
                         <i class="fas fa-shopping-basket"></i>Sản phẩm
                     </a>
                 </li>
+                <?php
+                if(isset($_SESSION['isLOGIN']) && $_SESSION["isLOGIN"] == 1 && $_SESSION["AUTHENTICATION"] == 0)
+                {
+                    echo '  <li class="user">
+                                <a href="userTable.php">
+                                    <i class="fas fa-users"></i>Tài khoản
+                                </a>
+                            </li>';
+                }
+                ?>
             </ul>
         </nav>
     </div>

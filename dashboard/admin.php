@@ -135,7 +135,7 @@
                 <div class="col-lg-6">
                     <div class="au-card chart-percent-card pb-2">
                         <div class="au-card-inner">
-                            <h3 class="title-2 tm-b-5">Loại được mua nhiều nhất</h3>
+                            <h3 class="title-2 tm-b-5">Loại được mua nhiều nhất (%)</h3>
                             <div class="row no-gutters">
                                 <div class="col-xl-5">
                                     <div class="chart-note-wrap">
@@ -155,7 +155,36 @@
                                 </div>
                                 <div class="col-xl-7">
                                     <div class="percent-chart">
-                                        <canvas id="my-percent-chart"></canvas>
+                                        <canvas id="my-percent-chart" data-val="
+                                        <?php
+                                            $total = 0;
+                                            $data =[0,0,0];
+                                            $out="";
+                                            $sql = 'SELECT productCetorgry , SUM(quality) quality 
+                                                    FROM receipt,receiptdetail,product
+                                                    WHERE receipt.receiptID = receiptdetail.receiptID AND receiptdetail.productID = product.productID  AND receipt.status = 1 
+                                                    GROUP BY productCetorgry
+                                                    ORDER BY quality ';
+                                            $rs = conSQL :: executeQuery($sql);
+                                            while($row = mysqli_fetch_array($rs))
+                                            {
+                                                $total += $row['quality'];
+                                                $data[$row['productCetorgry']-1]=$row['quality'];
+                                            }
+                                            foreach ($data as $i => $s)
+                                            {
+                                                $s = round($s*100/$total);
+                                                if($i+1 == count($data))
+                                                {
+                                                    $out .= $s;
+                                                }
+                                                else{
+                                                    $out .= $s.",";
+                                                }
+                                            }
+                                            echo $out;
+                                        ?>
+                                        "></canvas>
                                     </div>
                                 </div>
                             </div>
