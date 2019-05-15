@@ -21,6 +21,7 @@
     $firstName="";
     $lastName="";
     $email="";
+    $authen="";
 
     if(isset($_SESSION["isLOGIN"]) && $_SESSION["isLOGIN"] == 1)
     {
