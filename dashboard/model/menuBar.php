@@ -15,36 +15,41 @@
         </div>
         <nav class="navbar-sidebar2">
             <ul class="list-unstyled navbar__list">
-                <li class="dashboard">
-                    <a href="admin.php">
-                        <i class="fas fa-tachometer-alt"></i>Thống kê
-                    </a>
-                </li>
-                <li class="receipt">
-                    <a href="receiptTable.php">
-                        <i class="fas fa-chart-bar"></i>Hóa đơn</a>
-                    <span class="inbox-num" id="progressingNum">
-                        <?php
-                            $sql = 'SELECT * FROM receipt WHERE receipt.status=0';
-                            $rs = conSQL :: executeQuery($sql);
-                            echo mysqli_num_rows($rs);
-                        ?>
-                    </span>
-                </li>
-                <li class="product">
-                    <a href="productTable.php">
-                        <i class="fas fa-shopping-basket"></i>Sản phẩm
-                    </a>
-                </li>
                 <?php
-                if(isset($_SESSION['isLOGIN']) && $_SESSION["isLOGIN"] == 1 && $_SESSION["AUTHENTICATION"] == 0)
+                if(isset($_SESSION['isLOGIN']) && $_SESSION["isLOGIN"] == 1)
                 {
-                    echo '  <li class="user">
-                                <a href="userTable.php">
-                                    <i class="fas fa-users"></i>Tài khoản
-                                </a>
-                            </li>';
+                    if($_SESSION["AUTHENTICATION"] == 0)
+                    {
+                        echo '  <li class="user">
+                                    <a href="userTable.php">
+                                        <i class="fas fa-users"></i>Tài khoản
+                                    </a>
+                                </li>';
+                    }
+                    else{
+                        $sql = 'SELECT * FROM receipt WHERE receipt.status=0';
+                        $rs = conSQL :: executeQuery($sql);
+                        echo '
+                                <li class="dashboard">
+                                    <a href="admin.php">
+                                        <i class="fas fa-tachometer-alt"></i>Thống kê
+                                    </a>
+                                </li>
+                                <li class="receipt">
+                                    <a href="receiptTable.php">
+                                        <i class="fas fa-chart-bar"></i>Hóa đơn</a>
+                                    <span class="inbox-num" id="progressingNum">
+                                    '.mysqli_num_rows($rs).'
+                                    </span>
+                                </li>
+                                <li class="product">
+                                    <a href="productTable.php">
+                                        <i class="fas fa-shopping-basket"></i>Sản phẩm
+                                    </a>
+                                </li>';
+                    }
                 }
+                
                 
                 ?>
             </ul>

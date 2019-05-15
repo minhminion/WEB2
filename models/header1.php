@@ -208,7 +208,7 @@
                 <!-- Nav Start -->
                 <div class="classynav">
                     <ul>
-                        <li><a href="#">Shop</a>
+                        <li><a href="#">Sản phẩm</a>
                             <div class="megamenu">
                                 <ul class="single-mega cn-col-4">
                                     <li class="title">Bàn Phím</li>
@@ -239,11 +239,18 @@
                                 </ul>
                             </div>
                         </li>
-                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="contact.php">Liên hệ</a></li>
                         <?php
                             if(isset($_SESSION['isLOGIN']) && $_SESSION["isLOGIN"] == 1 && ($_SESSION["AUTHENTICATION"] == 0 || $_SESSION["AUTHENTICATION"] == 1))
                             {
-                                echo '<li><a href="./dashboard/admin.php">Quản trị</a><li>';
+                                if($_SESSION["AUTHENTICATION"] == 0)
+                                {
+                                    echo '<li><a href="./dashboard/userTable.php">Quản trị</a><li>';
+                                }
+                                else if ($_SESSION["AUTHENTICATION"] == 1)
+                                {
+                                    echo '<li><a href="./dashboard/admin.php">Quản trị</a><li>';
+                                }
                             }
                         ?>
                     </ul>
