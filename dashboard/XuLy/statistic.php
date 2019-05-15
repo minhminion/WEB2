@@ -97,7 +97,7 @@
     while($row = mysqli_fetch_array($rs))
     {
         $n = $row[$by];
-        $data[$n-1] = $row['total']/$step; 
+        $data[$n-1] = round($row['total']/$step); 
     }
 
     $myChart = new stdClass();
