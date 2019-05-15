@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 15, 2019 lúc 11:34 AM
+-- Thời gian đã tạo: Th5 15, 2019 lúc 03:59 PM
 -- Phiên bản máy phục vụ: 10.1.36-MariaDB
 -- Phiên bản PHP: 7.2.10
 
@@ -119,7 +119,12 @@ INSERT INTO `customer` (`userID`, `firstName`, `lastName`, `email`) VALUES
 ('001', 'Lưu', 'Bảo Minh', 'minhminion2015@gmail.com'),
 ('002', 'Nguyễn Văn', 'Thỏ', 'thanos1234@gmail.com'),
 ('003', 'Nguyễn Văn ', 'Tho', 'minhdatsg2000@gmail.com'),
-('004', 'Em ', 'Tôi', 'emtoi@yahoo.com.vn');
+('004', 'Em ', 'Tôi', 'emtoi@yahoo.com.vn'),
+('005', 'Nguyễn Văn ', 'ABC', 'sale123@gmail.com'),
+('006', 'Nguyễn', 'Thị Mộng', 'mong@gmail.com'),
+('007', 'Em ', 'Yêu', 'emyeudau@gmail.com'),
+('008', 'Mai', 'Tram', 'maitram@gmail.com'),
+('009', 'Trương', 'Tam Phong', '3wind@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -226,7 +231,10 @@ INSERT INTO `receipt` (`receiptID`, `userName`, `firstName`, `lastName`, `countr
 (4, 'minhminion', 'Lưu', 'Bảo Minh', 'TP.Hồ Chí Minh', 'dasda', '00000000000', 'minhminion2015@gmail.com', '', 13455500, '2018-06-12 04:04:49', 1),
 (5, 'minhminion', 'Lưu', 'Bảo Minh', 'TP.Hồ Chí Minh', '282 Nguyễn Tri Phương', '0934837765', 'minhminion2015@gmail.com', 'Em đặt cho vui ', 14637000, '2019-12-14 05:53:49', 1),
 (6, 'emtoi', 'Em ', 'Tôi', 'TP.Hồ Chí Minh', 'dasdas', '0934837765', 'emtoi@yahoo.com.vn', 'Em đặt cho vui thôi ạ', 13455500, '2019-05-14 13:50:01', 1),
-(7, 'minhminion', 'Lưu', 'Bị', 'TP.Hồ Chí Minh', '001 Nguyễn Trãi ', '0934837765', 'minhminion2015@gmail.com', 'Em lại đặt cho vui', 38233000, '2019-05-15 11:01:44', 1);
+(7, 'minhminion', 'Lưu', 'Bị', 'TP.Hồ Chí Minh', '001 Nguyễn Trãi ', '0934837765', 'minhminion2015@gmail.com', 'Em lại đặt cho vui', 38233000, '2019-05-15 11:01:44', 1),
+(8, 'Saler', 'Nguyễn Văn', 'ABC', 'TP.Hồ Chí Minh', 'dasdas', '0934837765', 'sale123@gmail.com', 'asdsad', 8984500, '2019-05-15 15:10:21', 1),
+(9, 'Saler', 'Nguyễn Văn', 'ABC', 'TP.Hồ Chí Minh', 'dasds', '1231', 'sale123@gmail.com', '', 3697500, '2019-05-15 15:11:47', 1),
+(10, '3wind', 'Trương', 'Tam Phong', 'TP.Hồ Chí Minh', 'dasdas', '0934837765', '3wind@gmail.com', 'asdsda', 16107500, '2019-05-15 15:18:56', 0);
 
 --
 -- Bẫy `receipt`
@@ -284,7 +292,17 @@ INSERT INTO `receiptdetail` (`receiptID`, `productID`, `productName`, `quality`,
 (7, '018', 'Razer BlackWidow X Chroma Mercury Edition', 2, 3890000, 7780000),
 (7, '041', 'Asus ROG Strix Fusion 300', 1, 2990000, 2990000),
 (7, '044', 'Logitech G933', 1, 4000000, 4000000),
-(7, '046', 'Razer Kraken Tournament Green', 6, 2690000, 16140000);
+(7, '046', 'Razer Kraken Tournament Green', 6, 2690000, 16140000),
+(8, '013', 'Razer Blackwidow Tournament Quartz Pink Edition', 1, 3390000, 3390000),
+(8, '017', 'Razer Blackwidow Elite', 1, 4490000, 4490000),
+(8, '046', 'Razer Kraken Tournament Green', 1, 2690000, 2690000),
+(9, '036', 'Razer Lancehead Tournament Edition', 1, 2000000, 2000000),
+(9, '037', 'Razer Mamba Elite', 1, 2350000, 2350000),
+(10, '009', 'Corsair K95 RGB Platinum Gunmetal', 1, 5190000, 5190000),
+(10, '017', 'Razer Blackwidow Elite', 1, 4490000, 4490000),
+(10, '034', 'Logitech G903 Lightspeed Wireless', 1, 3790000, 3790000),
+(10, '039', 'SteelSeries Rival 650', 1, 2790000, 2790000),
+(10, '046', 'Razer Kraken Tournament Green', 1, 2690000, 2690000);
 
 -- --------------------------------------------------------
 
@@ -305,9 +323,14 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`userID`, `userName`, `userPass`, `userAuthentication`, `state`) VALUES
+('009', '3wind', '$2y$10$ziLl0.mIuvg/2TCWizL54.i9eu6vAkZ2PVqbyS37ydfRt3Hzg.age', '2', 1),
 ('004', 'emtoi', '$2y$10$lsuE8ygqk6MaofLqdVzXwO71Ti.NZlDW/iBdg/OFrkwkbmBjSLZBi', '2', 1),
+('007', 'emyeudau', '$2y$10$DxouoqYKDW2YMEgqnFE5IO4QrZo/y6fgKiZ8gSfsUb1q.Z56SFg3K', '2', 1),
+('008', 'maitram', '$2y$10$d3tdkpL.Mosoy4NXlb3RiuyPidMrIZtrNaJAKyOFjfU5L4yu05LmG', '2', 1),
 ('001', 'minhminion', '$2y$10$x2vtcz9pLVTYZfQL/zSTuePwlm9F0LC/BZPJu67CV4BjpSoGxrgH.', '0', 1),
-('002', 'thanos', '$2y$10$KAzm0pURxfuKPfsXF6iG.er4Zl0H/6Vcziuy0FV59w/z9zegaJkyW', '2', 1),
+('006', 'Mongg', '$2y$10$MIW.ipx6J1OYWxFdip1sc.DGkzLRVR2Uir34r8CpmY73so0v0ES/.', '2', 1),
+('005', 'Saler', '$2y$10$lHg0ItOfCeGXzcfnxkKTZuAvBV0o1/js3m.E8XtlglPfA7rSkJYza', '1', 1),
+('002', 'thanos', '$2y$10$4bXZG2f826LiZ8JZHbpolucNwWx558vBockiOnuaygvKL8C4rSGxS', '1', 1),
 ('003', 'thor123', '$2y$10$qe2nznYrdti6zsLjTXNSWO5T8ZJiNJvxdCZoP8yKWrhmCuKSXG3B.', '2', 1);
 
 --
