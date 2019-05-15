@@ -8,7 +8,7 @@
     <div class="menu-sidebar2__content js-scrollbar1">
         <div class="account2">
             <div class="image img-cir img-120">
-                <img src="images/icon/avatar-big-01.jpg" alt="John Doe" />
+                <img src="images/icon/my_girl.jpg" alt="John Doe" />
             </div>
             <h4 class="name"></h4>
             <a href="#" class="signOut" style="cursor: pointer;">Đăng xuất</a>
