@@ -34,7 +34,7 @@
                 <a >
                     <h2>'.$row["productName"].'</h2>
                 </a>
-                <p class="product-price"><span class="old-price">$65.00</span>'.number_format($row["productPrice"],0,".",".").'đ</p>
+                <p class="product-price">'.number_format($row["productPrice"],0,".",".").'đ</p>
                 '. $a.'
                 <div class="input-group col-12 col-md-4 mt-4"> 
                 <span class="input-group-btn"> 

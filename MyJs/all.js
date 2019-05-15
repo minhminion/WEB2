@@ -203,16 +203,16 @@ $(document).ready(function(){
                 success:function(data)
                 {
 
-                    console.log(data);
-                    console.log(parseInt(max));
-                    console.log(parseInt(data) <= parseInt(max));
-                    if(parseInt(data) <= parseInt(max))
+                    // console.log(data);
+                    // console.log(parseInt(max));
+                    // console.log(parseInt(data) <= parseInt(max));
+                    if( parseInt(data) >= parseInt(min) && parseInt(data) <= parseInt(max))
                     {
                         $("#"+$id+"-quality").val(data);
                         load_cart_item();
                         checkOutDetails();
                     }
-                    else{
+                    else if(parseInt(data) > parseInt(max)){
                         alert("Hàng không đủ");
                     }
                 }

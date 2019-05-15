@@ -49,7 +49,7 @@ $(document).ready(function()
         $cetorgry = $(".product-cetorgry").val();
         $brand = $(".product-brand").val();
         $search = $("#searchProduct").val();
-        console.log($search);
+        // console.log($search);
 
         $.ajax({
             url:"./XuLy/pagingProductTable.php",
@@ -94,7 +94,7 @@ $(document).ready(function()
             datatype:"json",
             success:function(data)
             {
-                console.log(data);
+                // console.log(data);
                 data = JSON.parse(data);
                 $(".receiptTable").html(data.output);
                 $(".receiptPaging").html(data.paging);
@@ -105,7 +105,7 @@ $(document).ready(function()
     function pagingUser(page)
     {
         $search = $("#searchUser").val();
-        console.log($("#searchUser"));
+        // console.log($("#searchUser"));
 
         $.ajax({
             url:"./XuLy/pagingUser.php",
@@ -145,7 +145,7 @@ $(document).ready(function()
         {
             event.preventDefault();
             var page = $(this).attr("id");
-            console.log(page);
+            // console.log(page);
             pagingProduct(page);
         });
 
