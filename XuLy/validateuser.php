@@ -5,7 +5,7 @@
     $isAdmin = "";    
     if(isset($_POST['isAdmin']))
     {
-        $isAdmin = "AND userAuthentication = '0' ";
+        $isAdmin = "AND userAuthentication = '0' OR userAuthentication = '1' ";
     }
 
     $myObj = new stdClass();
@@ -48,11 +48,12 @@
                 $customer->lastName = $row["lastName"]; 
                 $customer->email = $row["email"];
 
+                $authen = $row["userAuthentication"];
                 $loginSuccess = true;
                 $islogin = true;
                 $_SESSION["isLOGIN"] = 1;
                 $_SESSION["user"] = $customer;
-                $_SESSION["AUTHENTICATION"] = $row["userAuthentication"];
+                $_SESSION["AUTHENTICATION"] = $authen;
                 $output = include("./header.php");
                 $user = $output->user;
                 $userInfo = $output->userInfo;
@@ -64,6 +65,7 @@
     $myObj->user =  $user;
     $myObj->userInfo = $userInfo;
     $myObj->error = $error;
+    $myObj->authen = $authen;
     
     echo json_encode($myObj);
 

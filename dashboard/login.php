@@ -97,7 +97,14 @@
                     data = JSON.parse(data)
                     if(data.login == true)
                     {   
-                        window.location.href = "./admin.php";
+                        console.log(data.authen);
+                        if(data.authen == 1)
+                        {
+                            window.location.href = "./admin.php";
+                        }
+                        else{
+                            window.location.href = "./userTable.php";
+                        }
                     }
                     else
                     {    

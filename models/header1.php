@@ -280,9 +280,6 @@
                 </form>
             </div>
             <!-- Favourite Area -->
-            <div class="favourite-area">
-                <a href="#"><img src="img/core-img/heart.svg" alt=""></a>
-            </div>
             <div id="user-info">
             <!-- User Login Info -->
                 <?php
