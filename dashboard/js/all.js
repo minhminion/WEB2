@@ -41,6 +41,11 @@ $(document).ready(function()
         statistic();
     })
 
+    $(document).on("change","#selectTimeOrder",function()
+    {
+        statistic();
+    })
+
     function pagingProduct(page)
     {
         $cetorgry = $(".product-cetorgry").val();
@@ -426,6 +431,7 @@ $(document).ready(function()
     function statistic()
     {
         var chartData="";
+        var orderBy = $("#selectTimeOrder").val();
         var month=$("#selectMonth").val();
         var year=$("#selectYear").val();
         console.log("Tháng "+month+" Năm "+year);
@@ -434,6 +440,7 @@ $(document).ready(function()
             url : '../dashboard/XuLy/statistic.php',
             method : 'POST',
             data: {
+                    orderBy : orderBy,
                     month : month,
                     year : year,
             },
@@ -562,7 +569,7 @@ $(document).ready(function()
             labels: label,
             datasets: [
                 {
-                label: "My First dataset",
+                label: "Tổng tiền bán ra",
                 data: data,
                 borderColor: "rgba(0, 123, 255, 0.9)",
                 borderWidth: "0",

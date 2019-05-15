@@ -59,20 +59,12 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="au-breadcrumb-content">
-                                    <div class="au-breadcrumb-left">
-                                        <span class="au-breadcrumb-span">You are here:</span>
+                                <div class="au-breadcrumb-left">
+                                        <span class="au-breadcrumb-span">Bạn đang ở:</span>
                                         <ul class="list-unstyled list-inline au-breadcrumb__list">
-                                            <li class="list-inline-item active">
-                                                <a href="#">Home</a>
-                                            </li>
-                                            <li class="list-inline-item seprate">
-                                                <span>/</span>
-                                            </li>
-                                            <li class="list-inline-item">Dashboard</li>
+                                            <li class="list-inline-item">Quản lý tài khoản</li>
                                         </ul>
                                     </div>
-                                    <button class="au-btn au-btn-icon au-btn--green">
-                                        <i class="zmdi zmdi-plus"></i>add item</button>
                                 </div>
                             </div>
                         </div>
@@ -89,7 +81,7 @@
                                 <!-- USER DATA-->
                                 <div class="user-data m-b-30">
                                     <h3 class="title-3 m-b-30">
-                                        <i class="zmdi zmdi-account-calendar"></i>user data</h3>
+                                        <i class="zmdi zmdi-account-calendar"></i>Tài khoản</h3>
                                     <div class="filters m-b-45 row">
                                         <!-- <div class="rs-select2--dark rs-select2--md m-r-10 rs-select2--border">
                                             <select class="js-select2" name="property">
@@ -115,7 +107,7 @@
                                                         <i class="fa fa-search"></i> Tìm
                                                     </button>
                                                 </div>
-                                                <input type="text" name="input1-group2" id="searchUser" placeholder="Username cần tìm ...." class="form-control">
+                                                <input type="text" name="input1-group2" id="searchUser" placeholder="Tên đăng nhập cần tìm ...." class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -123,11 +115,11 @@
                                         <table class="table">
                                             <thead>
                                                 <tr>
-                                                    <td>username</td>
-                                                    <td>password</td>
+                                                    <td>tên đang nhập</td>
+                                                    <td>mật khẩu</td>
                                                     <td>email</td>
-                                                    <td>role</td>
-                                                    <td>state</td>
+                                                    <td>quyền</td>
+                                                    <td>trạng thái</td>
                                                     <td></td>
                                                 </tr>
                                             </thead>

@@ -22,19 +22,11 @@
                             <div class="col-md-12">
                                 <div class="au-breadcrumb-content">
                                     <div class="au-breadcrumb-left">
-                                        <span class="au-breadcrumb-span">You are here:</span>
+                                        <span class="au-breadcrumb-span">Bạn đang ở:</span>
                                         <ul class="list-unstyled list-inline au-breadcrumb__list">
-                                            <li class="list-inline-item active">
-                                                <a href="#">Home</a>
-                                            </li>
-                                            <li class="list-inline-item seprate">
-                                                <span>/</span>
-                                            </li>
-                                            <li class="list-inline-item">Dashboard</li>
+                                            <li class="list-inline-item">Trang thống kê</li>
                                         </ul>
                                     </div>
-                                    <button class="au-btn au-btn-icon au-btn--green">
-                                        <i class="zmdi zmdi-plus"></i>add item</button>
                                 </div>
                             </div>
                         </div>
@@ -92,7 +84,7 @@
                             <div class="col-md-6 col-lg-3">
                                 <div class="statistic__item">
                                     <h2 class="number">$1,060,386</h2>
-                                    <span class="desc">total earnings</span>
+                                    <span class="desc">Tổng thu nhập</span>
                                     <div class="icon">
                                         <i class="zmdi zmdi-money"></i>
                                     </div>
@@ -103,7 +95,69 @@
                 </div>
             </section>
             <!-- END STATISTIC-->
-
+            <!-- TOP CAMPAIGNS -->
+            <div class="row ml-3 mr-3">
+                <div class="col-lg-6">
+                    `<div class="top-campaign">
+                        <h3 class="title-3 m-b-30">top campaigns</h3>
+                        <div class="table-responsive">
+                            <table class="table table-top-campaign">
+                                <tbody>
+                                    <tr>
+                                        <td>1. Australia</td>
+                                        <td>$70,261.65</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2. United Kingdom</td>
+                                        <td>$46,399.22</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3. Turkey</td>
+                                        <td>$35,364.90</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4. Germany</td>
+                                        <td>$20,366.96</td>
+                                    </tr>
+                                    <tr>
+                                        <td>5. France</td>
+                                        <td>$10,366.96</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3. Turkey</td>
+                                        <td>$35,364.90</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4. Germany</td>
+                                        <td>$20,366.96</td>
+                                    </tr>
+                                    <tr>
+                                        <td>5. France</td>
+                                        <td>$10,366.96</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3. Turkey</td>
+                                        <td>$35,364.90</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4. Germany</td>
+                                        <td>$20,366.96</td>
+                                    </tr>
+                                    <tr>
+                                        <td>5. France</td>
+                                        <td>$10,366.96</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4. Germany</td>
+                                        <td>$20,366.96</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END TOP CAMPAIGNS -->
             <section>
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
@@ -111,20 +165,12 @@
                             <div class="col-xl-12">
                                 <!-- RECENT REPORT 2-->
                                 <div class="recent-report2">
-                                    <h3 class="title-3">Tổng thu nhập (Triệu)</h3>
+                                    <h3 class="title-3">Tổng thu nhập (Triệu
+                                    )</h3>
                                     <div class="chart-info ">
                                         <div class="chart-info__left">
-                                            <div class="chart-note">
-                                                <span class="dot dot--blue"></span>
-                                                <span>products</span>
-                                            </div>
-                                            <div class="chart-note">
-                                                <span class="dot dot--green"></span>
-                                                <span>Services</span>
-                                            </div>
                                             <div class="rs-select2--dark rs-select2--md">
                                                 <select class="js-select2 au-select-dark" name="time" id="selectTimeOrder">
-                                                    <option selected="selected">Thời gian</option>
                                                     <option value="month">Theo tháng</option>
                                                     <option value="day">theo ngày</option>
                                                 </select>
@@ -135,11 +181,17 @@
                                             <div class="rs-select2--dark rs-select2--md m-r-10 selectMonth" style="visibility:hidden">
                                                 <select class="js-select2" name="property" id="selectMonth">
                                                     <?php
-                                                        $month = date("M");
-                                                        $out = '<option selected="selected" value="">Tháng</option>';
+                                                        $month = date("m");
+                                                        $out = '';
                                                         for($i = 1 ; $i <= 12 ;$i++)
                                                         {
-                                                            $out .= '<option value="'.$i.'">Tháng '.$i.'</option>';
+                                                            if($i == $month) 
+                                                            {
+                                                                $out .= '<option value="'.$i.'" selected="selected">Tháng '.$i.'</option>';
+                                                            }
+                                                            else{
+                                                                $out .= '<option value="'.$i.'" >Tháng '.$i.'</option>';
+                                                            }
                                                         }
                                                         echo $out;
                                                         ?>
@@ -150,10 +202,17 @@
                                                 <select class="js-select2" name="property" id="selectYear">
                                                     <?php
                                                         $year = date("Y");
-                                                        $out = '<option selected="selected" value="">Năm</option>';
+                                                        $out = '';
                                                         for($i = $year ; $i > ($year-20) ;$i--)
                                                         {
-                                                            $out .= '<option value="'.$i.'">'.$i.'</option>';
+                                                            if($i == $year)
+                                                            {
+                                                                $out .= '<option value="'.$i.'" selected="selected">'.$i.'</option>';
+                                                            }    
+                                                            else{
+                                                                $out .= '<option value="'.$i.'">'.$i.'</option>';
+                                                            }
+                                                            
                                                         }
                                                         echo $out;
                                                     ?>

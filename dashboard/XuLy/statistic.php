@@ -6,8 +6,7 @@
     $label="";
     $data=[];
 
-
-    $by="";
+    $by="month";
     $where='';
     $groupBy="";
 
@@ -16,39 +15,23 @@
     {
         $colMonth[$i] = "Tháng ".($i+1);
     }
-    
     $colDate = [];
     for($i = 0 ; $i < 31 ; $i++)
     {
         $colDate[$i] = ($i+1);
     }
-
-    $whereData=array();
-    array_push($whereData,"receipt.status = 1");
     
-    $groupByData=array();
-    array_push($groupByData,"month");
-    array_push($groupByData,"year");
-    
-    $sortYear=date("Y");
-    if(isset($_POST['year']) && !empty($_POST['year']))
+    if(isset($_POST['orderBy']))
     {
-        $sortYear = $_POST['year'];
+        $by=$_POST['orderBy'];
     }
-    array_push($whereData,"YEAR(receiptDate) = ".$sortYear);
 
-    // Theo Ngày
-    $sortMonth=date("M");
-    if(isset($_POST['month']) && !empty($_POST['month']))
+    if($by == 'day')
     {
-        $sortMonth = $_POST['month'];
-        array_push($whereData,"MONTH(receiptDate) = ".$sortMonth);
-        array_push($groupByData,"day");
         for($i = 0 ; $i < count($colDate) ; $i++)
         {
             $data[$i] = 0;
         }
-        $by='day';
         $label = ArraytoString($colDate);
     }
     else{
@@ -56,8 +39,28 @@
         {
             $data[$i] = 0;
         }
-        $by ='month';
         $label = ArraytoString($colMonth);
+    }
+    
+    $whereData=array();
+    array_push($whereData,"receipt.status = 1");
+    
+    $groupByData=array();
+    array_push($groupByData,"month");
+    array_push($groupByData,"year");
+    
+    if(isset($_POST['year']))
+    {
+        $sortYear = $_POST['year'];
+    }
+    array_push($whereData,"YEAR(receiptDate) = ".$sortYear);
+
+    // Theo Ngày
+    if(isset($_POST['month']) && $by == 'day')
+    {
+        $sortMonth = $_POST['month'];
+        array_push($whereData,"MONTH(receiptDate) = ".$sortMonth);
+        array_push($groupByData,"day");
     }
     /////////////////////
     foreach ($whereData as $i => $s)
@@ -92,7 +95,7 @@
     while($row = mysqli_fetch_array($rs))
     {
         $n = $row[$by];
-        $data[$n - 1] = $row['total']/$step; 
+        $data[$n-1] = $row['total']/$step; 
     }
 
     $myChart = new stdClass();
