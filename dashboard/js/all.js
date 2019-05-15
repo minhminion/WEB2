@@ -146,7 +146,9 @@ $(document).ready(function()
             event.preventDefault();
             var page = $(this).attr("id");
             // console.log(page);
+            pagingReceipt(page);
             pagingProduct(page);
+            pagingUser(page);
         });
 
     $(document).on("click",".info-receipt",function(event)
@@ -327,6 +329,50 @@ $(document).ready(function()
             pagingProduct();
         }
     })
+
+    $("#DK").on("submit",function(e)
+        {
+            e.preventDefault();
+            console.log(decodeURI($(this).serialize()));
+            $.ajax({
+                url:"./../XuLy/validation.php",
+                method:"POST",
+                data:{  
+                        toLogin : 0,
+                        info : $(this).serialize()},
+                success:function(data)
+                {
+                    console.log(data);
+                    data = JSON.parse(data);
+                    console.log(data.isRegister);
+                    if(data.isRegister == false)
+                    {
+                        $infoE = data.error;
+                        var error = $(".error");
+
+                        for(var i = 0 ; i<= error.length ;i++)
+                        {
+                            var s = $infoE[i];
+                            error[i].innerText = s;
+                        }
+                    }
+                    else
+                    {
+                        $("#register").modal("toggle");
+                        Swal.fire(
+                            {
+                                type: "succes",
+                                title: "Đăng ký thành công",
+                                onClose: () => {
+                                    pagingUser();
+                                    }
+                            }
+                        )
+                    }
+                    
+                }
+            })
+        });
 
     $(document).on("change","#productImgChoice",function()
     {

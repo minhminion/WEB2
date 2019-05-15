@@ -45,8 +45,17 @@
                         <div class="row">
                             <div class="col-md-6 col-lg-3">
                                 <div class="statistic__item">
-                                    <h2 class="number">10,368</h2>
-                                    <span class="desc">members online</span>
+                                    <h2 class="number">
+                                        <?php
+                                            $total = 0;
+                                            $sql='  SELECT * 
+                                                    FROM user 
+                                                    WHERE user.state = 1';
+                                            $rs = conSQL :: executeQuery($sql);
+                                            echo mysqli_num_rows($rs);
+                                        ?>
+                                    </h2>
+                                    <span class="desc">Thành viên hoạt động</span>
                                     <div class="icon">
                                         <i class="zmdi zmdi-account-o"></i>
                                     </div>
@@ -75,18 +84,22 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6 col-lg-3">
+                            <div class="col-md-12 col-lg-6">
                                 <div class="statistic__item">
-                                    <h2 class="number">1,086</h2>
-                                    <span class="desc">this week</span>
-                                    <div class="icon">
-                                        <i class="zmdi zmdi-calendar-note"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-3">
-                                <div class="statistic__item">
-                                    <h2 class="number">$1,060,386</h2>
+                                    <h2 class="number">
+                                    <?php
+                                            $total = 0;
+                                            $sql='  SELECT * 
+                                                    FROM `receipt` 
+                                                    WHERE receipt.status = 1 ';
+                                            $rs = conSQL :: executeQuery($sql);
+                                            while($row = mysqli_fetch_array($rs))
+                                            {
+                                                $total += $row["receiptTotal"];
+                                            }
+                                            echo number_format($total,0,".",".");
+                                        ?>
+                                     VNĐ</h2>
                                     <span class="desc">Tổng thu nhập</span>
                                     <div class="icon">
                                         <i class="zmdi zmdi-money"></i>

@@ -6,7 +6,7 @@
     $brand ="";
     $search="";
     $where="";
-    $order = 1;
+    $order = 1 ;
 
     $data = array();
     array_push($data,1);
@@ -19,6 +19,10 @@
     if(!empty($_POST['DescOrAsc']))
     {
         $order .= " ".$_POST['DescOrAsc'];
+    }
+    else
+    {
+        $order .= " DESC";
     }
 
     if(isset($_POST["page"]))

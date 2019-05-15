@@ -135,17 +135,20 @@ $confirmpassword  = GetParameter($_POST['info'],"confirmpassword");
 
 		$sql2 = 'INSERT INTO `user` VALUES ("'.$userId.'","'.$userName.'","'.$pass.'","2","1")';
 		conSQL :: executeQuery($sql2);
+	
+		if($_POST['toLogin'] == 1)
+		{
+			$customer = new stdClass();
+			$customer->userId = $userId; 
+			$customer->userName = $userName; 
+			$customer->firstName = $firstName; 
+			$customer->lastName = $lastName; 
+			$customer->email = $email;
 
-		$customer = new stdClass();
-		$customer->userId = $userId; 
-		$customer->userName = $userName; 
-		$customer->firstName = $firstName; 
-		$customer->lastName = $lastName; 
-		$customer->email = $email;
-
-		$_SESSION["isLOGIN"] = 1;
-		$_SESSION["user"] = $customer;
-		$_SESSION["AUTHENTICATION"] = 2;
+			$_SESSION["isLOGIN"] = 1;
+			$_SESSION["user"] = $customer;
+			$_SESSION["AUTHENTICATION"] = 2;
+		}
 	}
 	$myObj = new stdClass();
 	$myObj->isRegister = $isRegister;

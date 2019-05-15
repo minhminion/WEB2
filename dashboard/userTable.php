@@ -48,7 +48,51 @@
         </div>
     </div>
 </div>
-
+<!-- ADD USER -->
+<div class="modal fade" id="register" role="dialog" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+    <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+            <h4 class="modal-title">Đăng ký</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+            <form id="DK" action="" method="post">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="last_name">Họ*<span class="error"></span></label>
+                        <input type="text" class="form-control" name="firstName" value="" placeholder="Nguyễn Văn">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="last_name">Tên*<span class="error"></span></label>
+                        <input type="text" class="form-control" name="lastName" value="" placeholder="A">
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <label for="last_name">Tên đăng nhập*<span class="error"></span></label>
+                        <input type="text" class="form-control" name="user" value="" placeholder="Tên đăng nhập">
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <label for="last_name">Email*<span class="error"></span></label>
+                        <input type="text" class="form-control" name="email" value="" placeholder="admin1234@gmail.com">
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <label for="last_name">Mật khẩu*<span class="error"></span></label>
+                        <input type="password" class="form-control" name="password" value="" placeholder="Mật khẩu">
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <label for="last_name">Nhập lại mật khẩu*<span class="error"></span></label>
+                        <input type="password" class="form-control" name="confirmpassword" value="" placeholder="Mật khẩu">
+                    </div>
+                    <div class="col-md-12 mb-3 mt-3">
+                        <input type="submit" class="form-control" value="Đăng ký" name="submit">
+                    </div>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+</div>
 <body class="animsition">
     <div class="page-wrapper">
         <?php include("./model/menuBar.php") ?>
@@ -86,23 +130,6 @@
                                     <h3 class="title-3 m-b-30">
                                         <i class="zmdi zmdi-account-calendar"></i>Tài khoản</h3>
                                     <div class="filters m-b-45 row">
-                                        <!-- <div class="rs-select2--dark rs-select2--md m-r-10 rs-select2--border">
-                                            <select class="js-select2" name="property">
-                                                <option selected="selected">All Properties</option>
-                                                <option value="">Products</option>
-                                                <option value="">Services</option>
-                                            </select>
-                                            <div class="dropDownSelect2"></div>
-                                        </div>
-                                        <div class="rs-select2--dark rs-select2--sm rs-select2--border">
-                                            <select class="js-select2 au-select-dark" name="time">
-                                                <option selected="selected">All Time</option>
-                                                <option value="">By Month</option>
-                                                <option value="">By Day</option>
-                                            </select>
-                                            <div class="dropDownSelect2"></div>
-                                        </div> -->
-                                        
                                         <div class="col-sm-6 input-group">
                                             <div class="input-group">
                                                 <div class="input-group-btn">
@@ -112,6 +139,10 @@
                                                 </div>
                                                 <input type="text" name="input1-group2" id="searchUser" placeholder="Tên đăng nhập cần tìm ...." class="form-control">
                                             </div>
+                                        </div>
+                                        <div class="table-data__tool-right">
+                                            <button class="au-btn au-btn-icon au-btn--green au-btn--small btn-product-edit" data-toggle="modal" data-target="#register">
+                                            <i class="zmdi zmdi-plus"></i>Thêm tài khoản</button>
                                         </div>
                                     </div>
                                     <div class="table-responsive table-data h-100">

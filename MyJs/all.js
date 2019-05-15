@@ -391,7 +391,8 @@ $(document).ready(function(){
             $.ajax({
                 url:"./XuLy/validation.php",
                 method:"POST",
-                data:{info : $(this).serialize()},
+                data:{  toLogin : 1,
+                        info : $(this).serialize()},
                 success:function(data)
                 {
                     console.log(data);
