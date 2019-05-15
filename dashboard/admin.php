@@ -98,7 +98,7 @@
             <!-- TOP CAMPAIGNS -->
             <div class="row ml-3 mr-3">
                 <div class="col-lg-6">
-                    `<div class="top-campaign">
+                    <div class="top-campaign">
                         <h3 class="title-3 m-b-30">top campaigns</h3>
                         <div class="table-responsive">
                             <table class="table table-top-campaign">
@@ -123,36 +123,35 @@
                                         <td>5. France</td>
                                         <td>$10,366.96</td>
                                     </tr>
-                                    <tr>
-                                        <td>3. Turkey</td>
-                                        <td>$35,364.90</td>
-                                    </tr>
-                                    <tr>
-                                        <td>4. Germany</td>
-                                        <td>$20,366.96</td>
-                                    </tr>
-                                    <tr>
-                                        <td>5. France</td>
-                                        <td>$10,366.96</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3. Turkey</td>
-                                        <td>$35,364.90</td>
-                                    </tr>
-                                    <tr>
-                                        <td>4. Germany</td>
-                                        <td>$20,366.96</td>
-                                    </tr>
-                                    <tr>
-                                        <td>5. France</td>
-                                        <td>$10,366.96</td>
-                                    </tr>
-                                    <tr>
-                                        <td>4. Germany</td>
-                                        <td>$20,366.96</td>
-                                    </tr>
+                                    
                                 </tbody>
                             </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="au-card chart-percent-card">
+                        <div class="au-card-inner">
+                            <h3 class="title-2 tm-b-5">char by %</h3>
+                            <div class="row no-gutters">
+                                <div class="col-xl-6">
+                                    <div class="chart-note-wrap">
+                                        <div class="chart-note mr-0 d-block">
+                                            <span class="dot dot--blue"></span>
+                                            <span>products</span>
+                                        </div>
+                                        <div class="chart-note mr-0 d-block">
+                                            <span class="dot dot--red"></span>
+                                            <span>services</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6">
+                                    <div class="percent-chart"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+                                        <canvas id="percent-chart" height="280" width="268" class="chartjs-render-monitor" style="display: block; width: 268px; height: 280px;"></canvas>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

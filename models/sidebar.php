@@ -61,13 +61,6 @@
                                             <li><a href="#" class="sub-item" brand="003" cetorgry="003">Logitech</a></li>
                                             <li><a href="#" class="sub-item" brand="002" cetorgry="003">Asus</a></li>
                                         </ul>
-                                    <!-- Single Item -->
-                                    <li data-toggle="collapse" data-target="#accessories" class="collapsed">
-                                        <a href="#">Phụ Kiện</a>
-                                    </li>
-                                        <ul class="sub-menu collapse" id="accessories">
-                                            <li><a href="#" class="sub-item" cetorgry="004" >All</a></li>
-                                        </ul>
                                 </div>
                             </div>
 

@@ -12,7 +12,7 @@
 <body class="animsition">
 <!-- FORM ADD PRODUCT -->
 <div class="modal fade" id="productEdit" role="dialog" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog mw-100 w-50">
     <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
@@ -64,7 +64,7 @@
                                     ?>
                                 </select>
                             </div>
-                            <div class="form-group col-md-12 mb-3">
+                            <div class="form-group col-md-12 mb-3 ImgChoice">
                                 <label for="">Ảnh sản phẩm:</label>
                                 <img class="mx-auto d-block" id="productImg" width="320">
                                 <input type="file" accept=".jpeg,.jpg,.png,.gif" name="image" id="productImgChoice" class="form-control">
@@ -78,8 +78,8 @@
                                 <input type="number" name="amount" class="form-control" placeholder="Nhập số lượng" id="">
                             </div>
                             <div class="form-group col-md-12 mb-3">
-                                <label for="description">Mô tả</label>
-                                <textarea class="form-control rounded-0" id="description" name="description" rows="5"></textarea>
+                                <label for="description">Mô tả (Xuống dòng 2 lần tương đương 1 gạch đầu dòng)</label>
+                                <textarea class="form-control rounded-0" id="description" name="description" rows="10"></textarea>
                             </div>
                             <div class="col-md-12 mb-3">
                                 <input type="submit" value="Thêm mới" do="add" name="submit" class="form-control btn btn-primary"> 

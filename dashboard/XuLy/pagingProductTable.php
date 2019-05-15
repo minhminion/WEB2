@@ -112,8 +112,9 @@
         $next = $page;
     }  
     $paging = "";
-    $paging .=' <ul class="pagination justify-content-center mt-50 mb-70">
-                <li class="page-item" id="'.$prev.'"><a class="page-link" href="#"><i class="fa fa-angle-left"></i></a></li>';
+    $paging .='     <ul class="pagination justify-content-center mt-50 mb-70">
+                        <li class="page-item" id="1"><a class="page-link" href="#">Đầu</a></li>
+                        <li class="page-item" id="'.$prev.'"><a class="page-link" href="#"><i class="fa fa-angle-left"></i></a></li>';
 
 
 
@@ -128,7 +129,9 @@
             $paging .= '<li class="page-item" id="'.$i.'"><a class="page-link" href="#">'.$i.'</a></li>';
         }
     }
-    $paging .='<li class="page-item" id="'.$next.'"><a class="page-link" href="#"><i class="fa fa-angle-right"></i></a></li></ul>';
+    $paging .='<li class="page-item" id="'.$next.'"><a class="page-link" href="#"><i class="fa fa-angle-right"></i></a></li>
+                <li class="page-item" id="'.$total_page.'"><a class="page-link" href="#">Cuối</a></li>
+                </ul>';
 
     $myobj = new \stdClass();
     $myobj->output = $output;

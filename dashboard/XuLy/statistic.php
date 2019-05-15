@@ -9,6 +9,8 @@
     $by="month";
     $where='';
     $groupBy="";
+    $sortYear = date('Y');
+    $sortMonth = date('m');
 
     $colMonth = [];
     for($i = 0 ; $i < 12 ; $i++)

@@ -5,12 +5,13 @@ $(document).ready(function()
     pagingReceipt();
     pagingUser();
     activeMenuItem();
-    statistic();
 
-
-    // $('#statistic').onload(function()
-    // {
-    // })
+    
+    
+    $('#statistic').ready(function()
+    {
+        statistic();
+    })
 
     $(document).on("change","#selectTimeOrder",function()
     {
@@ -30,17 +31,14 @@ $(document).ready(function()
             break;
         }
     })
-
     $(document).on("change","#selectMonth",function()
     {
         statistic();
     })
-
     $(document).on("change","#selectYear",function()
     {
         statistic();
     })
-
     $(document).on("change","#selectTimeOrder",function()
     {
         statistic();
@@ -334,6 +332,7 @@ $(document).ready(function()
     {
         var input = this;
         var url = $(this).val();
+        console.log(input.files);
         var ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
         if (input.files && input.files[0] && (ext == "gif" || ext == "png" || ext == "jpeg" || ext == "jpg")) 
         {
@@ -342,11 +341,12 @@ $(document).ready(function()
             reader.onload = function (e) {
             $('#productImg').attr('src',e.target.result);
             }
-        reader.readAsDataURL(input.files[0]);
+            reader.readAsDataURL(input.files[0]);
+            // console.log(input.files[0])
         }
         else
         {
-            $('#productImg').attr('src','./../img/logoG.png');
+            $('#productImg').attr('src','./../img/sanpham/noImage.png');
         }
     })
 
@@ -401,13 +401,18 @@ $(document).ready(function()
             {
                 data = JSON.parse(data);
                 console.log(data);
-
+                $('#productEdit').modal("toggle");
                 
+                $(".product-error").html("");
                 $('#product-form').find('input[name="do"]').val("edit");
 
                 $('#product-form').find('input[name="id"]').val(data.id);
                 document.getElementById('productId').setAttribute("readonly", true);
-            
+                
+                $imgURL = './../img/sanpham/'+data.img;
+                $('#productImg').attr("src",$imgURL);
+                $("#productImgChoice").val('');
+
                 $('#product-form').find('input[name="name"]').val(data.name);
                 $('#productCetorgry').val(data.category);
                 $('#productBrand').val(data.brand);
@@ -417,7 +422,6 @@ $(document).ready(function()
                 $('#product-form').find('input[name="submit"]').val("Xác nhận");
                 $('#product-form').find('input[name="submit"]').attr("do","edit");
 
-                $('#productEdit').modal("toggle");
 
             }
         })
@@ -446,13 +450,13 @@ $(document).ready(function()
             },
             success:function(data)
             {
-                console.log(data);
+                // console.log(data);
                 chartData = JSON.parse(data);
                 // $("#my-recent-rep-chart").data('val',chartData.value);
             },
             complete:function(data)
             {
-                console.log(chartData)
+                // console.log(chartData)
                 // DrawMyChart(chartData.label);
                 $('#myReportChart').remove();
                 $(".recent-report2").append('<div class="recent-report__chart" id="myReportChart"><canvas id="my-singelBarChart" data-val=""></canvas></div>');
@@ -606,10 +610,15 @@ $(document).ready(function()
 
     function refeshProductEdit()
     {
+        $(".product-error").html();
         $('#product-form').find('input[name="do"]').val("add");
 
         $('#product-form').find('input[name="id"]').val("");
         document.getElementById('productId').removeAttribute('readonly');
+
+        $('#productImg').attr("src","");
+        $("#productImgChoice").val('');
+
 
         $('#product-form').find('input[name="name"]').val("");
         $('#productCetorgry').val("001");

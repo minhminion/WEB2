@@ -13,7 +13,7 @@
         while($row = mysqli_fetch_array($result))
         {
             $a="<ul class='product-desc'>";
-            $description = explode("%",$row["productDescription"]);
+            $description = explode("%%",$row["productDescription"]);
             foreach($description as $s)
             {
                 $a .= '<li>'.$s.'</li>' ;
@@ -31,12 +31,12 @@
 
             <div class="single_product_desc clearfix">
                 <span>'.$row["brandName"].'</span>
-                <a href="cart.html">
+                <a >
                     <h2>'.$row["productName"].'</h2>
                 </a>
                 <p class="product-price"><span class="old-price">$65.00</span>'.number_format($row["productPrice"],0,".",".").'đ</p>
                 '. $a.'
-                <div class="input-group col-12 col-md-4"> 
+                <div class="input-group col-12 col-md-4 mt-4"> 
                 <span class="input-group-btn"> 
                     <button type="button" class="btn btn-success btn-number minus" data-type="minus" data-field="quant"> 
                         <i class="fas fa-minus"></i>

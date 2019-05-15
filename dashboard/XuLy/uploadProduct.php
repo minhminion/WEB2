@@ -66,14 +66,19 @@
             // echo $sql;
             if($do == 'edit')
             {
+                $updateImg = "";
+                if($img != 'noImage.png')
+                {
+                    $updateImg = ',IMG="'.$img.'"';
+                }    
                 $sql = 'UPDATE product SET 
                         productName="'.$productName.'",
                         productDescription="'.$productDescription.'",
                         productPrice="'.$productPrice.'",
                         productAmount="'.$productAmount.'",
                         productCetorgry="'.$productCetorgry.'",
-                        productBrand="'.$productBrand.'",
-                        IMG="'.$img.'" 
+                        productBrand="'.$productBrand.'"
+                        '.$updateImg.'
                         WHERE productID="'.$productId.'" ';
             }
             conSQL :: executeQuery($sql);

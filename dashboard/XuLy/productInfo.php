@@ -8,6 +8,7 @@
     $price = '';
     $amount = '';
     $description = '';
+    $img="";
 
     if($_POST)
     {
@@ -22,6 +23,8 @@
             $price = $row['productPrice'];
             $amount = $row['productAmount'];
             $description = $row['productDescription'];
+            $description = str_replace("%%","\n",$description); 
+            $img = $row['IMG'];
         }
     }
 
@@ -33,6 +36,7 @@
     $myProduct->price = $price;
     $myProduct->amount = $amount;
     $myProduct->description = $description;
+    $myProduct->img = $img;
 
     echo json_encode($myProduct);
 ?>

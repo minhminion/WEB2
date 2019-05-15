@@ -233,10 +233,6 @@
                                     <li><a href="shop.php?brand=003?cetorgry=003">Logitech</a></li>
                                     <li><a href="shop.php?brand=002?cetorgry=003">Asus</a></li>
                                 </ul>
-                                <ul class="single-mega cn-col-4">
-                                    <li class="title">Phụ kiện</li>
-                                    <li><a href="shop.php?cetorgry=004">All</a></li>
-                                </ul>
                             </div>
                         </li>
                         <li><a href="#">Pages</a>
